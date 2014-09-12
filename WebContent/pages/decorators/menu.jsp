@@ -17,35 +17,35 @@
                         <li><a href="${rootPath}/backend/volunteerInterview/index.action">面试</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="">
-                        <i class="fa fa-tasks"></i>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-gavel"></i>
                         <span>客户管理</span>
-                        <span class="label label-danger pull-right mail-info"></span>
                     </a>
+                    <ul class="sub">
+                        <li><a href="">客户信息</a></li>
+                    </ul>
                 </li>
 
-                <li>
-                    <a href="">
-                        <i class="fa fa-tasks"></i>
-                        <span>产品分类管理</span>
-                        <span class="label label-danger pull-right mail-info"></span>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-gavel"></i>
+                        <span>产品管理</span>
                     </a>
+                    <ul class="sub">
+                        <li><a href="">产品分类</a></li>
+                        <li><a href="">产品发布</a></li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="">
+                <li class="sub-menu">
+                    <a href="javascript:;">
                         <i class="fa fa-tasks"></i>
                         <span>订单管理</span>
-                        <span class="label label-danger pull-right mail-info"></span>
                     </a>
-                </li>
-
-                <li>
-                    <a href="">
-                        <i class="fa fa-bar-chart-o"></i>
-                        <span>订单报表</span>
-                        <span class="label label-danger pull-right mail-info"></span>
-                    </a>
+                    <ul class="sub">
+                        <li><a href="">订单记录</a></li>
+                        <li><a href="">订单报表</a></li>
+                    </ul>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
@@ -53,8 +53,8 @@
                         <span>服务管理</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="${rootPath}/backend/serviceplace/index.action?type=0">公司</a></li>
-                        <li><a  href="${rootPath}/backend/serviceplace/index.action?type=1">地图地点</a></li>
+                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=0">公司</a></li>
+                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=1">地图地点</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -64,7 +64,8 @@
                     </a>
                     <ul class="sub">
                         <li><a id="courseManagement" href="${rootPath}/backend/traincourse/index.action">培训课程</a></li>
-                        <li><a id="trainManagement" href="${rootPath}/backend/volunterTrainCourse/index.action">培训记录</a></li>
+                        <li><a id="trainManagement" href="${rootPath}/backend/volunterTrainCourse/index.action">培训记录</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -73,10 +74,10 @@
                         <span>工时管理</span>
                     </a>
                     <ul class="sub">
-                        <li><a  href="${rootPath}/backend/userservice/index.action">签到记录</a></li>
-                        <li><a  href="${rootPath}/backend/report/activeTimeReport.action">工时实时统计</a></li>
-                        <li><a  href="${rootPath}/backend/report/volunteerDailyReport.action">员工日工时统计</a></li>
-                        <li><a  href="${rootPath}/backend/report/volunteerMonthlyReport.action">员工月工时统计</a></li>
+                        <li><a href="${rootPath}/backend/userservice/index.action">签到记录</a></li>
+                        <li><a href="${rootPath}/backend/report/activeTimeReport.action">工时实时统计</a></li>
+                        <li><a href="${rootPath}/backend/report/volunteerDailyReport.action">员工日工时统计</a></li>
+                        <li><a href="${rootPath}/backend/report/volunteerMonthlyReport.action">员工月工时统计</a></li>
                         <%--<li><a  href="backend/report/serviceDailyReport.action">服务地点日工时统计</a></li>--%>
                         <%--<li><a  href="backend/report/serviceMonthlyReport.action">服务地点月工时统计</a></li>--%>
                         <%--<li><a  href="boxed_page.html">工时排名</a></li>--%>
