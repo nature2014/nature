@@ -8,7 +8,7 @@
     <meta name="author" content="大自然信息管理系统">
     <meta name="keyword" content="大自然信息管理系统">
     <title>大自然信息管理系统</title>
-    
+
     <link rel="shortcut icon" href="${rootPath}/jslib/flatlab/img/favicon.png">
 
     <!-- Bootstrap core CSS -->
@@ -38,11 +38,12 @@
       <script src="${rootPath}/jslib/flatlab/js/html5shiv.js"></script>
       <script src="${rootPath}/jslib/flatlab/js/respond.min.js"></script>
     <![endif]-->
-    
+
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="${rootPath}/jslib/flatlab/js/jquery.js"></script>
     <script src="${rootPath}/jslib/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="${rootPath}/jslib/flatlab/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="${rootPath}/jslib/flatlab/js/jquery.cookie.js"></script>
     <script class="include" type="text/javascript" src="${rootPath}/jslib/flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.scrollTo.min.js"></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -55,6 +56,7 @@
     <script src="${rootPath}/jslib/flatlab/assets/advanced-datatable/extras/TableTools/media/js/ZeroClipboard.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/assets/advanced-datatable/extras/TableTools/media/js/TableTools.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" charset="utf-8" ></script>
+    <script src="${rootPath}/jslib/flatlab/js/jquery.validate.min.js" type="text/javascript"></script>
     <decorator:head/>
   </head>
 

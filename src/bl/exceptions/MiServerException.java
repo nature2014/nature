@@ -61,7 +61,7 @@ public class MiServerException extends WrappedRuntimeException {
         private static final long serialVersionUID = -9043059579107449491L;
 
         public NotFound(String msg) {
-            super("Object not found: {0}", new String[] { msg });
+            super("错误信息: {0}", new String[] { msg });
         }
 
         /** Constructor that takes a message key and args */
@@ -76,7 +76,7 @@ public class MiServerException extends WrappedRuntimeException {
         private static final long serialVersionUID = -3641115916462093715L;
 
         public Conflicted(String msg) {
-            super("Object conflicted: {0}", new String[] { msg });
+            super("错误信息: {0}", new String[] { msg });
         }
     }
 

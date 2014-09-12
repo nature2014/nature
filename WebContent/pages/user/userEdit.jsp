@@ -29,7 +29,7 @@
     </header>
     <div class="panel-body">
         <s:actionerror/><s:actionmessage/>
-        <form id="userForm" class="form-horizontal tasi-form" action="backend/user/save.action" method="post">
+        <form id="userForm" class="form-horizontal tasi-form" action="${rootPath}/backend/user/save.action" method="post">
             <div class="form-group has-success">
                 <label class="col-lg-2 control-label">用户名</label>
 

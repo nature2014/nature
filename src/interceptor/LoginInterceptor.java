@@ -4,13 +4,9 @@
  */
 package interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
+import util.DBUtils;
 import util.WrappedRuntimeException;
 import webapps.WebappsConstants;
-import actions.UserAction;
 import bl.exceptions.MiServerException;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -29,9 +25,10 @@ public class LoginInterceptor extends AbstractInterceptor {
 
   @Override
   public String intercept(ActionInvocation invocation) throws Exception {
-    if (ActionContext.getContext().getSession().get(UserAction.LOGIN_USER_SESSION_ID) == null) {
-      return "login_failure";
+    if (ActionContext.getContext().getSession().get(WebappsConstants.LOGIN_USER_SESSION_ID) == null) {
+      return "tologin";
     }
+
     String result;
     try {
       result = invocation.invoke();

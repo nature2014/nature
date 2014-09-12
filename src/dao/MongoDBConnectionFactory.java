@@ -29,7 +29,7 @@ public class MongoDBConnectionFactory {
 
     public static void initDb() {
         //注册sql.date的转换器，即允许BeanUtils.copyProperties时的源目标的sql类型的值允许为空
-        ConvertUtils.register(new MyDateConvert(), Date.class);
+        ConvertUtils.register(new MyDateConvert(), java.util.Date.class);
         //non-null will be copied otherwise ignore null value.
         BeanUtilsBean.setInstance(new NullAwareBeanUtilsBean());
         try {

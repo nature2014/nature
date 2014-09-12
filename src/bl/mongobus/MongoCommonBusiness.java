@@ -1,6 +1,7 @@
 package bl.mongobus;
 
 import bl.beans.Bean;
+import bl.beans.VolunteerTrainCourseBean;
 import bl.common.*;
 import dao.MongoDBConnectionFactory;
 import org.apache.commons.beanutils.BeanUtils;
@@ -14,6 +15,7 @@ import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.DBUtils;
 import vo.table.TableDataVo;
 import vo.table.TableQueryVo;
 
@@ -36,7 +38,10 @@ public class MongoCommonBusiness<F, L> implements BusinessInterface,
     }
 
   public String getDBName() {
-    String dbFlag = "form";
+    String dbFlag = DBUtils.getDBFlag();
+    if(!org.apache.commons.lang.StringUtils.isNotEmpty(dbFlag)) {
+      dbFlag = "form";
+    }
     return dbFlag;
   }
 
@@ -352,19 +357,19 @@ public class MongoCommonBusiness<F, L> implements BusinessInterface,
     Datastore dc = MongoDBConnectionFactory.getDatastore(getDBName());
     UpdateOperations<L> ops
         = dc.createUpdateOperations(this.clazz).set(targetColumn, targetValue);
-    Query query = dc.createQuery(this.clazz);
+    org.mongodb.morphia.query.Query query = dc.createQuery(this.clazz);
     query.filter(conditionName, conditionValue);
     dc.update(query, ops);
     }
 
     public static void main(String[] args) {
-       /* MongoDBConnectionFactory.initDb();
+        MongoDBConnectionFactory.initDb();
         MongoCommonBusiness<BeanContext, VolunteerTrainCourseBean> mc = new MongoCommonBusiness<BeanContext, VolunteerTrainCourseBean>();
         mc.clazz = VolunteerTrainCourseBean.class;
 
         Datastore dc = MongoDBConnectionFactory.getDatastore(mc.getDBName());
         Query query = dc.createQuery(mc.clazz);
         query.filter("_id nin", new ObjectId[] { ObjectId.get() });
-        System.out.println(dc.getCount(query));*/
+        System.out.println(dc.getCount(query));
     }
 }

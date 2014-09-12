@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.MessageFormat;
+
 /**
  * this Interceptor mainly focus on business exception that is inherited with {@link bl.exceptions.MiServerException}
  * 
@@ -28,9 +30,9 @@ public class MiServerExceptionInterceptor extends AbstractInterceptor {
         } catch (MiServerException e) {
             if (invocation.getAction() instanceof ActionSupport) {
                 ActionSupport as = (ActionSupport) invocation.getAction();
-                String errorMessage = as.getText(e.getKeyMessage(), e.getParameterMessage());
+                String errorMessage = MessageFormat.format(e.getKeyMessage(), e.getParameterMessage());
                 LOG.error(errorMessage);
-                invocation.getStack().setValue(WebappsConstants.CTX_TOKEN_ERROR_MSG_REQUEST, errorMessage);
+                as.addActionError(errorMessage);
                 return as.INPUT;
             } else {
                 LOG.error("This action exception is: {}", e);

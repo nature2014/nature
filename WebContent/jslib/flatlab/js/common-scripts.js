@@ -8,7 +8,10 @@ $(function() {
         speed: 'slow',
         showCount: false,
         autoExpand: true,
-//        cookie: 'dcjq-accordion-1',
+        cookie: 'volunteercookies',
+        classArrow: 'dcjq-icon',
+        classParent	 : 'dcjq-parent',
+        classActive	 : 'active',
         classExpand: 'dcjq-current-parent'
     });
 });

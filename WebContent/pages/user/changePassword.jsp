@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="${rootPath}/img/favicon.png">
 
     <style type="text/css">
         table tbody tr.even.row_selected td{

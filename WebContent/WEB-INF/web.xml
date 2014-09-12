@@ -5,14 +5,15 @@
 	version="2.5">
 	<listener>  
        <listener-class>webapps.WebInitListener</listener-class>  
-    </listener>
+    </listener>  
+
     <filter>
         <filter-name>struts-prepare</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter</filter-class>
         <init-param>
-            <param-name>config</param-name>
-            <param-value>struts-custom.xml,struts.xml</param-value>
-        </init-param>
+			<param-name>config</param-name>
+			<param-value>struts-custom.xml,struts.xml</param-value>
+		</init-param>
         <init-param>
             <param-name>loggerFactory</param-name>
             <param-value>
@@ -29,6 +30,7 @@
         <filter-name>sitemesh</filter-name>
         <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>struts-prepare</filter-name>
         <url-pattern>/*</url-pattern>
@@ -44,9 +46,25 @@
         <url-pattern>*.action</url-pattern>
     </filter-mapping>
 
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+    <servlet>
+        <servlet-name>AccessViewStatusMessages</servlet-name>
+        <servlet-class>ch.qos.logback.classic.ViewStatusMessagesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AccessViewStatusMessages</servlet-name>
+        <url-pattern>/log</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WeChat</servlet-name>
+        <servlet-class>wechat.WechatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WeChat</servlet-name>
+        <url-pattern>/wechat</url-pattern>
+    </servlet-mapping>
+
 	<jsp-config>
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>

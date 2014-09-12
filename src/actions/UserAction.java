@@ -57,7 +57,7 @@ public class UserAction extends BaseTableAction<UserBusiness> {
     @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
-        init.getAoColumns().add(new TableHeaderVo("name", "用户名"));
+        init.getAoColumns().add(new TableHeaderVo("name", "用户名").enableSearch());
         return init;
     }
 

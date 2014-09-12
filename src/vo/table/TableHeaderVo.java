@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package vo.table;
 
@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * Table Header, map property <b>Column</b> of <b>dataTable</b>
- *
+ * 
  * @author gudong
  * @since $Date:2014-02-16$
  */
@@ -27,34 +27,34 @@ public class TableHeaderVo {
   //true 仅仅显示在搜索条件里但不出现在grid表头里
   private boolean hiddenColumn = false;
 
-  public boolean isHiddenColumn() {
-    return hiddenColumn;
-  }
+    public boolean isHiddenColumn() {
+        return hiddenColumn;
+    }
 
-  public TableHeaderVo setHiddenColumn(boolean hiddenColumn) {
-    this.hiddenColumn = hiddenColumn;
-    return this;
-  }
+    public TableHeaderVo setHiddenColumn(boolean hiddenColumn) {
+        this.hiddenColumn = hiddenColumn;
+        return this;
+    }
 
-  public String getSuffixed() {
-    return suffixed;
-  }
+    public String getSuffixed() {
+        return suffixed;
+    }
 
-  public void setSuffixed(String suffixed) {
-    this.suffixed = suffixed;
-  }
+    public void setSuffixed(String suffixed) {
+        this.suffixed = suffixed;
+    }
 
-  public String getsClass() {
-    return sClass;
-  }
+    public String getsClass() {
+        return sClass;
+    }
 
-  public void setsClass(String sClass) {
-    this.sClass = sClass;
-  }
+    public void setsClass(String sClass) {
+        this.sClass = sClass;
+    }
 
-  // // additional properties
+    // // additional properties
   private String[][] searchOptions = null; // map html select element, like [["1","2"]["Male","Female"]]
-
+  
   public TableHeaderVo(String mData, String sTitle) {
     super();
     this.mData = mData;
@@ -117,7 +117,7 @@ public class TableHeaderVo {
     this.setbSearchable(true);
     return this;
   }
-
+  
   public void setbSearchable(boolean bSearchable) {
     this.bSearchable = bSearchable;
   }
@@ -139,11 +139,11 @@ public class TableHeaderVo {
     return this;
   }
 
-  public String[][] getSearchOptions() {
-    return searchOptions;
-  }
+    public String[][] getSearchOptions() {
+        return searchOptions;
+    }
 
-  public String getSClass() {
+    public String getSClass() {
     return sClass;
   }
 
@@ -151,62 +151,30 @@ public class TableHeaderVo {
     this.sClass = sClass;
     return this;
   }
-
+  
   public TableHeaderVo hidePhone(){
     this.sClass = "hidden-phone";
     return this;
   }
 
-  public String convertValue(Object rawValue) {
-    /**
-     * 由于searchOptions是为了前台下拉框使用的，所以在导出EXCEL数据的时候，可以根据此做值的转化为显示名称，为excel提供友好结果
-     * searchOptions数据结构是二位数组，第一纬度：数值 第二纬度：显示名称
-     **/
-    if (rawValue == null) {
-      return "";
-    } else if (rawValue instanceof Date) {
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-      return sdf.format(rawValue);
-    } else if (this.searchOptions != null && rawValue != null) {
-      for (int i = 0; i < this.searchOptions[0].length; i++) {
-        if (this.searchOptions[0][i].equals(String.valueOf(rawValue))) {
-          return this.searchOptions[1][i];
-        }
-      }
-
-    }
-    return rawValue.toString();
-  }
-
-    /**
-     * cellFormatter["XXXX"] = function ( data, type, full ) {}
-     * @return  snippet JS code.
-     */
-    public String getCellFormatter() {
-        if (this.searchOptions != null) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("cellFormatter['");
-            sb.append(this.getmData());
-            sb.append("']");
-            sb.append(" = function ( data, type, full ) {");
+    public String convertValue(Object rawValue) {
+        /**
+         * 由于searchOptions是为了前台下拉框使用的，所以在导出EXCEL数据的时候，可以根据此做值的转化为显示名称，为excel提供友好结果
+         * searchOptions数据结构是二位数组，第一纬度：数值 第二纬度：显示名称
+         **/
+        if (rawValue == null) {
+            return "";
+        } else if (rawValue instanceof Date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return sdf.format(rawValue);
+        } else if (this.searchOptions != null && rawValue != null) {
             for (int i = 0; i < this.searchOptions[0].length; i++) {
-                sb.append("if(data =='");
-                sb.append(this.searchOptions[0][i]);
-                sb.append("'){");
-                sb.append("return '");
-                sb.append(this.searchOptions[1][i]);
-                sb.append("';}");
+                if (this.searchOptions[0][i].equals(String.valueOf(rawValue))) {
+                    return this.searchOptions[1][i];
+                }
             }
-            sb.append("}");
-            return sb.toString();
+
         }
-        return null;
+        return rawValue.toString();
     }
-
-    public static void main(String[] args) {
-        TableHeaderVo th = new TableHeaderVo("status", "状态").enableSearch().addSearchOptions(
-                new String[][] { { "0", "1", "2", "3", "4"}, { "已注册", "通过审核", "通过面试" , "未通过审核", "未通过面试"} });
-        System.out.println(th.getCellFormatter());
-    }
-
 }

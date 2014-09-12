@@ -7,18 +7,18 @@
     <title>动态表单管理主页--锁屏</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="jslib/flatlab/css/bootstrap.min.css" rel="stylesheet">
-    <link href="jslib/flatlab/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="${rootPath}/jslib/flatlab/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${rootPath}/jslib/flatlab/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="jslib/flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${rootPath}/jslib/flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="jslib/flatlab/css/style.css" rel="stylesheet">
-    <link href="jslib/flatlab/css/style-responsive.css" rel="stylesheet" />
+    <link href="${rootPath}/jslib/flatlab/css/style.css" rel="stylesheet">
+    <link href="${rootPath}/jslib/flatlab/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>
-    <script src="jslib/flatlab/js/html5shiv.js"></script>
-    <script src="jslib/flatlab/js/respond.min.js"></script>
+    <script src="${rootPath}/jslib/flatlab/js/html5shiv.js"></script>
+    <script src="${rootPath}/jslib/flatlab/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -30,10 +30,10 @@
 
 
         <div class="lock-box text-center">
-            <img src="jslib/flatlab/img/follower-avatar.jpg" alt="lock avatar"/>
+            <img src="${rootPath}/jslib/flatlab/img/follower-avatar.jpg" alt="lock avatar"/>
             <h1>Jonathan Smith</h1>
             <span class="locked">Locked</span>
-            <form role="form" class="form-inline" action="${rootPath}/index.jsp">
+            <form role="form" class="form-inline" action="index.jsp">
                 <div class="form-group col-lg-12">
                     <input type="password" placeholder="Password" id="exampleInputPassword2" class="form-control lock-input">
                     <button class="btn btn-lock" type="submit">

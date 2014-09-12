@@ -175,6 +175,8 @@
             <interceptor name="annotationWorkflow" class="com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor" />
             <interceptor name="multiselect" class="org.apache.struts2.interceptor.MultiselectInterceptor" />
             <interceptor name="loginInterceptor" class="interceptor.LoginInterceptor"/>
+            <interceptor name="bakcendLoginInterceptor" class="interceptor.BackendLoginInterceptor"/>
+            <interceptor name="dbFlagInterceptor" class="interceptor.DBFlagInterceptor" />
             <!-- Basic stack -->
             <interceptor-stack name="basicStack">
                 <interceptor-ref name="exception"/>
@@ -303,11 +305,19 @@
                  applications that still refer to the defaultStack by the
                  old name -->
             <interceptor-stack name="defaultStack">
+                <interceptor-ref name="dbFlagInterceptor" />
                 <interceptor-ref name="loginInterceptor"/>
                 <interceptor-ref name="_defaultStack"/>
             </interceptor-stack>
             
+            <interceptor-stack name="bakcendDefaultStack">
+                <interceptor-ref name="dbFlagInterceptor" />
+                <interceptor-ref name="bakcendLoginInterceptor"/>
+                <interceptor-ref name="_defaultStack"/>
+            </interceptor-stack>
+            
             <interceptor-stack name="noLoginStack">
+                <interceptor-ref name="dbFlagInterceptor" />
                 <interceptor-ref name="_defaultStack"/>
             </interceptor-stack>
 

@@ -14,6 +14,7 @@ import java.util.List;
 public class TableInitVo {
   private boolean bProcessing = true;
   private boolean bServerSide = true;
+  private boolean disableTools = false;
   private int iDisplayLength = 10;
   private String[][] aLengthMenu = new String[][] { { "10", "25", "50", "-1" }, { "10", "25", "50", "ALL" } };
   private List<TableHeaderVo> aoColumns = new ArrayList<TableHeaderVo>();
@@ -76,5 +77,13 @@ public class TableInitVo {
       }
     }
     return false;
+  }
+
+  public boolean isDisableTools() {
+    return disableTools;
+  }
+
+  public void setDisableTools(boolean disableTools) {
+    this.disableTools = disableTools;
   }
 }

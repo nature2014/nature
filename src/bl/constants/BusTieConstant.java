@@ -1,5 +1,6 @@
 package bl.constants;
 
+
 public interface BusTieConstant {
 
     public static final String BUS_CPATH_FORMBUSINESS = "bl.mongobus.FormBusiness";
@@ -8,24 +9,22 @@ public interface BusTieConstant {
     
     public static final String BUS_CPATH_PAGEBUSINESS = "bl.mongobus.PageBusiness";
 
-    public static final String BUS_CPATH_DOCUMENTBUSINESS = "bl.mongobus.DocumentBusiness";
+    public static final String BUS_CPATH_SERVICEPLACE = "bl.mongobus.ServicePlaceBusiness";
 
-    public static final String BUS_CPATH_ENTRYBUSINESS = "bl.mongobus.EntryBusiness";
+    public static final String BUS_CPATH_TRAINCOURSE = "bl.mongobus.TrainCourseBusiness";
 
-    public static final String BUS_CPATH_STUDYBUSINESS = "bl.mongobus.StudyBusiness";
+    public static final String BUS_CPATH_USERSERVICE = "bl.mongobus.UserServiceBusiness";
 
-    public static final String BUS_CPATH_DISEASEBUSINESS = "bl.mongobus.DiseaseBusiness";
+    public static final String BUS_CPATH_ACTIVEUSER = "bl.mongobus.ActiveUserBusiness";
 
-    public static final String BUS_CPATH_VIEWBUSINESS = "bl.mongobus.ViewBusiness";
+    public static final String BUS_CPATH_VOLUNTEER = "bl.mongobus.VolunteerBusiness";
 
-    public static final String BUS_CPATH_PARTICIPANTBUSINESS = "bl.mongobus.ParticipantBusiness";
+    public static final String BUS_CPATH_TRAINCOURSESERVICEPLACE = "bl.mongobus.TrainCourseServicePlaceBusiness";
 
-    public static final String BUS_CPATH_PATIENTBUSINESS = "bl.mongobus.PatientBusiness";
-    
-    public static final String BUS_CPATH_DEPARTMENTBUSINESS = "bl.mongobus.DepartmentBusiness";
+    public static final String BUS_CPATH_SYSTEMSETTING = "bl.mongobus.SystemSettingBusiness";
 
-    public static final String BUS_CPATH_SUTDYPLANBUSINESS = "bl.mongobus.StudyPlanBusiness";
+    public static final String BUS_CPATH_VOLUNTEERTRAINCOURSE = "bl.mongobus.VolunteerTrainCourseBusiness";
 
-    public static final String BUS_CPATH_UNIT_BUSINESS = "bl.mongobus.UnitBusiness";
+    public static final String BUS_CPATH_SOURCECODE = "bl.mongobus.SourceCodeBusiness";
 
 }

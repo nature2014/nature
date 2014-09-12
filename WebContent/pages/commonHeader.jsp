@@ -8,3 +8,25 @@
     response.setHeader("Pragma", "no-cache"); //HTTP 1.0
     response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
+
+  <style type="text/css">
+    .mt15 {
+        margin-top: 15px;
+    }
+    .red{
+      color:red !important;
+    }
+    .actionMessage li{
+       text-align: center !important;
+       color: green !important;
+       font-size: x-large;
+    }
+    .errorMessage li{
+       text-align: center !important;
+       color:red !important;
+       font-size: x-large;
+    }
+	.error{
+	   display: inline-block;
+	}
+ </style>

@@ -28,7 +28,7 @@
 			saveState	 : true,
 			disableLink	 : true,
 			showCount : false,
-//			cookie	: 'dcjq-accordion'
+            cookie	: 'dcjq-accordion'
 		};
 
 		//call in the default otions
@@ -38,9 +38,9 @@
 
 			var obj = this;
 			setUpAccordion();
-//			if(defaults.saveState == true){
-//				checkCookie(defaults.cookie, obj);
-//			}
+			if(defaults.saveState == true){
+				checkCookie(defaults.cookie, obj);
+			}
 			if(defaults.autoExpand == true){
 				$('li.'+defaults.classExpand+' > a').addClass(defaults.classActive);
 			}
@@ -78,7 +78,7 @@
 				}
 
 			} else {
-			
+
 				$('li a',obj).click(function(e){
 
 					$activeLi = $(this).parent('li');
@@ -104,11 +104,11 @@
 						$(this).siblings('ul').slideToggle(defaults.speed);
 						$('> a',$activeLi).addClass(defaults.classActive);
 					}
-					
-//					// Write cookie if save state is on
-//					if(defaults.saveState == true){
-//						createCookie(defaults.cookie, obj);
-//					}
+
+					// Write cookie if save state is on
+					if(defaults.saveState == true){
+						createCookie(defaults.cookie, obj);
+					}
 				});
 			}
 
@@ -136,7 +136,7 @@
 					});
 				}
 			}
-			
+
 			function linkOver(){
 
 			$activeLi = $(this).parent('li');
@@ -195,31 +195,31 @@
 		});
 
 		// Retrieve cookie value and set active items
-//		function checkCookie(cookieId, obj){
-//			var cookieVal = $.cookie(cookieId);
-//			if(cookieVal != null){
-//				// create array from cookie string
-//				var activeArray = cookieVal.split(',');
-//				$.each(activeArray, function(index,value){
-//					var $cookieLi = $('li:eq('+value+')',obj);
-//					$('> a',$cookieLi).addClass(defaults.classActive);
-//					var $parentsLi = $cookieLi.parents('li');
-//					$('> a',$parentsLi).addClass(defaults.classActive);
-//				});
-//			}
-//		}
+		function checkCookie(cookieId, obj){
+		var cookieVal = $.cookie(cookieId);
+			if(cookieVal != null){
+				// create array from cookie string
+				var activeArray = cookieVal.split(',');
+				$.each(activeArray, function(index,value){
+					var $cookieLi = $('li:eq('+value+')',obj);
+					$('> a',$cookieLi).addClass(defaults.classActive);
+					var $parentsLi = $cookieLi.parents('li');
+					$('> a',$parentsLi).addClass(defaults.classActive);
+				});
+			}
+		}
 
 		// Write cookie
-//		function createCookie(cookieId, obj){
-//			var activeIndex = [];
-//			// Create array of active items index value
-//			$('li a.'+defaults.classActive,obj).each(function(i){
-//				var $arrayItem = $(this).parent('li');
-//				var itemIndex = $('li',obj).index($arrayItem);
-//					activeIndex.push(itemIndex);
-//				});
-//			// Store in cookie
-//			$.cookie(cookieId, activeIndex, { path: '/' });
-//		}
+		function createCookie(cookieId, obj){
+			var activeIndex = [];
+			// Create array of active items index value
+			$('li a.'+defaults.classActive,obj).each(function(i){
+				var $arrayItem = $(this).parent('li');
+				var itemIndex = $('li',obj).index($arrayItem);
+					activeIndex.push(itemIndex);
+				});
+			// Store in cookie
+			$.cookie(cookieId, activeIndex, { path: '/' });
+		}
 	};
 })(jQuery);

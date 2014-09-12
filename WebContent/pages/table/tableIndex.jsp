@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="${rootPath}/img/favicon.png">
     <style type="text/css">
         .dataTables_info{width:25%}
         .paging_full_numbers{width:70%}
@@ -29,9 +29,9 @@
             <section class="panel">
                 <header class="panel-heading" onclick="$('#panelbody').toggle();$('#panelbodybullet').toggleClass('fa fa-chevron-up');$('#panelbodybullet').toggleClass('fa fa-chevron-down');" style="cursor: pointer">
                     <div id="operationbutton"></div>
-                    <span class="tools pull-right">
+                      <span class="tools pull-right">
                         <span id="panelbodybullet" class="fa fa-chevron-up" style="cursor: pointer">查询区域</span>
-                    </span>
+                      </span>
                 </header>
                 <div class="panel-body" id="panelbody" style="display: none">
                     <div class="form-group">
@@ -65,13 +65,14 @@
                             </s:if>
                         </s:iterator>
                         <s:if test="#counter % 3 !=0">
-                 </div>
+                    </div>
                     </s:if>
                     <a class="btn btn-success pull-right" style="margin-right:15px;margin-top: 15px;" onclick="$('#errorarea').html('');$('#${tableId}').dataTable()._fnAjaxUpdate()">
                         <i class="fa fa-check"></i>
                         查询
                     </a>
-      </div>
+                </div>
+    </div>
 </section>
 </form>
 <div id="errorarea"><%@include file="../strutsMessage.jsp"%></div>
@@ -112,7 +113,7 @@ var options = {
                 var tableObj = $('#'+tableId).dataTable();
                 var nTr = $(button).parents('tr')[0];
                 var selectRowData =  tableObj.fnGetData( nTr );
-                window.location = actionPrex + "/delete.action?${addButtonParameter}&id=" + selectRowData[idName]+"&ids=" + selectRowData[idName];
+                window.location = actionPrex + "/delete.action?${addButtonParameter}&id=" + selectRowData[idName];
             }
         }
     }
@@ -183,14 +184,13 @@ $(document).ready(function() {
             "bProcessing": initParam.bProcessing,
             "bServerSide": initParam.bServerSide,
             "iDisplayLength":initParam.iDisplayLength,
-            "aLengthMenu": [[ "10", "25", "50", "100","500"], ["10", "25", "50", "100", "500"]],
+            "aLengthMenu": initParam.aLengthMenu,
             "bStateSave": true, //save state that keep page in cookie.
-            bSortClasses:false,
             "sPaginationType":'full_numbers',
             "aoColumns": columns,
             "sAjaxSource": "${actionPrex}/queryTable.action?${addButtonParameter}",
             //"sDom": '<"H"lT><"clear">rt<"F"ip>',
-            "sDom": 'lrt<"F"ip>',
+            "sDom": 'rt<"F"ip>',
             "oLanguage": {
                 "oPaginate": {
                     "sPrevious": "上一页",
@@ -198,7 +198,6 @@ $(document).ready(function() {
                     "sLast":"末页",
                     "sFirst":"首页"
                 },
-                sProcessing:'正在努力加载，请稍后！',
                 "sLengthMenu": "每页显示 _MENU_ 条",
                 "sZeroRecords": "无数据",
                 "sInfo": "显示第 _START_ 到 _END_ 条, 共 _TOTAL_ 条.",
@@ -306,7 +305,6 @@ $(document).ready(function() {
                 }
                 </s:if>
                 </s:iterator>
-
                 if(window.exportExcel==true){
                     window.exportExcel = false;
                     var form = $("#exportForm");
@@ -318,18 +316,6 @@ $(document).ready(function() {
                         hiddenElement.attr("name",aoData[i].name);
                         hiddenElement.attr("value",aoData[i].value);
                         form.append(hiddenElement);
-                    }
-                    var parameters = "${addButtonParameter}";
-                    if(parameters!=null){
-                        var splits = parameters.split("&");
-                        for(var i=0;i<splits.length;i++){
-                            var splitEqual = splits[i].split("=");
-                            var hiddenElement = $("<input>");
-                            hiddenElement.attr("type","hidden");
-                            hiddenElement.attr("name",splitEqual[0]);
-                            hiddenElement.attr("value",splitEqual[1]);
-                            form.append(hiddenElement);
-                        }
                     }
                     this.oApi._fnProcessingDisplay(oSettings,false);
                     form.submit();
@@ -351,7 +337,7 @@ $(document).ready(function() {
         });
     } );
 } );
-<s:if test="#session['sessionUser'].name=='admin'">
+<s:if test="#session['backendSessionUser'].name=='admin'">
 window.admin = true;
 window.actionPrex = "${actionPrex}";
 </s:if>
@@ -365,7 +351,9 @@ window.actionPrex = "${actionPrex}";
 </s:if>
 
 <script>
-
+    <s:if test="#session['backendSessionUser'].name=='admin'">
+    operationButtons.push('<a class="btn btn-success" onclick=\'window.exportExcel=true;$("#${tableId}").dataTable()._fnAjaxUpdate()\'><i class="fa fa-plus"></i> 批量导出 </a>');
+    </s:if>
     // 格式化js时间
     var formatDateTime = function (obj, IsMi) {
         var myDate = new Date(obj);
@@ -393,11 +381,6 @@ window.actionPrex = "${actionPrex}";
         }
     }
 
-    <s:iterator value="tableInit.aoColumns" var="column">
-        <s:if test="%{#column.cellFormatter!=null}">
-            <s:property value="#column.cellFormatter"/>;
-        </s:if>
-    </s:iterator>
 </script>
 </body>
 </html>

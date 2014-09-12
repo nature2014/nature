@@ -5,69 +5,135 @@
 
 <struts>
 
-    <constant name="struts.devMode" value="false"/>
-    <constant name="struts.ui.theme" value="simple"/>
-    <constant name="struts.i18n.encoding" value="UTF-8"/>
-    <constant name="struts.custom.i18n.resources" value="resources/LocaleStrings"/>
-    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+    <constant name="struts.devMode" value="false" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <constant name="struts.custom.i18n.resources" value="resources/LocaleStrings" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
     <constant name="struts.xwork.chaining.copyErrors" value="true"/>
     <constant name="struts.xwork.chaining.copyFieldErrors" value="true"/>
     <constant name="struts.xwork.chaining.copyMessages" value="true"/>
 
-    <package name="default" namespace="/" extends="struts-default">
-        <default-action-ref name="index"/>
+    <package name="default" namespace="/" extends="struts-default" >
+        <default-action-ref name="welcome"></default-action-ref>
         <global-results>
             <result name="error">/pages/generalError.jsp</result>
             <result name="tableIndex">/pages/table/tableIndex.jsp</result>
-            <result name="login_failure" type="redirectAction">logout.action</result>
+            <result name="tologin">/html/welcome.jsp</result>
         </global-results>
         <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
+            <exception-mapping exception="java.lang.Exception" result="error" />
         </global-exception-mappings>
-
-
-        <action name="login" class="actions.UserAction" method="login">
-            <interceptor-ref name="noLoginStack"></interceptor-ref>
-            <result name="success" type="redirect">/welcome.jsp</result>
+        <action name="welcome">
+            <result name="success">/html/welcome.jsp</result>
         </action>
-        <action name="logout" class="actions.UserAction" method="logout">
+        <action name="login" class="actions.front.VolunteerAction" method="login">
             <interceptor-ref name="noLoginStack"></interceptor-ref>
-            <result name="success" type="redirect">/pages/menu_loginout/login.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="failure">/pages/menu_loginout/login.jsp</result>
+        </action>
+        <action name="logout" class="actions.front.VolunteerAction" method="logout">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">tologin</param>
+            </result>
+        </action>
+
+        <action name="register" class="actions.front.VolunteerAction" method="register">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+            <result name="failure">/pages/volunteer/register.jsp</result>
+            <result name="success">/pages/volunteer/registerSuccess.jsp</result>
         </action>
 
         <action name="index">
-            <result name="success">/welcome.jsp</result>
+            <result name="success">/pages/frontend_service/servicetile.jsp</result>
         </action>
     </package>
+    <package name="loginout" namespace="/loginout" extends="default">
 
-    <package name="user" namespace="/user" extends="default">
-        <action name="index" class="actions.UserAction" method="index"/>
-        <action name="initTable" class="actions.UserAction" method="initTable"/>
-        <action name="queryTable" class="actions.UserAction" method="queryTable"/>
-        <action name="add" class="actions.UserAction" method="add">
-            <result name="success">/pages/user/userEdit.jsp</result>
+    </package>
+
+    <package name="volunteer" namespace="/volunteer" extends="default">
+        <action name="view" class="actions.front.VolunteerAction" method="view">
+            <result name="success">/pages/volunteer/volunteerView.jsp</result>
         </action>
-        <action name="edit" class="actions.UserAction" method="edit">
-            <result name="success">/pages/user/userEdit.jsp</result>
+        <action name="add" class="actions.front.VolunteerAction" method="add">
+            <result name="success">/pages/volunteer/volunteerEdit.jsp</result>
         </action>
-        <action name="save" class="actions.UserAction" method="save">
-            <result name="success" type="redirectAction">/user/index</result>
+        <action name="edit" class="actions.front.VolunteerAction" method="edit">
+            <result name="success">/pages/volunteer/volunteerEdit.jsp</result>
         </action>
-        <action name="delete" class="actions.UserAction" method="delete">
-            <result name="success" type="redirectAction">/user/index</result>
-        </action>
-        <action name="lock" class="actions.UserAction" method="lock">
-            <result name="success" type="redirectAction">/user/index</result>
-        </action>
-        <action name="changePassword" class="actions.UserAction" method="changePassword">
+        <action name="save" class="actions.front.VolunteerAction" method="save">
             <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
                 <param name="actionName">index</param>
             </result>
-            <result name="failure">/pages/user/changePassword.jsp</result>
         </action>
-        <action name="resetPassword" class="actions.UserAction" method="resetPassword">
-            <result name="success">/pages/user/userEdit.jsp</result>
+        <action name="changePassword" class="actions.front.VolunteerAction" method="changePassword">
+		   <result name="success">/pages/volunteer/changePwd.jsp</result>
+		</action>
+    </package>
+
+    <package name="userFront" namespace="/userFront" extends="default">
+
+        <action name="getCheckInRecords" class="actions.front.UserServiceAction" method="getList">
+            <result name="success">/pages/menu_volunteer/checkInRecords.jsp</result>
+        </action>
+        <action name="checkIn" class="actions.front.UserServiceAction" method="checkIn">
+            <result name="success">/pages/menu_volunteer/checkIn.jsp</result>
+        </action>
+        <action name="checkInSubmit" class="actions.front.UserServiceAction" method="checkInSubmit">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">index</param>
+            </result>
+            <result name="error">/pages/menu_volunteer/checkIn.jsp</result>
+        </action>
+        <action name="checkOut" class="actions.front.UserServiceAction" method="checkOut">
+            <result name="success" type="redirectAction">getCheckInRecords</result>
+        </action>
+
+        <action name="myTimeReport" class="actions.front.UserServiceAction" method="getMyTimeReport">
+            <result name="success">/pages/menu_volunteer/myTimeReport.jsp</result>
+        </action>
+        <action name="myDailyTimeReport" class="actions.front.UserServiceAction" method="getMyDailyTimeReport">
+            <result name="success">/pages/menu_volunteer/myTimeReportDaily.jsp</result>
+        </action>
+        <action name="myMonthlyTimeReport" class="actions.front.UserServiceAction" method="getMyMonthlyTimeReport">
+            <result name="success">/pages/menu_volunteer/myTimeReportMonthly.jsp</result>
+        </action>
+
+
+        <action name="whoishere" class="actions.front.UserServiceAction" method="whoIsHere">
+            <result name="success">/pages/menu_whoishere/whoishere.jsp</result>
+        </action>
+        <action name="whoisherelist" class="actions.front.UserServiceAction" method="whoIsHereList">
+            <result name="success">/pages/menu_whoishere/whoisherelist.jsp</result>
         </action>
     </package>
 
+    <package name="uploadpng" namespace="/personpicture" extends="default">
+        <action name="uploadpngdata" class="actions.HeadJpgAction" method="uploadPersonPicture">
+        </action>
+    </package>
+
+    <package name="frontTraincourse" namespace="/frontTraincourse" extends="default">
+        <action name="index" class="actions.front.TrainCourseAction" method="index">
+            <result name="tableIndex">/pages/traincourse/myTraincourse.jsp</result>
+        </action>
+        <action name="initTable" class="actions.front.TrainCourseAction" method="initTable"/>
+        <action name="queryTable" class="actions.front.TrainCourseAction" method="queryTable"/>
+        <action name="queryMyTrainCourse" class="actions.front.TrainCourseAction" method="queryMyTrainCourse"/>
+        <action name="receive" class="actions.front.TrainCourseAction" method="receive">
+            <result name="success" type="redirectAction">index</result>
+        </action>
+    </package>
+
+
+    <include file="struts-backend.xml"></include>
+    <include file="struts-wechat.xml"></include>
 </struts>

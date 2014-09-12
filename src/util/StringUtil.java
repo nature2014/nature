@@ -1,8 +1,8 @@
-package util;
 /**
  * @author gudong
  * @since Date: Mar 20, 2014
  */
+package util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,44 +11,46 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author gudong
+ * 
  */
 public class StringUtil {
-    /**
-     * MD5¼ÓÃÜÀà
-     *
-     * @param str Òª¼ÓÃÜµÄ×Ö·û´®
-     * @return ¼ÓÃÜºóµÄ×Ö·û´®
-     */
-    public static String toMD5(String str) {
-        try {
-            str = StringUtils.defaultString(str);
-            if (str.length() == 0) {
-                return str;
-            }
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
-            byte[] byteDigest = md.digest();
-            int i;
-            StringBuffer buf = new StringBuffer("");
-            for (int offset = 0; offset < byteDigest.length; offset++) {
-                i = byteDigest[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
-                buf.append(Integer.toHexString(i));
-            }
-            // 32Î»¼ÓÃÜ
-            return buf.toString();
-            // 16Î»µÄ¼ÓÃÜ
-            // return buf.toString().substring(8, 24);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return str;
-        }
-    }
+	/**
+	 * MD5åŠ å¯†ç±»
+	 * 
+	 * @param str
+	 *            è¦åŠ å¯†çš„å­—ç¬¦ä¸²
+	 * @return åŠ å¯†åçš„å­—ç¬¦ä¸²
+	 */
+	public static String toMD5(String str) {
+		try {
+			str = StringUtils.defaultString(str);
+			if (str.length() == 0) {
+				return str;
+			}
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(str.getBytes());
+			byte[] byteDigest = md.digest();
+			int i;
+			StringBuffer buf = new StringBuffer("");
+			for (int offset = 0; offset < byteDigest.length; offset++) {
+				i = byteDigest[offset];
+				if (i < 0)
+					i += 256;
+				if (i < 16)
+					buf.append("0");
+				buf.append(Integer.toHexString(i));
+			}
+			// 32ä½åŠ å¯†
+			return buf.toString();
+			// 16ä½çš„åŠ å¯†
+			// return buf.toString().substring(8, 24);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return str;
+		}
+	}
 
-    public static void main(String[] args) {
-        System.out.println(StringUtil.toMD5("admin"));
-    }
+	public static void main(String[] args) {
+		System.out.println(StringUtil.toMD5("admin"));
+	}
 }

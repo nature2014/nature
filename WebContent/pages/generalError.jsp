@@ -6,13 +6,9 @@
 
 <body>
 
-	<h3>General Server Exception, please contact with Peter. +8618651806651 QQ:116352437</h3>
+	<h3>系统后台发了异常错误，请联系系统管理员并且把相关信息告知管理员，以便更快地诊断问题。</h3>
 	<pre style="color: red">
 		<s:property value="exception.message" />
-	</pre>
-	<br>
-	<pre>
-		<s:property value="exceptionStack" />
 	</pre>
 </body>
 </html:html>

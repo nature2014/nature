@@ -17,7 +17,7 @@ public class TableQueryVo implements Serializable {
   private int iDisplayStart;
   private int iDisplayLength;
 
-  private Map<String, String> filter = new HashMap<String, String>();
+  private Map filter = new HashMap();
   private LinkedHashMap<String, String> sort = new LinkedHashMap<String, String>();
 
   public int getSEcho() {
@@ -44,11 +44,11 @@ public class TableQueryVo implements Serializable {
     this.iDisplayLength = iDisplayLength;
   }
 
-  public Map<String, String> getFilter() {
+  public Map getFilter() {
     return filter;
   }
 
-  public void setFilter(Map<String, String> filter) {
+  public void setFilter(Map filter) {
     this.filter = filter;
   }
 
