@@ -217,7 +217,7 @@ $(document).ready(function() {
                     }
 
                     var nCloneTd = document.createElement( 'td' );
-                    nCloneTd.innerHTML = '<img class="operation" src="jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_open.png">';
+                    nCloneTd.innerHTML = '<img class="operation" src="${rootPath}/jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_open.png">';
                     //nCloneTd.className = "center";
                     $(nCloneTd).css("width","50px");
                     $('#${tableId} tbody tr').each( function (i) {
@@ -227,11 +227,11 @@ $(document).ready(function() {
                         var nTr = $(this).parents('tr')[0];
                         if ( oTable.fnIsOpen(nTr) ){
                             // This row is already open - close it
-                            $(this).attr("src" , "jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_open.png");
+                            $(this).attr("src" , "${rootPath}/jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_open.png");
                             oTable.fnClose( nTr );
                         }else{
                             //   Open this row
-                            $(this).attr("src" , "jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_close.png");
+                            $(this).attr("src" , "${rootPath}/jslib/flatlab/assets/advanced-datatable/examples/examples_support/details_close.png");
                             oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
                             $('td.details',$(nTr).next()).attr("colspan",nTr.childNodes.length);
                         }

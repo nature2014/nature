@@ -8,7 +8,7 @@
 	</excludes>
 
 	<!-- 用来定义装饰器要过滤的页面 -->
-	<decorator name="main" page="/pages/decorators/main_2.jsp">
+	<decorator name="main" page="/pages/decorators/main.jsp">
 		<pattern>/welcome.jsp</pattern>
         <pattern>/user/*.action</pattern>
 	</decorator>

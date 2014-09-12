@@ -137,7 +137,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>2.3</version>
         <configuration>
-          <outputDirectory>E:\\apache-tomcat-8.0.3\\webapps</outputDirectory>
+          <outputDirectory>D:\apache-tomcat-8.0.9\\webapps</outputDirectory>
           <warSourceDirectory>WebContent</warSourceDirectory>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
@@ -147,56 +147,11 @@
         <artifactId>junit4-maven-plugin</artifactId>
         <version>2.0.14</version>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>jaxb2-maven-plugin</artifactId>
-        <version>1.5</version>
-        <executions>
-          <execution>
-            <id>xjc</id>
-            <goals>
-              <goal>xjc</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <schemaDirectory>srcresources</schemaDirectory>
-          <packageName>dynamicschema</packageName>
-          <staleFile>target/generated-sources/jaxb/xjcStaleFlag</staleFile>
-          <bindingDirectory>srcresources/xjb</bindingDirectory>
-          <extension>true</extension>
-        </configuration>
-      </plugin>
     </plugins>
     <pluginManagement>
     	<plugins>
-    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-    		<plugin>
-    			<groupId>org.eclipse.m2e</groupId>
-    			<artifactId>lifecycle-mapping</artifactId>
-    			<version>1.0.0</version>
-    			<configuration>
-    				<lifecycleMappingMetadata>
-    					<pluginExecutions>
-    						<pluginExecution>
-    							<pluginExecutionFilter>
-    								<groupId>org.codehaus.mojo</groupId>
-    								<artifactId>jaxb2-maven-plugin</artifactId>
-    								<versionRange>[1.5,)</versionRange>
-    								<goals>
-    									<goal>xjc</goal>
-    								</goals>
-    							</pluginExecutionFilter>
-    							<action>
-    								<ignore></ignore>
-    							</action>
-    						</pluginExecution>
-    					</pluginExecutions>
-    				</lifecycleMappingMetadata>
-    			</configuration>
-    		</plugin>
     	</plugins>
     </pluginManagement>
   </build>
-  <artifactId>form</artifactId>
+  <artifactId>nature</artifactId>
 </project>
