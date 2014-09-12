@@ -4,9 +4,9 @@
     <%@ include file="/pages/commonHeader.jsp" %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="dynamic manager technique">
-    <meta name="author" content="LiLimin,GuDong,WangRonghua">
-    <meta name="keyword" content="dynamicform,template">
+    <meta name="description" content="大自然信息管理系统">
+    <meta name="author" content="大自然信息管理系统">
+    <meta name="keyword" content="大自然信息管理系统">
     <title>大自然信息管理系统</title>
     
     <link rel="shortcut icon" href="${rootPath}/jslib/flatlab/img/favicon.png">
