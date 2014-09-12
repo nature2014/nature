@@ -5,7 +5,7 @@
     <%@ include file="../metrouiHeader.jsp" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/train.css" rel="stylesheet">
+    <link href="${rootPath}/css/train.css" rel="stylesheet">
     <title>员工注册</title>
 
     <style type="text/css">
@@ -48,7 +48,7 @@
             <%@ include file="../frontend_service/flashcamera.jsp" %>
         </div>
     </div>
-    <form  id="volunteerForm" action="volunteer/save.action" method="post">
+    <form  id="volunteerForm" action="${rootPath}/volunteer/save.action" method="post">
         <input name="volunteer.iconpath" id="iconpath" type="hidden" value="${volunteer.iconpath}"/>
         <input name="volunteer.id" type="hidden" value="${volunteer.id}"/>
         <input name="volunteer.registerFrom" type="hidden" value="${volunteer.registerFrom}"/>
@@ -138,8 +138,8 @@
             </div>
             <div class="bg-btn">
                 <input class="Infor-btn" type="submit" value="修改"/>
-                <input class="Infor-btn" type="button" value="修改密码" onclick="window.location.href='volunteer/changePassword.action'" style="cursor: pointer;"/>
-                <input class="Infor-btn" type="button" value="取消" onclick="window.location.href='index.action'" />
+                <input class="Infor-btn" type="button" value="修改密码" onclick="window.location.href='${rootPath}/volunteer/changePassword.action'" style="cursor: pointer;"/>
+                <input class="Infor-btn" type="button" value="取消" onclick="window.location.href='${rootPath}/index.action'" />
             </div>
         </div>
 

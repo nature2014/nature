@@ -5,7 +5,7 @@
     <%@ include file="../metrouiHeader.jsp" %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/train.css" rel="stylesheet">
+    <link href="${rootPath}/css/train.css" rel="stylesheet">
     <title>员工注册</title>
 
     <style type="text/css">
@@ -37,7 +37,7 @@
     <div class="bg-user">
         <div class="bg-fh">
             <a href="${rootPath}/html/welcome.jsp">
-                <img src="img/back.png" width="35" height="35" />
+                <img src="${rootPath}/img/back.png" width="35" height="35" />
             </a>
         </div>
         <div class="bg-top">注册</div>
@@ -47,7 +47,7 @@
 
     <div class="bg-left">
         <div class="face">
-            <img id="personicon" src="${volunteer.iconpath}" onerror="this.src='person/img/<s:property value="@util.DBUtils@getDBFlag()"/>/volunteer.png'">
+            <img id="personicon" src="${volunteer.iconpath}" onerror="this.src='${rootPath}/person/img/<s:property value="@util.DBUtils@getDBFlag()"/>/volunteer.png'">
         </div>
         <div id="cameraDialog">
 

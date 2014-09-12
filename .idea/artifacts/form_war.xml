@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="form:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="nature-1.0.0.war">
+      <element id="artifact" artifact-name="form:war exploded" />
+    </root>
+  </artifact>
+</component>
