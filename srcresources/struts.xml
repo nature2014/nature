@@ -52,9 +52,19 @@
         <action name="index">
             <result name="success">/pages/frontend_service/servicetile.jsp</result>
         </action>
+
     </package>
     <package name="loginout" namespace="/loginout" extends="default">
 
+    </package>
+
+    <package name="upload" namespace="/upload" extends="struts-default">
+        <action name="getImage" class="actions.upload.UploadMultipleImageAction" method="getImage">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
+        <action name="uploadImage" class="actions.upload.UploadMultipleImageAction" method="uploadImage">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
     </package>
 
     <package name="volunteer" namespace="/volunteer" extends="default">

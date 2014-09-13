@@ -36,13 +36,13 @@
         </div>
         <div class="bg-top">我的注册</div>
         <div class="bg-username">${volunteer.name}</div>
-        <div class="bg-touxiang"><img src="${volunteer.iconpath}" onerror="this.src='person/img/<s:property value="@util.DBUtils@getDBFlag()"/>/volunteer.png'" width="50" height="50" /></div>
+        <div class="bg-touxiang"><img src="${volunteer.iconpath}"  width="50" height="50" /></div>
         <s:property value="#volunteer.iconpath"/>
     </div>
 
     <div class="bg-left">
         <div class="face">
-            <img id="personicon" src="${volunteer.iconpath}" onerror="this.src='person/img/<s:property value="@util.DBUtils@getDBFlag()"/>/volunteer.png'">
+            <img id="personicon" src="${volunteer.iconpath}" >
         </div>
         <div id="cameraDialog">
             <%@ include file="../frontend_service/flashcamera.jsp" %>

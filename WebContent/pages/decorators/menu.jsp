@@ -23,7 +23,7 @@
                         <span>客户管理</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="">客户信息</a></li>
+                        <li><a href="${rootPath}/backend/customer/index.action">客户信息</a></li>
                     </ul>
                 </li>
 
@@ -33,8 +33,8 @@
                         <span>产品管理</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="">产品分类</a></li>
-                        <li><a href="">产品发布</a></li>
+                        <li><a href="${rootPath}/backend/productlevel/index.action">产品分类</a></li>
+                        <li><a href="${rootPath}/backend/product/index.action">产品发布</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -53,8 +53,8 @@
                         <span>服务管理</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=0">公司</a></li>
-                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=1">地图地点</a></li>
+                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=0">办公位置</a></li>
+                        <li><a href="${rootPath}/backend/serviceplace/index.action?type=1">地理位置</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

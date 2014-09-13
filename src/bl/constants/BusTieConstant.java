@@ -6,7 +6,7 @@ public interface BusTieConstant {
     public static final String BUS_CPATH_FORMBUSINESS = "bl.mongobus.FormBusiness";
 
     public static final String BUS_CPATH_DATABUSINESS = "bl.mongobus.DataBusiness";
-    
+
     public static final String BUS_CPATH_PAGEBUSINESS = "bl.mongobus.PageBusiness";
 
     public static final String BUS_CPATH_SERVICEPLACE = "bl.mongobus.ServicePlaceBusiness";
@@ -27,4 +27,9 @@ public interface BusTieConstant {
 
     public static final String BUS_CPATH_SOURCECODE = "bl.mongobus.SourceCodeBusiness";
 
+    public static final String BUS_CPATH_CUSTOMER = "bl.mongobus.CustomerBusiness";
+
+    public static final String BUS_CPATH_PRODUCT = "bl.mongobus.ProductBusiness";
+
+    public static final String BUS_CPATH_PRODUCTLEVEL = "bl.mongobus.ProductLevelBusiness";
 }
