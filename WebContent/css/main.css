@@ -1,0 +1,532 @@
+body {
+    background-image:url(../img/banner.jpg);
+    font-family: 'Open Sans', sans-serif;
+    padding: 0px !important;
+    margin: 0px !important;
+    font-size:13px;
+}
+a {
+    color: #FFF;
+}
+
+a:hover {
+    color: #003547;
+}
+a, a:hover, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+.home {
+    width:800px;
+    height:auto;
+    margin:auto;
+}
+.home2 {
+    width:960px;
+    height:auto;
+    margin:auto;
+}
+.leftimg{
+    width:400px;
+    height:300px;
+    float:left;
+    margin-top:25%;
+    margin-right:10px;
+}
+.nav-banner1{
+    background:#CE401F;
+    width:300px;
+    height:145px;
+    float:left;
+    margin-top:25%;
+    margin-right:10px;
+
+}
+
+
+.nav-banner2{
+    background:#64B219;
+    width:300px;
+    height:145px;
+    float:left;
+    margin-top:10px;
+    margin-right:10px;
+
+}
+
+.nav-img{
+    width:300px;
+    height:110px;
+    padding-top:10px;
+
+    text-align:center;
+
+}
+
+
+.nav-img2{
+    width:300px;
+    height:130px;
+    padding-top:10px;
+
+    text-align:center;
+
+}
+.nav-font{
+
+    text-align:left;
+    font-size:16px;
+    color:#FFF;
+    padding-left:10px;
+
+}
+.login-font{
+    width:300px;
+    height:50px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:center;
+    font-size:18px;
+    color:#FFF;
+    font-style: normal;
+    padding-top:20%;
+
+}
+.nav-login{
+    width:300px;
+    height:300px;
+    float:left;
+    margin-top:25%;
+    margin-left:10%;
+    margin-right:10px;
+    background:#CE401F;
+}
+
+.nav-login2{
+    width:300px;
+    height:300px;
+    float:left;
+    margin-top:25%;
+    margin-right:10px;
+    background:#64B219;
+}
+.login-text	{
+    width:250px;
+    height:35px;
+    margin-bottom:20px;
+    color:#bcc0cd;
+    border:#FFF 1px solid;
+    padding-top:5px;
+    padding-left:5px;
+
+    background: url("../img/user.png") no-repeat right #FFF;
+
+}
+.login-anniu{
+    text-align:right;
+    padding-right:22px;}
+
+.login-password	{
+    width:250px;
+    height:35px;
+    margin-bottom:20px;
+    color:#bcc0cd;
+    border:#FFF 1px solid;
+
+    background: url("../img/password.png") no-repeat right #FFF;
+
+}
+.bg-blue{
+    width:200px;
+    height:200px;
+    background:#0072EA;
+    margin-top:8%;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+
+}
+.bg-green{
+    width:200px;
+    height:200px;
+    background:#64B219;
+    margin-top:8%;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+.bg-gay{
+    width:200px;
+    height:200px;
+    background:#CE401F;
+    margin-left:5%;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+.bg-green2{
+    width:200px;
+    height:200px;
+    background:#4E33AA;
+    float:left;
+    margin-right:10px;
+}
+.bg-black{
+    width:200px;
+    height:200px;
+    background:#F7CC00;
+    float:left;
+    margin-right:10px;
+
+}
+.bg-red{
+    width:200px;
+    height:200px;
+    background:#EE8055;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+
+}
+.bg-gray{
+    width:200px;
+    height:200px;
+    background:#60CBDE;
+    float:left;
+    margin-right:10px;
+
+}
+
+
+.bg-volu{
+    width:410px;
+    height:200px;
+    background:#0072EA;
+    margin-top:8%;
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+    margin-left:5%;
+
+}
+.bg-img{
+
+    width:200px;
+    height:120px;
+    text-align:center;
+    padding-top:40px;
+}
+.bg-font{
+    width:200px;
+    height:30px;
+    text-align:left;
+    padding-top:10px;
+    padding-left:20px;
+
+}
+
+
+.bg-img2{
+
+    width:200px;
+    height:60px;
+    text-align:center;
+    padding-top:10px;
+}
+.bg-font2{
+    width:200px;
+    height:20px;
+    text-align:center;
+    padding-top:0px;
+}
+.bg-user{
+    width:960px;
+    height:50px;
+    height:auto;
+    margin-top:5%;
+
+}
+.bg-touxiang{
+    width:50px;
+    height:50px;
+    float:left;
+
+}
+.bg-username{
+    font:Arial, Helvetica, sans-serif;
+    font-size:18px;
+    width:900px;
+    height:50px;
+    font-weight:bold;
+    color:#FFF;
+    float:left;
+    text-align:right;
+    padding-top:10px;
+    margin-right:10px;
+
+}
+.bg-regist{
+    width:900px;
+
+    background:#FDFDFD;
+    margin-top:2%;
+    margin-bottom:5%;
+    float:left;
+    border:#0072EA solid 1px;
+
+}
+.bg-regist2{
+    width:900px;
+
+    background:#FDFDFD;
+    margin-top:2%;
+    margin-bottom:5%;
+    float:left;
+    border:#0072EA solid 1px;
+
+}
+.regist-banner{
+    width:900px;
+    height:40px;
+    background:#0072EA;
+}
+
+.regist-home{
+    width:40px;
+    height:40px;
+    margin-right:10px;
+    float:left;
+}
+.regist-font{
+    width:200px;
+    height:40px;
+    margin-right:10px;
+    float:left;
+    color:#FFF;
+    font: Arial, Helvetica, sans-serif;
+    font-size:14px;
+    line-height:40px;
+    font-weight:600;}
+.Information-font{
+    width:750px;
+    height:30px;
+    font:Arial, Helvetica, sans-serif;
+    float:left;
+    margin-top:5%;
+    margin-left:8%;
+    font-size:14px;
+    color:#6E6E6E;
+    border-bottom:#DDD 1px solid;
+}
+.qiandao-hr{
+    width:750px;
+    height:30px;
+    float:left;
+    margin-left:8%;
+    font-size:14px;
+    color:#6E6E6E;
+    border-bottom:#DDD 1px solid;
+
+}
+.qiandao-hr2{
+    width:750px;
+    height:40px;
+    float:left;
+    margin-top:2%;
+    line-height:30px;
+
+
+    margin-left:8%;
+    font-size:12px;
+    color:#6E6E6E;
+    border-top:#DDD 1px solid;
+
+}
+.Information-font2{
+    width:750px;
+    height:10px;
+    font:Arial, Helvetica, sans-serif;
+    float:left;
+    margin-left:8%;
+    font-size:14px;
+    color:#6E6E6E;
+    border-bottom:#DDD 1px solid;
+}
+.Information-table{
+    width:680px;
+
+    font:Arial, Helvetica, sans-serif;
+    float:left;
+    margin-top:1%;
+    margin-left:15%;
+    font-size:14px;
+
+
+    color:#6E6E6E;
+
+
+}
+.Information-table table{
+
+    width:630px;
+
+
+
+}
+.home2 .bg-regist .Information-table table tr td {
+    height:40px;
+
+
+}
+.home2 .bg-regist .Information-table table tr td  img{
+    height:80px;
+    width:80px;
+    float:left;
+    margin-right:10px;
+    border:#DDD 1px solid;
+}
+.Upload{
+    width:80px;
+    height:35px;
+    border:#0072EA 1px solid;
+    background:#0072EA;
+    margin-right:10px;
+    float:left;
+    margin-bottom:8px;
+    color:#FFF;
+    text-align:center;
+    line-height:35px;
+    padding-top:2px;
+}
+.upload-img{
+    width:160px;
+    height:auto;
+    float:left;
+    margin-bottom:10px;
+}
+.upload-img img{
+    width:80px;
+    height:80px;
+    border:#DDD 1px solid;}
+.Radio{
+    border: 0px solid #eadcbf;
+    outline: none;
+    width:30px;
+
+
+}
+
+
+.Information-button{
+    width:750px;
+    height:100px;
+    margin-top:1%;
+    margin-left:8%;
+    float:left;
+    text-align:center;
+    margin-bottom:10%
+}
+.qiandao-button{
+    width:750px;
+    height:50px;
+    margin-top:1%;
+    margin-left:8%;
+    float:left;
+    text-align:left;
+    margin-bottom:10%
+}
+.Information-btn{
+    height:40px;
+    width:80px;
+    background:#0072EA;
+    border:#0072EA solid 1px;
+    margin-right:10px;
+    color:#FFF;
+
+}
+.bg-qiandao{
+    width:900px;
+
+    background:#FDFDFD;
+    margin-top:2%;
+    margin-bottom:5%;
+    float:left;
+    border:#64B219 solid 1px;
+
+}
+.qiandao-banner{
+    width:900px;
+    height:40px;
+    background:#64B219;
+}
+.bg-Train{
+
+    width:900px;
+
+    background:#FDFDFD;
+    margin-top:2%;
+    margin-bottom:5%;
+    float:left;
+    border:#4E33AA solid 1px;
+
+}
+
+.Train-banner{
+    width:900px;
+    height:40px;
+    background:#4E33AA;
+}
+
+
+.Information-btn2{
+    height:40px;
+    width:120px;
+    background:#64B219;
+    border:#64B219 solid 1px;
+    margin-right:10px;
+    color:#FFF;
+
+}
+.float-div{
+    position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;
+    z-index: 2; left: 0px; display: none;
+}
+.float-fy{
+    position: absolute; z-index: 3; left: 25%; top: 25%;;
+    background-color: #fff; display: none;
+    width:600px;
+    height:500px;
+    border:#0072EA solid 1px;
+}
+.float-banner{
+    width:600px;
+    height:30px;
+    background:#0072EA;
+
+}
+.float-font{
+    height:30px;
+    font-size: 14px;
+    font-weight:bold;
+    line-height:30px;
+
+}
+.qiandao-table{
+}
+.qiandao-table tr:hover,.qiandao-table tr.altrow{ background:#f7f7f7;}
+.qiandao-table tr td{
+    border-bottom:#DDD 1px solid;
+    height:30px;
+    padding-left:5px;
+    padding-top:5px;
+
+
+}
+
+.odd {
+    background:#f7f7f7;
+    font-weight:bold;
+}
+
+	
+	

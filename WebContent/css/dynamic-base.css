@@ -1,0 +1,78 @@
+.template .rb_menu {
+  padding-right: 1px;
+  padding-left: 1px;
+  width: 100px;
+}
+
+.template .rb_menu li {
+  padding-bottom: 3px;
+  padding-top: 3px;
+  vertical-align: middle;
+  list-style: none;
+}
+
+.template .rb_menu li:hover {
+  background-color: #2020AF;
+  color: #F0FF00;
+}
+
+.template .rb_menu img {
+  vertical-align: middle;
+}
+
+.template #maindynamicform {
+  margin-left: 100px;
+  height: 500px;
+}
+.template div.connectedSortable > label{
+    width:70px;
+}
+
+.template .form-control {
+  display: inline;
+  width: 130px;
+}
+.template form.connectedSortable{
+	width:88%;
+	min-height:300px;
+	border: 1px solid red;
+	position:relative;
+}
+
+.template fieldset.connectedSortable {
+  display: block;
+  border: 1px dashed blue;
+  width:98%;
+  min-height:150px;
+  margin:10px;
+  position:relative;
+}
+
+.template div.section.connectedSortable {
+    display: block;
+    border: 1px dashed #ff0acf;
+    margin:10px;
+    min-height:80px;
+    position:relative;
+}
+
+.template div.connectedSortable {
+  position:relative;
+}
+
+.template .operation{
+	position:absolute;
+	top:0px;
+	right:0px
+}
+
+.template .operation>span.fa:hover {
+     background-color: #fd0a07;
+     color: #F0FF00;
+ }
+
+.template section.panel.panel-body {
+    border:1px slateblue solid;
+    background-color: #fffbba;
+    color: #2e34ff;
+}

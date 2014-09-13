@@ -1,0 +1,49 @@
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.metro .page {
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 980px;
+}
+.description {
+    margin: 10px 0;
+}
+.show-grid .row [class*="span"] {
+    background: none repeat scroll 0 0 rgba(193, 179, 123, 0.52);
+    line-height: 40px;
+    min-height: 10px !important;
+    text-align: center;
+}
+.color-stack li, #icon-list li {
+    margin-bottom: 5px;
+}
+.example > img {
+    display: inline-block;
+    margin: 5px;
+}
+.example .image-container {
+    display: inline-block;
+    margin: 10px;
+    vertical-align: middle;
+}
+.layout {
+    min-height: 100%;
+    position: relative;
+}
+header {
+    height: 45px;
+    position: relative;
+}
+footer {
+    height: 25px;
+    width: 100%;
+}
+@media only screen and (max-width: 640px) {
+    .prettyprint, .example {
+        display: none;
+    }
+}

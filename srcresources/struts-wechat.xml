@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="default-wechat" namespace="/wechat" extends="default" >
+        <interceptors>
+            <interceptor name="WechatInterceptor"
+                         class="interceptor.WechatInterceptor">
+            </interceptor>
+            <!-- 拦截器栈 -->
+            <interceptor-stack name="wechatDefault">
+                <interceptor-ref name="noLoginStack" />
+                <interceptor-ref name="WechatInterceptor" />
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="wechatDefault"></default-interceptor-ref>
+
+        <global-results>
+            <result name="message">/pages/wechat/wechatMessage.jsp</result>
+            <result name="redirectBinding">/pages/wechat/userBindingRedirect.jsp</result>
+        </global-results>
+
+	</package>
+
+    <package name="wechat" namespace="/wechat" extends="default-wechat">
+        <action name="redirect" class="actions.wechat.WechatRedirect" method="redirect">
+            <result name="success">/pages/wechat/redirect.jsp</result>
+        </action>
+        <action name="userBinding" class="actions.wechat.WechatUserAction" method="binding">
+            <result name="success">/pages/wechat/userBinding.jsp</result>
+            <result name="releaseBinding">/pages/wechat/userBindingRelease.jsp</result>
+        </action>
+        <action name="userBindingRelease" class="actions.wechat.WechatUserAction" method="releaseBinding">
+            <result name="success">/pages/wechat/userBinding.jsp</result>
+        </action>
+
+        <action name="userBindingSubmit" class="actions.wechat.WechatUserAction" method="bindingSubmit">
+            <result name="success">/pages/wechat/userBindingSuccess.jsp</result>
+            <result name="error">/pages/wechat/userBinding.jsp</result>
+        </action>
+
+        <action name="checkIn" class="actions.wechat.WechatServiceAction" method="checkIn">
+            <result name="success">/pages/wechat/checkIn.jsp</result>
+            <result name="checkout">/pages/wechat/checkOut.jsp</result>
+            <result name="login">/pages/wechat/userBindingRedirect.jsp</result>
+            <result name="error">/pages/wechat/wechatError.jsp</result>
+        </action>
+        <action name="checkInSubmit" class="actions.wechat.WechatServiceAction" method="checkInSubmit">
+            <result name="success">/pages/wechat/wechatMessage.jsp</result>
+        </action>
+        <action name="checkOut" class="actions.wechat.WechatServiceAction" method="checkOut">
+            <result name="success">/pages/wechat/checkOut.jsp</result>
+            <result name="error">/pages/wechat/wechatMessage.jsp</result>
+        </action>
+        <action name="checkOutSubmit" class="actions.wechat.WechatServiceAction" method="checkOutSubmit">
+            <result name="success">/pages/wechat/wechatMessage.jsp</result>
+        </action>
+        <action name="peopleHere" class="actions.wechat.WechatUserAction" method="searchActiveUser">
+            <result name="success">/pages/wechat/searchActiveUser.jsp</result>
+        </action>
+
+        <action name="volunteerRecruit" class="actions.wechat.WechatRecruitAction" method="volunteerRecruitView">
+            <result name="success">/pages/wechat/volunteerrecruit.jsp</result>
+        </action>
+        <action name="volunteerRecruitSave" class="actions.wechat.WechatRecruitAction" method="volunteerRecruitSave">
+            <result name="success">/pages/wechat/volunteerrecruitsuccess.jsp</result>
+            <result name="error">/pages/wechat/volunteerrecruit.jsp</result>
+        </action>
+        <action name="myAdvise" class="actions.wechat.WechatBaseAuthAction" method="execute">
+            <result name="success">/pages/wechat/developing.jsp</result>
+        </action>
+        <action name="currentActivity" class="actions.wechat.WechatBaseAuthAction" method="execute">
+            <result name="success">/pages/wechat/developing.jsp</result>
+        </action>
+        <action name="serviceDescription" class="actions.wechat.WechatServiceDescriptionAction" method="outDescription">
+            <result name="success">/pages/wechat/servicedescription.jsp</result>
+        </action>
+    </package> 
+    
+    <package name="user" namespace="/wechat/user" extends="default-wechat">
+       <action name="myInfo" class="actions.wechat.WechatUserAction" method="myInfo">
+            <result name="success">/pages/wechat/userMyInfo.jsp</result>
+        </action>
+         <action name="save" class="actions.wechat.WechatUserAction" method="save">
+            <result name="success">/pages/wechat/wechatMessage.jsp</result>
+        </action>
+         <action name="myHonor" class="actions.wechat.WechatUserAction" method="myHonor">
+            <result name="success">/pages/wechat/developing.jsp</result>
+        </action>
+         <action name="register" class="actions.wechat.WechatUserAction" method="register">
+            <result name="failure">/pages/wechat/register.jsp</result>
+            <result name="success">/pages/wechat/registerSuccess.jsp</result>
+        </action>
+    </package>
+    
+    <package name="trainCourse" namespace="/wechat/trainCourse" extends="default-wechat">
+       <action name="myTrainCourse" class="actions.wechat.WechatTrainCourseAction" method="myTrainCourse">
+            <result name="success">/pages/wechat/myTrainCourse.jsp</result>
+        </action>
+    </package>
+</struts>
