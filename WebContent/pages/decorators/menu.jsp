@@ -24,6 +24,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="${rootPath}/backend/customer/index.action">客户信息</a></li>
+                        <li><a href="${rootPath}/backend/customer/customerPosition.action">客户在哪里</a></li>
                     </ul>
                 </li>
 

@@ -29,6 +29,16 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
 
     private CustomerBean customer;
 
+    private List<CustomerBean> customerBeanList;
+
+    public List<CustomerBean> getCustomerBeanList() {
+        return customerBeanList;
+    }
+
+    public void setCustomerBeanList(List<CustomerBean> customerBeanList) {
+        this.customerBeanList = customerBeanList;
+    }
+
     public String getJsonInitImage() {
         return jsonInitImage;
     }
@@ -116,5 +126,14 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
         return SUCCESS;
     }
 
+    /**
+     * 客户的位置视图，基于百度地图
+     *
+     * @return
+     */
+    public String customerPosition() {
+        customerBeanList = (List<CustomerBean>) getBusiness().getAllLeaves().getResponseData();
+        return SUCCESS;
+    }
 
 }

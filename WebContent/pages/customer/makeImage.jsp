@@ -6,7 +6,7 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <script>
     cellFormatter["logo"] = function (data, type, full) {
-        var image = '<img style="width:120px;height:80px;float:left" src="' + data + '"/>';
+        var image = '<img style="width:240px;height:80px;float:left" src="' + data + '"/>';
         return image;
     };
 </script>

@@ -22,7 +22,25 @@ public class CustomerBean extends Bean {
     private String qq;
     private String email;
     private String wechat;
+    private float longitude; // 经度坐标
+    private float latitude; // 纬度坐标
     private List<ImageInfoBean> image;
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
 
     public List<ImageInfoBean> getImage() {
         return image;

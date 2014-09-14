@@ -148,6 +148,9 @@
                                         var longitude = jQuery("#servicePlacelongitude").val();
                                         var latitude = jQuery("#servicePlacelatitude").val();
                                         initializePosition(jQuery("#servicePlacename").val(),longitude,latitude);
+                                        setTimeout(function () {
+                                            map.setZoom(10);
+                                        }, 100);
                                     });
 
                                     function callBackFunction(point){

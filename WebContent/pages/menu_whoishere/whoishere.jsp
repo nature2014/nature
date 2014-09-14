@@ -9,12 +9,12 @@
             setInterval("document.getElementById('timewatcher').innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());", 1000);
         }
     </script>
-    <link href="css/train.css" rel="stylesheet">
+    <link href="${rootPath}/css/train.css" rel="stylesheet">
 </head>
 <body>
 <div class="home2">
     <div class="bg-user">
-        <div class="bg-fh"><img src="img/back.png" width="35" height="35" onclick="location='index.action'"
+        <div class="bg-fh"><img src="${rootPath}/img/back.png" width="35" height="35" onclick="location='index.action'"
                                 style="cursor: pointer"/></div>
         <div class="bg-top">谁在这里</div>
 
@@ -31,7 +31,7 @@
             <div class="bg-title2"><s:property value="#parent.name"/></div>
             <div style="clear:both"></div>
             <s:iterator value="#parent.children" var="child">
-                <a href='userFront/whoisherelist.action?servicePlaceId=<s:property value="#child.id"/>'>
+                <a href='${rootPath}/userFront/whoisherelist.action?servicePlaceId=<s:property value="#child.id"/>'>
                 <div class="hosp-green">
                     <div class="plase-img">
                         <img src="<s:property value="#child.serviceicon"/>" style="width:100px;height:80px"/>
@@ -60,7 +60,7 @@
                 <s:iterator value="outServicePlaces" id="service">
                 <s:set name="found" value="true"/>
                 var buffer = [];
-                buffer.push('<a href="userFront/whoisherelist.action?servicePlaceId=<s:property value="#service.id"/>">');
+                buffer.push('<a href="${rootPath}/userFront/whoisherelist.action?servicePlaceId=<s:property value="#service.id"/>">');
                 buffer.push('<s:property value="#service.name"/><span class="badge bg-success">'+
                         <s:property value="#service.activeUserBeanList.size()"/>
                         +'</span>');
