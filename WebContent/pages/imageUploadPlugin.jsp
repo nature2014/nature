@@ -126,14 +126,6 @@
       </tr>
       {% } %}
 
-
-
-
-
-
-
-
-
 </script>
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
@@ -143,16 +135,17 @@
             <input type="hidden" name="image.fileName" value="{%=file.fileName%}">
             <input type="hidden" name="image.name" value="{%=file.name%}">
             <input type="hidden" name="image.size" value="{%=file.size%}">
+            <input type="hidden" name="image.fileType" value="{%=file.fileType%}">
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
-                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                    <a href="{%=file.fileType=='image'?file.url:file.thumbnailUrl%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}><img src="{%=file.thumbnailUrl%}" style="width:120px;height:80px"></a>
                 {% } %}
             </span>
           </td>
           <td>
               <p class="name">
                   {% if (file.url) { %}
-                  <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                  <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=(file.thumbnailUrl && file.fileType=='image')?'data-gallery':''%}>{%=file.name%}</a>
                   {% } else { %}
                   <span>{%=file.name%}</span>
                   {% } %}
@@ -180,14 +173,6 @@
           </td>
       </tr>
       {% } %}
-
-
-
-
-
-
-
-
 
 </script>
 
@@ -230,6 +215,9 @@
         });
         jQuery("input[name='image.size']").each(function (i, ref) {
             jQuery(ref).attr('name', 'image[' + i + '].size');
+        });
+        jQuery("input[name='image.fileType']").each(function (i, ref) {
+            jQuery(ref).attr('name', 'image[' + i + '].fileType');
         });
     });
 

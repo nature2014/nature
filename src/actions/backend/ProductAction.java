@@ -71,8 +71,14 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
     }
 
     @Override
+    public String getCustomJsp() {
+        return "/pages/product/makeImage.jsp";
+    }
+
+    @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
+        init.getAoColumns().add(new TableHeaderVo("image", "产品效果图"));
         init.getAoColumns().add(new TableHeaderVo("name", "产品名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("code", "编码").enableSearch());
         List<ProductLevelBean> productLevelBeans = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();

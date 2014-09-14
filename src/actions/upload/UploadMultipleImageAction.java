@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
@@ -28,15 +27,18 @@ public class UploadMultipleImageAction extends HttpServlet {
 
     private final static Logger LOG = LoggerFactory.getLogger(UploadMultipleImageAction.class);
     private static File FILEPATH = null;
+    private static String contextPath = null;
 
     static {
+        LOG.debug("初始化图片路径");
         String catalinaHome = System.getProperty("catalina.home");
         FILEPATH = new File(catalinaHome + File.separator + "upload");
         if (!FILEPATH.exists()) {
             //确保目录存在
             FILEPATH.mkdir();
         }
-        LOG.debug("初始化图片路径");
+        LOG.debug("初始化应用服务器上下文地址");
+        contextPath = ServletActionContext.getServletContext().getContextPath();
     }
 
     private File[] images; //上传的文件
@@ -98,7 +100,6 @@ public class UploadMultipleImageAction extends HttpServlet {
         this.getthumb = getthumb;
     }
 
-
     public String getImage() {
         try {
             HttpServletResponse response = ServletActionContext.getResponse();
@@ -142,31 +143,42 @@ public class UploadMultipleImageAction extends HttpServlet {
                 File file = new File(FILEPATH, this.getthumb);
                 if (file.exists()) {
                     String mimetype = getMimeType(file);
-                    BufferedImage im = ImageIO.read(file);
-                    if (im != null) {
-                        //缩略图
-                        BufferedImage thumb = Scalr.resize(im, 120);
-                        ByteArrayOutputStream os = new ByteArrayOutputStream();
-                        if (mimetype.endsWith("png")) {
-                            ImageIO.write(thumb, "PNG", os);
-                            response.setContentType("image/png");
-                        } else if (mimetype.endsWith("jpg")) {
-                            ImageIO.write(thumb, "jpg", os);
-                            response.setContentType("image/jpg");
-                        } else if (mimetype.endsWith("jpeg")) {
-                            ImageIO.write(thumb, "jpeg", os);
-                            response.setContentType("image/jpeg");
-                        } else {
-                            ImageIO.write(thumb, "GIF", os);
-                            response.setContentType("image/gif");
+                    if (mimetype.endsWith("jpg") || mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
+                        BufferedImage im = ImageIO.read(file);
+                        if (im != null) {
+                            //缩略图
+                            BufferedImage thumb = Scalr.resize(im, 120);
+                            ByteArrayOutputStream os = new ByteArrayOutputStream();
+                            if (mimetype.endsWith("png")) {
+                                ImageIO.write(thumb, "PNG", os);
+                                response.setContentType("image/png");
+                            } else if (mimetype.endsWith("jpg")) {
+                                ImageIO.write(thumb, "jpg", os);
+                                response.setContentType("image/jpg");
+                            } else if (mimetype.endsWith("jpeg")) {
+                                ImageIO.write(thumb, "jpeg", os);
+                                response.setContentType("image/jpeg");
+                            } else {
+                                ImageIO.write(thumb, "GIF", os);
+                                response.setContentType("image/gif");
+                            }
+                            ServletOutputStream srvos = response.getOutputStream();
+                            response.setContentLength(os.size());
+                            response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+                            os.writeTo(srvos);
+                            srvos.flush();
+                            srvos.close();
+                            os.close();
                         }
-                        ServletOutputStream srvos = response.getOutputStream();
-                        response.setContentLength(os.size());
-                        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
-                        os.writeTo(srvos);
-                        srvos.flush();
-                        srvos.close();
-                        os.close();
+                    } else {
+                        //此为普通二进制文件
+                        response.setContentType("application/octef-stream");
+                        response.setContentLength((int) file.length());
+                        FileInputStream from = new FileInputStream(file);
+                        //对拷文件流
+                        IOUtils.copy(from, response.getOutputStream());
+                        response.getOutputStream().close();
+                        from.close();
                     }
                 }
             }
@@ -186,6 +198,7 @@ public class UploadMultipleImageAction extends HttpServlet {
             HttpServletResponse response = ServletActionContext.getResponse();
             writer = response.getWriter();
             response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
 
             for (int i = 0; i < imagesFileName.length; i++) {
                 String uuid = ObjectId.get().toString();
@@ -204,10 +217,23 @@ public class UploadMultipleImageAction extends HttpServlet {
                 jsonObject.put("fileName", fileName);
                 jsonObject.put("name", imagesFileName[i]);
                 jsonObject.put("size", file.length());
-                jsonObject.put("url", "/upload/getImage.action?getfile=" + fileName);
-                jsonObject.put("thumbnailUrl", "/upload/getImage.action?getthumb=" + fileName);
-                jsonObject.put("deleteUrl", "upload/getImage.action?delfile=" + fileName);
+
                 jsonObject.put("deleteType", "GET");
+                jsonObject.put("url", contextPath + "/upload/getImage.action?getfile=" + fileName);
+                jsonObject.put("deleteUrl", contextPath + "upload/getImage.action?delfile=" + fileName);
+
+                String mimetype = getMimeType(file);
+                if (mimetype.endsWith("jpg") || mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
+                    //图片格式
+                    jsonObject.put("fileType", "image");
+                    jsonObject.put("thumbnailUrl", contextPath + "/upload/getImage.action?getthumb=" + fileName);
+
+                } else {
+                    //区分文件
+                    jsonObject.put("fileType", "binary");
+                    //换成文件的图标
+                    jsonObject.put("thumbnailUrl", contextPath + "/jslib/flatlab/img/404_icon.png");
+                }
                 jsonArray.add(jsonObject);
             }
             outPutJson.put("files", jsonArray);
@@ -259,9 +285,18 @@ public class UploadMultipleImageAction extends HttpServlet {
                 jsonObject.put("fileName", infoBean.getFileName());
                 jsonObject.put("name", infoBean.getName());
                 jsonObject.put("size", infoBean.getSize());
-                jsonObject.put("url", "/upload/getImage.action?getfile=" + infoBean.getFileName());
-                jsonObject.put("thumbnailUrl", "/upload/getImage.action?getthumb=" + infoBean.getFileName());
-                jsonObject.put("deleteUrl", "upload/getImage.action?delfile=" + infoBean.getFileName());
+                jsonObject.put("fileType", infoBean.getFileType());
+                jsonObject.put("url", contextPath + "/upload/getImage.action?getfile=" + infoBean.getFileName());
+                jsonObject.put("deleteUrl", contextPath + "upload/getImage.action?delfile=" + infoBean.getFileName());
+                String fileType = infoBean.getFileType();
+                if (fileType.equals("image")) {
+                    //图片格式
+                    jsonObject.put("thumbnailUrl", contextPath + "/upload/getImage.action?getthumb=" + infoBean.getFileName());
+
+                } else {
+                    //换成文件的图标
+                    jsonObject.put("thumbnailUrl", contextPath + "/jslib/flatlab/img/404_icon.png");
+                }
                 jsonObject.put("deleteType", "GET");
                 jsonArray.add(jsonObject);
             }
