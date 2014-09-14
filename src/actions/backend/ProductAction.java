@@ -1,5 +1,7 @@
 package actions.backend;
 
+import actions.upload.UploadMultipleImageAction;
+import bl.beans.ImageInfoBean;
 import bl.beans.ProductBean;
 import bl.beans.ProductLevelBean;
 import bl.beans.SourceCodeBean;
@@ -25,7 +27,8 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
     private static final long serialVersionUID = -5222876000116738224L;
     private static Logger LOG = LoggerFactory.getLogger(ProductAction.class);
     protected final static ProductLevelBusiness PLS = (ProductLevelBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_PRODUCTLEVEL);
-
+    private String jsonInitImage;
+    private List<ImageInfoBean> image;
     private ProductBean product;
 
     private List<ProductLevelBean> listProductLevel;
@@ -44,6 +47,22 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
 
     public void setProduct(ProductBean product) {
         this.product = product;
+    }
+
+    public String getJsonInitImage() {
+        return jsonInitImage;
+    }
+
+    public void setJsonInitImage(String jsonInitImage) {
+        this.jsonInitImage = jsonInitImage;
+    }
+
+    public List<ImageInfoBean> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageInfoBean> image) {
+        this.image = image;
     }
 
     @Override
@@ -80,6 +99,8 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
 
     @Override
     public String save() throws Exception {
+        //暂时这样配置，否则需要配置struts映射规则支持二级字段映射
+        product.setImage(image);
         if (StringUtils.isBlank(product.getId())) {
             ProductBean userTmp = (ProductBean) getBusiness().getLeafByName(product.getName()).getResponseData();
             if (userTmp != null) {
@@ -93,6 +114,8 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
             ProductBean origProductLevel = (ProductBean) getBusiness().getLeaf(product.getId().toString()).getResponseData();
             ProductBean newProductLevel = (ProductBean) origProductLevel.clone();
             BeanUtils.copyProperties(newProductLevel, product);
+            //空值的时候,参考NullAwareBeanUtilsBean.java
+            newProductLevel.setImage(product.getImage());
             getBusiness().updateLeaf(origProductLevel, newProductLevel);
         }
         return SUCCESS;
@@ -108,6 +131,8 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
     public String edit() throws Exception {
         listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
         product = (ProductBean) getBusiness().getLeaf(getId()).getResponseData();
+        //初始化图片列表
+        this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(product.getImage());
         return SUCCESS;
     }
 

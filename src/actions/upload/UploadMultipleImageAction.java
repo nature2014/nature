@@ -1,5 +1,6 @@
 package actions.upload;
 
+import bl.beans.ImageInfoBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.io.IOUtils;
@@ -17,9 +18,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by limin.llm on 2014/9/13.
+ * 接口API:https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
  */
 public class UploadMultipleImageAction extends HttpServlet {
 
@@ -126,39 +129,46 @@ public class UploadMultipleImageAction extends HttpServlet {
                 if (file.exists()) {
                     file.delete();
                 }
+                JSONObject outPutJson = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                JSONObject deleteInfo = new JSONObject();
+                deleteInfo.put(this.delfile, true);
+                jsonArray.add(deleteInfo);
+                outPutJson.put("files", jsonArray);
+                response.getWriter().write(outPutJson.toString());
+                response.getWriter().close();
+
             } else if (StringUtils.isNotEmpty(getthumb)) {
                 File file = new File(FILEPATH, this.getthumb);
                 if (file.exists()) {
                     String mimetype = getMimeType(file);
-                    if (mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
-                        BufferedImage im = ImageIO.read(file);
-                        if (im != null) {
-                            //缩略图
-                            BufferedImage thumb = Scalr.resize(im, 120);
-                            ByteArrayOutputStream os = new ByteArrayOutputStream();
-                            if (mimetype.endsWith("png")) {
-                                ImageIO.write(thumb, "PNG", os);
-                                response.setContentType("image/png");
-                            } else if (mimetype.endsWith("jpeg")) {
-                                ImageIO.write(thumb, "jpg", os);
-                                response.setContentType("image/jpeg");
-                            } else {
-                                ImageIO.write(thumb, "GIF", os);
-                                response.setContentType("image/gif");
-                            }
-                            ServletOutputStream srvos = response.getOutputStream();
-                            response.setContentLength(os.size());
-                            response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
-                            os.writeTo(srvos);
-                            srvos.flush();
-                            srvos.close();
-                            os.close();
+                    BufferedImage im = ImageIO.read(file);
+                    if (im != null) {
+                        //缩略图
+                        BufferedImage thumb = Scalr.resize(im, 120);
+                        ByteArrayOutputStream os = new ByteArrayOutputStream();
+                        if (mimetype.endsWith("png")) {
+                            ImageIO.write(thumb, "PNG", os);
+                            response.setContentType("image/png");
+                        } else if (mimetype.endsWith("jpg")) {
+                            ImageIO.write(thumb, "jpg", os);
+                            response.setContentType("image/jpg");
+                        } else if (mimetype.endsWith("jpeg")) {
+                            ImageIO.write(thumb, "jpeg", os);
+                            response.setContentType("image/jpeg");
+                        } else {
+                            ImageIO.write(thumb, "GIF", os);
+                            response.setContentType("image/gif");
                         }
+                        ServletOutputStream srvos = response.getOutputStream();
+                        response.setContentLength(os.size());
+                        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+                        os.writeTo(srvos);
+                        srvos.flush();
+                        srvos.close();
+                        os.close();
                     }
                 }
-            } else {
-                PrintWriter writer = response.getWriter();
-                writer.write("call POST with multipart form data");
             }
 
         } catch (Exception e) {
@@ -170,6 +180,7 @@ public class UploadMultipleImageAction extends HttpServlet {
     public String uploadImage() {
 
         PrintWriter writer = null;
+        JSONObject outPutJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         try {
             HttpServletResponse response = ServletActionContext.getResponse();
@@ -190,18 +201,20 @@ public class UploadMultipleImageAction extends HttpServlet {
                 IOUtils.closeQuietly(from);
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("name", fileName);
-                jsonObject.put("size", file.getTotalSpace());
+                jsonObject.put("fileName", fileName);
+                jsonObject.put("name", imagesFileName[i]);
+                jsonObject.put("size", file.length());
                 jsonObject.put("url", "/upload/getImage.action?getfile=" + fileName);
-                jsonObject.put("thumbnail_url", "/upload/getImage.action?getthumb=" + fileName);
-                jsonObject.put("delete_url", "upload/getImage.action?delfile=" + fileName);
-                jsonObject.put("delete_type", "GET");
+                jsonObject.put("thumbnailUrl", "/upload/getImage.action?getthumb=" + fileName);
+                jsonObject.put("deleteUrl", "upload/getImage.action?delfile=" + fileName);
+                jsonObject.put("deleteType", "GET");
                 jsonArray.add(jsonObject);
             }
+            outPutJson.put("files", jsonArray);
         } catch (Exception e) {
             LOG.error("this exception [{}]", e.getMessage());
         } finally {
-            writer.write(jsonArray.toString());
+            writer.write(outPutJson.toString());
             writer.close();
         }
         return null;
@@ -235,5 +248,27 @@ public class UploadMultipleImageAction extends HttpServlet {
         }
         LOG.debug(suffix);
         return suffix;
+    }
+
+    public static String jsonFromImageInfo(List<ImageInfoBean> imageInfoBeanList) {
+        JSONObject outPutJson = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        if (imageInfoBeanList != null) {
+            for (ImageInfoBean infoBean : imageInfoBeanList) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("fileName", infoBean.getFileName());
+                jsonObject.put("name", infoBean.getName());
+                jsonObject.put("size", infoBean.getSize());
+                jsonObject.put("url", "/upload/getImage.action?getfile=" + infoBean.getFileName());
+                jsonObject.put("thumbnailUrl", "/upload/getImage.action?getthumb=" + infoBean.getFileName());
+                jsonObject.put("deleteUrl", "upload/getImage.action?delfile=" + infoBean.getFileName());
+                jsonObject.put("deleteType", "GET");
+                jsonArray.add(jsonObject);
+            }
+            outPutJson.put("files", jsonArray);
+        } else {
+            outPutJson.put("files", jsonArray);
+        }
+        return outPutJson.toString();
     }
 }

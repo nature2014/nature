@@ -11,7 +11,7 @@ import org.mongodb.morphia.annotations.Entity;
  */
 @Entity(value = "backend_productlevel")
 public class ProductLevelBean extends Bean {
-    //产品级别编码
+    //缂栫爜
     private String code;
     private String description;
 

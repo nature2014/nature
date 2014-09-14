@@ -15,16 +15,11 @@ import java.util.List;
  */
 @Entity(value = "backend_product")
 public class ProductBean extends Bean {
-    //产品编码
     private String code;
-    //摘要信息
     private String summary;
-    //产品图片可以是多张
-    private String[] image;
-    //价格
+    private List<ImageInfoBean> image;
     private float price;
 
-    //产品状态，上架，下架
     private int state;
 
     public static enum PState {
@@ -56,11 +51,11 @@ public class ProductBean extends Bean {
         this.summary = summary;
     }
 
-    public String[] getImage() {
+    public List<ImageInfoBean> getImage() {
         return image;
     }
 
-    public void setImage(String[] image) {
+    public void setImage(List<ImageInfoBean> image) {
         this.image = image;
     }
 
@@ -88,7 +83,6 @@ public class ProductBean extends Bean {
         this.productLevelId = productLevelId;
     }
 
-    //关联产品类别,暂时一个产品只属于一个类别
     private String productLevelId;
 
     private ProductLevelBean productLevelBean;

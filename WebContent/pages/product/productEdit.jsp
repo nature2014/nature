@@ -1,5 +1,4 @@
 <%@ include file="../commonHeader.jsp" %>
-
 <!--main content start-->
 <section class="panel">
     <header class="panel-heading">
@@ -16,7 +15,7 @@
               method="post">
             <div class="form-group has-success">
                 <label class="col-lg-2 control-label">产品名称</label>
-
+                <s:set name="imageName" value="'product.image'"/>
                 <div class="col-lg-10">
                     <input name="product.id" type="hidden" value="${product.id}"/>
                     <input type="text" placeholder="产品名称" name="product.name" class="form-control"
@@ -31,7 +30,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="编码" name="product.code" class="form-control"
-                              required="required" value="${product.code}">
+                           required="required" value="${product.code}">
                 </div>
             </div>
             <div class="form-group has-success">
@@ -47,7 +46,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="价格(元)" class="form-control" name="product.price"
-                          value="${product.price}"/>
+                           value="${product.price}"/>
                 </div>
             </div>
             <div class="form-group has-success">
@@ -66,6 +65,13 @@
                               required="required" rows="20">${product.summary}</textarea>
                 </div>
             </div>
+            <div class="form-group has-success">
+                <label class="col-lg-2 control-label">产品效果图</label>
+
+                <div class="col-lg-10">
+                    <%@ include file="/pages/imageUploadPlugin.jsp" %>
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
@@ -78,5 +84,4 @@
         </form>
     </div>
 </section>
-<script type="text/javascript">
-</script>
+
