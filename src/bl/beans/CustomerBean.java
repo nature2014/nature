@@ -6,13 +6,15 @@ package bl.beans;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import java.util.List;
+
 /**
  * @author pli
  */
 @Entity(value = "backend_customer")
 public class CustomerBean extends Bean {
 
-    //¹«Ë¾µÄÍ¼±ê
+    //å®¢æˆ·çš„å›¾æ ‡
     private String logo;
     private String address;
     private String cellPhone;
@@ -20,6 +22,15 @@ public class CustomerBean extends Bean {
     private String qq;
     private String email;
     private String wechat;
+    private List<ImageInfoBean> image;
+
+    public List<ImageInfoBean> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageInfoBean> image) {
+        this.image = image;
+    }
 
     public String getLogo() {
         return logo;

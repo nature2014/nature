@@ -138,7 +138,7 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
         listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
         product = (ProductBean) getBusiness().getLeaf(getId()).getResponseData();
         //初始化图片列表
-        this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(product.getImage());
+        this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(product != null ? product.getImage() : null);
         return SUCCESS;
     }
 

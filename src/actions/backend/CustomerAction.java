@@ -1,6 +1,8 @@
 package actions.backend;
 
+import actions.upload.UploadMultipleImageAction;
 import bl.beans.CustomerBean;
+import bl.beans.ImageInfoBean;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
 import bl.mongobus.CustomerBusiness;
@@ -12,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
 
+import java.util.List;
+
 /**
  * @author pli
  * @since $Date:2014-09-13$
@@ -20,8 +24,26 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
     private static final CustomerBusiness customerBusiness = (CustomerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_CUSTOMER);
     private static final long serialVersionUID = -5222876000116738224L;
     private static Logger LOG = LoggerFactory.getLogger(CustomerAction.class);
+    private String jsonInitImage;
+    private List<ImageInfoBean> image;
 
     private CustomerBean customer;
+
+    public String getJsonInitImage() {
+        return jsonInitImage;
+    }
+
+    public void setJsonInitImage(String jsonInitImage) {
+        this.jsonInitImage = jsonInitImage;
+    }
+
+    public List<ImageInfoBean> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageInfoBean> image) {
+        this.image = image;
+    }
 
     public CustomerBean getCustomer() {
         return customer;
@@ -37,8 +59,14 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
     }
 
     @Override
+    public String getCustomJsp() {
+        return "/pages/customer/makeImage.jsp";
+    }
+
+    @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
+        init.getAoColumns().add(new TableHeaderVo("logo", "客户Logo").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("name", "客户名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("cellPhone", "手机号码").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("fixedPhone", "固定电话").enableSearch());
@@ -57,6 +85,8 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
 
     @Override
     public String save() throws Exception {
+        //暂时这样配置，否则需要配置struts映射规则支持二级字段映射
+        customer.setImage(image);
         if (StringUtils.isBlank(customer.getId())) {
             CustomerBean userTmp = (CustomerBean) getBusiness().getLeafByName(customer.getName()).getResponseData();
             if (userTmp != null) {
@@ -70,6 +100,8 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
             CustomerBean origCustomer = (CustomerBean) getBusiness().getLeaf(customer.getId().toString()).getResponseData();
             CustomerBean newCustomer = (CustomerBean) origCustomer.clone();
             BeanUtils.copyProperties(newCustomer, customer);
+            //空值的时候,参考NullAwareBeanUtilsBean.java
+            newCustomer.setImage(customer.getImage());
             getBusiness().updateLeaf(origCustomer, newCustomer);
         }
         return SUCCESS;
@@ -78,6 +110,9 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
     @Override
     public String edit() throws Exception {
         customer = (CustomerBean) getBusiness().getLeaf(getId()).getResponseData();
+        //初始化图片列表
+        this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(customer != null ? customer.getImage() : null);
+
         return SUCCESS;
     }
 
