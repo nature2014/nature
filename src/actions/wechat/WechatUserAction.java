@@ -30,10 +30,9 @@ import java.util.List;
  * Created by wangronghua on 14-3-19.
  */
 public class WechatUserAction extends WechatBaseAuthAction {
-
-    private String userName;
+    private String name;
     private String identityCardNumber;
-    private String password;
+    private String cellPhone;
 
     private String servicePlaceId;
     private String servicePlaceName;
@@ -139,19 +138,18 @@ public class WechatUserAction extends WechatBaseAuthAction {
     }
 
     public String bindingSubmit() {
-        if(StringUtils.isEmpty(userName)) {
+        if(StringUtils.isEmpty(name)) {
             super.addActionError("用户名不能为空！");
-        }
-        else if(StringUtils.isEmpty(password)) {
-            super.addActionError("密码不能为空！");
         }
         else if(StringUtils.isEmpty(identityCardNumber)) {
             super.addActionError("身份证号不能为空！");
         }
+        else if(StringUtils.isEmpty(cellPhone)) {
+            super.addActionError("手机号码不能为空！");
+        }
         else {
-            VolunteerBean userTmp = vb.getVolunteerBeanByCode(userName);
-            if (userTmp != null && userTmp.getStatus() == 2 && StringUtil.toMD5(password).equals(userTmp.getPassword())
-                && identityCardNumber.equals(userTmp.getIdentityCard())) {
+            VolunteerBean userTmp = vb.getVolunteerBeanByIdentityCard(identityCardNumber);
+            if (userTmp != null && name.equals(userTmp.getName()) && cellPhone.equals(userTmp.getCellPhone())) {
                 userTmp.setOpenID(openID);
                 userTmp.setWechat(wechatUser);
                 vb.updateLeaf(userTmp, userTmp);
@@ -206,14 +204,6 @@ public class WechatUserAction extends WechatBaseAuthAction {
         this.wechatUser = wechatUser;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getIdentityCardNumber() {
         return identityCardNumber;
     }
@@ -228,14 +218,6 @@ public class WechatUserAction extends WechatBaseAuthAction {
 
     public void setOpenID(String openID) {
         this.openID = openID;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<ServicePlaceVo> getPlaces() {
@@ -277,5 +259,22 @@ public class WechatUserAction extends WechatBaseAuthAction {
     public void setServicePlaceName(String servicePlaceName) {
         this.servicePlaceName = servicePlaceName;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCellPhone() {
+        return cellPhone;
+    }
+
+    public void setCellPhone(String cellPhone) {
+        this.cellPhone = cellPhone;
+    }
+
 
 }

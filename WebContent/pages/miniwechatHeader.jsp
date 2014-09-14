@@ -11,6 +11,7 @@
 <meta name="author" content="LiLimin,GuDong,WangRonghua">
 <link href="${rootPath}/jslib/flatlab/css/bootstrap.min.css" rel="stylesheet">
 <link href="${rootPath}/jslib/flatlab/css/bootstrap-reset.css" rel="stylesheet">
+<link href="${rootPath}/jslib/flatlab/css/gallery.css" rel="stylesheet">
 <!--external css-->
 <link href="${rootPath}/jslib/flatlab/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <!-- Custom styles for this template -->
