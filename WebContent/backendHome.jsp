@@ -12,7 +12,7 @@
 <!--state overview start-->
 <div class="row state-overview">
     <div class="col-lg-3 col-sm-6">
-        <a href="${rootPath}/javascript:selectMenu('volunteerManagement','?status=2')">
+        <a href="javascript:selectMenu('volunteerManagement','?status=2')">
             <section class="panel">
                 <div class="symbol terques">
                     <i class="fa fa-user"></i>
@@ -25,7 +25,7 @@
         </a>
     </div>
     <div class="col-lg-3 col-sm-6">
-        <a href="${rootPath}/javascript:selectMenu('courseManagement')">
+        <a href="javascript:selectMenu('courseManagement')">
             <section class="panel">
                 <div class="symbol red">
                     <i class="fa fa-tags"></i>
@@ -38,7 +38,7 @@
         </a>
     </div>
     <div class="col-lg-3 col-sm-6">
-        <a href="${rootPath}/javascript:selectMenu('trainManagement')">
+        <a href="javascript:selectMenu('trainManagement')">
             <section class="panel">
                 <div class="symbol yellow">
                     <i class="fa fa-shopping-cart"></i>

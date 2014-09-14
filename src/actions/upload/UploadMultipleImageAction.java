@@ -287,7 +287,7 @@ public class UploadMultipleImageAction extends HttpServlet {
                 jsonObject.put("size", infoBean.getSize());
                 jsonObject.put("fileType", infoBean.getFileType());
                 jsonObject.put("url", contextPath + "/upload/getImage.action?getfile=" + infoBean.getFileName());
-                jsonObject.put("deleteUrl", contextPath + "upload/getImage.action?delfile=" + infoBean.getFileName());
+                jsonObject.put("deleteUrl", contextPath + "/upload/getImage.action?delfile=" + infoBean.getFileName());
                 String fileType = infoBean.getFileType();
                 if (fileType.equals("image")) {
                     //图片格式

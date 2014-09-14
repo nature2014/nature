@@ -199,7 +199,7 @@
 
 
         // Load existing files:
-        $('#fileupload').fileupload('option', 'done').call($('#fileupload'), $.Event('done'), {result: ${jsonInitImage}});
+        $('#fileupload').fileupload('option', 'done').call($('#fileupload'), $.Event('done'), {result: <s:if test="jsonInitImage!=null">${jsonInitImage}</s:if><s:else>{}</s:else> });
 
     });
 
