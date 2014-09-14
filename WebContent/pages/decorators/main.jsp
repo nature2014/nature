@@ -25,6 +25,7 @@
     <link href="${rootPath}/jslib/flatlab/css/style.css" rel="stylesheet">
     <link href="${rootPath}/jslib/flatlab/css/style-responsive.css" rel="stylesheet" />
     <link href="${rootPath}/jslib/jquery-ui-1.10.4.custom/css/start/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <link href="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
     <style type="text/css">
 		.ui-dialog {
 			z-index: 2000;
@@ -57,6 +58,7 @@
     <script src="${rootPath}/jslib/flatlab/assets/advanced-datatable/extras/TableTools/media/js/TableTools.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
     <decorator:head/>
   </head>
 

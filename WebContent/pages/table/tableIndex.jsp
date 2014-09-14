@@ -416,4 +416,10 @@ window.actionPrex = "${actionPrex}";
     <s:property value="#column.cellFormatter"/>;
     </s:if>
     </s:iterator>
+
+    $(function() {
+        //图片快速浮优
+        jQuery(".fancybox").fancybox();
+    });
+
 </script>

@@ -154,26 +154,26 @@ public class Bean implements BeanContext, Cloneable, Serializable {
     }
 
     /**
-     * ╢к╥╫╥╗д©╣дё╨тзвс╠Мжп╪ЛкВвс╤тоС
-     * ╡исцясЁы╪сть╣д╥╫й╫ю╢й╣ожё╛╤ЬгртзоъЁлиообндж╩╪стьр╩╢н╡╒гр╩╨╢Фрт╠ЦлА╦ъюШсцп╖бй
+     * О©╫к╥О©╫О©╫О©╫д©О©╫дёО©╫О©╫О©╫О©╫с╠О©╫О©╫п╪О©╫О©╫О©╫О©╫с╤О©╫О©╫О©╫
+     * О©╫О©╫О©╫О©╫О©╫сЁы╪О©╫О©╫ь╣д╥О©╫й╫О©╫О©╫й╣О©╫жёО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ъЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫ж╩О©╫О©╫О©╫О©╫р╩О©╫н╡О©╫О©╫р╩О©╫О©╫О©╫О©╫т╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫п╖О©╫О©╫
      *
-     * @param subClass     вж╠МюЮпмпео╒
-     * @param parentIdName вс╠М╤тс╕мБ╪ЭцШвж
+     * @param subClass     О©╫ж╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫о╒
+     * @param parentIdName О©╫с╠О©╫О©╫с╕О©╫О©╫О©╫О©╫О©╫О©╫О©╫
      * @param <SC>
-     * @return List<SC> вс╠МюЮпм
+     * @return List<SC> О©╫с╠О©╫О©╫О©╫О©╫О©╫
      */
     public <SC> List<SC> getSubBeans(Class<SC> subClass, String parentIdName) {
         return this.getSubBeans(subClass, parentIdName, null);
     }
 
     /**
-     * ╢к╥╫╥╗д©╣дё╨тзвс╠Мжп╪ЛкВвс╤тоС
-     * ╡исцясЁы╪сть╣д╥╫й╫ю╢й╣ожё╛╤ЬгртзоъЁлиообндж╩╪стьр╩╢н╡╒гр╩╨╢Фрт╠ЦлА╦ъюШсцп╖бй
+     * О©╫к╥О©╫О©╫О©╫д©О©╫дёО©╫О©╫О©╫О©╫с╠О©╫О©╫п╪О©╫О©╫О©╫О©╫с╤О©╫О©╫О©╫
+     * О©╫О©╫О©╫О©╫О©╫сЁы╪О©╫О©╫ь╣д╥О©╫й╫О©╫О©╫й╣О©╫жёО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ъЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫ж╩О©╫О©╫О©╫О©╫р╩О©╫н╡О©╫О©╫р╩О©╫О©╫О©╫О©╫т╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫п╖О©╫О©╫
      *
-     * @param subClass     вж╠МюЮпмпео╒
-     * @param parentIdName вс╠М╤тс╕мБ╪ЭцШвж
+     * @param subClass     О©╫ж╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫о╒
+     * @param parentIdName О©╫с╠О©╫О©╫с╕О©╫О©╫О©╫О©╫О©╫О©╫О©╫
      * @param <SC>
-     * @return List<SC> вс╠МюЮпм
+     * @return List<SC> О©╫с╠О©╫О©╫О©╫О©╫О©╫
      */
     public <SC> List<SC> getSubBeans(Class<SC> subClass, String parentIdName, String orderString) {
         String key = subClass + parentIdName;
@@ -196,13 +196,13 @@ public class Bean implements BeanContext, Cloneable, Serializable {
     }
 
     /**
-     * ╢к╥╫╥╗д©╣дё╨тз╦╦╠Мжп╪ЛкВвс╤тоС,╦Ы╬щ"_id"вж╤н╡Ия╞╤тоС
-     * ╡исцясЁы╪сть╣д╥╫й╫ю╢й╣ожё╛╤ЬгртзоъЁлиообндж╩╪стьр╩╢н╡╒гр╩╨╢Фрт╠ЦлА╦ъюШсцп╖бй
+     * О©╫к╥О©╫О©╫О©╫д©О©╫дёО©╫О©╫з╦О©╫О©╫О©╫О©╫п╪О©╫О©╫О©╫О©╫с╤О©╫О©╫О©╫,О©╫О©╫О©╫"_id"О©╫ж╤н╡О©╫я╞О©╫О©╫О©╫О©╫
+     * О©╫О©╫О©╫О©╫О©╫сЁы╪О©╫О©╫ь╣д╥О©╫й╫О©╫О©╫й╣О©╫жёО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ъЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫ж╩О©╫О©╫О©╫О©╫р╩О©╫н╡О©╫О©╫р╩О©╫О©╫О©╫О©╫т╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫п╖О©╫О©╫
      *
-     * @param subClass      вж╠МюЮпмпео╒
-     * @param parentIdValue вс╠М╤тс╕мБ╪ЭцШвж
+     * @param subClass      О©╫ж╠О©╫О©╫О©╫О©╫О©╫О©╫О©╫о╒
+     * @param parentIdValue О©╫с╠О©╫О©╫с╕О©╫О©╫О©╫О©╫О©╫О©╫О©╫
      * @param <SC>
-     * @return List<SC> вс╠МюЮпм
+     * @return List<SC> О©╫с╠О©╫О©╫О©╫О©╫О©╫
      */
     public <SC> SC getParentBean(Class<SC> subClass, String parentIdValue) {
         String key = subClass + parentIdValue;
@@ -223,6 +223,6 @@ public class Bean implements BeanContext, Cloneable, Serializable {
         return dc.find(beanClass).filter("_id", objectId).get();
     }
 
-    //╩╨╢ФЁь
+    //О©╫О©╫О©╫О©╫О©╫
     private Map<String, List> cacheSubBeans = new HashMap<String, List>();
 }
