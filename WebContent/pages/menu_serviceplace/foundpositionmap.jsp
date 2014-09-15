@@ -62,7 +62,7 @@
             // 将地址解析结果显示在地图上,并调整地图视野
             myGeo.getPoint(destination, function (point) {
                 if (point) {
-                    map.centerAndZoom(point, 15);
+                    map.centerAndZoom(point, 10);
                     if (window.marker == null)
                         window.marker = new BMap.Marker(point);
                     map.addOverlay(window.marker);
@@ -87,7 +87,7 @@
 
         map.addControl(new BMap.NavigationControl());  //添加默认缩放平移控件
         map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_BOTTOM_LEFT})); // 左下
-        map.centerAndZoom(window.city, 14); // 初始化地图,设置中心点坐标和地图级别。
+        map.centerAndZoom(window.city, 10); // 初始化地图,设置中心点坐标和地图级别。
 
         function initializePosition(destination, lng, lat) {
 

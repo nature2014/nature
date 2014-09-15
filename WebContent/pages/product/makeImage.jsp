@@ -14,7 +14,7 @@
                 if (data[i].fileType == "image") {
                     var imageUrl = '${rootPath}/upload/getImage.action?getfile=' + data[i].fileName;
                     var imageThumb = '${rootPath}/upload/getImage.action?getthumb=' + data[i].fileName;
-                    image += '<a class="fancybox" rel="group" href="' + imageUrl + '"><img style="width:120px;height:80px;float:left" src="' + imageThumb + '"/></a>';
+                    image += '<a class="fancybox" rel="group" href="' + imageUrl + '" title="' + data[i].name + '"><img style="width:120px;height:80px;float:left" src="' + imageThumb + '"/></a>';
                     j++;
                 }
             }

@@ -59,6 +59,8 @@
     <script src="${rootPath}/jslib/flatlab/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.pack.js"></script>
+
     <decorator:head/>
   </head>
 
