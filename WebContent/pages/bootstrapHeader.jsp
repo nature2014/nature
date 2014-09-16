@@ -30,6 +30,7 @@
 <script src="${rootPath}/jslib/flatlab/js/jquery.scrollTo.min.js"></script>
 <script src="${rootPath}/jslib/flatlab/js/jquery.nicescroll.js" type="text/javascript"></script>
 <script src="${rootPath}/jslib/flatlab/js/respond.min.js" ></script>
+<script src="${rootPath}/jslib/flatlab/js/modernizr.custom.js" ></script>
 
 <!-- js placed at the end of the document so the pages load faster -->
 <script src="${rootPath}/jslib/flatlab/assets/advanced-datatable/media/js/jquery.dataTables.js" type="text/javascript" language="javascript" ></script>

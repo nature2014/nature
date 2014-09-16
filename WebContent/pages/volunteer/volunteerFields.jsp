@@ -9,7 +9,7 @@
 <label>指纹信息</label>
 <label id="console_message" style="color:red;"></label>
 <div class="input-control text" data-role="input-control">
-    <img id="fingerjpg" src="${volunteer.fingerpath}" style="width:100px;height:80px;margin-bottom:120px" onerror="this.src='img/notfound.png';">
+    <img id="fingerjpg" src="${volunteer.fingerpath}" style="width:100px;height:80px;margin-bottom:120px">
     <script>
         window.figureNumber = "${volunteer.code}";
         function  printMessage(message){
@@ -24,7 +24,7 @@
 <s:else>
     <label>指纹信息</label>
     <div class="input-control text" data-role="input-control">
-        <img id="fingerjpg" src="${volunteer.fingerpath}" style="width:100px;height:80px;margin-bottom:120px" onerror="this.src='img/notfound.png';">
+        <img id="fingerjpg" src="${volunteer.fingerpath}" style="width:100px;height:80px;margin-bottom:120px">
     </div>
 </s:else>
 
