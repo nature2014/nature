@@ -20,6 +20,9 @@
 
 <div style="margin: 0px auto; width: 980px;position:relative">
     <div><img src="${rootPath}/img/nature.png" style="width:980px;height:280px"></div>
+    <div style="position:absolute;left:0px;top:180px;">
+        <img src="${rootPath}/img/wechat_account.jpg" style="width: 100px; height:100px;">
+    </div>
     <div style="margin: 0px auto; width: 200px;position:absolute;left:800px;top:5px">
         <a href="${rootPath}/index.action">
             <button type="button" class="btn btn-round btn-success">前台管理</button>
