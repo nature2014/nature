@@ -93,6 +93,7 @@
 
             if (lng != "" && lat != "") {
                 var point = new BMap.Point(lng, lat);
+                map.centerAndZoom(point, 10);
                 if (window.marker == null)
                     window.marker = new BMap.Marker(point);
                 window.marker.enableDragging();//允许拖动

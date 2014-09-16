@@ -125,7 +125,13 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
 
         return SUCCESS;
     }
-
+    @Override
+    public String delete() throws Exception {
+        if (getId() != null) {
+            getBusiness().deleteLeaf(getId());
+        }
+        return SUCCESS;
+    }
     /**
      * 客户的位置视图，基于百度地图
      *

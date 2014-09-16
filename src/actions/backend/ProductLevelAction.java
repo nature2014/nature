@@ -76,5 +76,11 @@ public class ProductLevelAction extends BaseBackendAction<ProductLevelBusiness> 
         return SUCCESS;
     }
 
-
+    @Override
+    public String delete() throws Exception {
+        if (getId() != null) {
+            getBusiness().deleteLeaf(getId());
+        }
+        return SUCCESS;
+    }
 }

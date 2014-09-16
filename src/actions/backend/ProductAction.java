@@ -142,5 +142,12 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
         return SUCCESS;
     }
 
+    @Override
+    public String delete() throws Exception {
+        if (getId() != null) {
+            getBusiness().deleteLeaf(getId());
+        }
+        return SUCCESS;
+    }
 
 }
