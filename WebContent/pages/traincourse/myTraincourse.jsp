@@ -3,7 +3,7 @@
 <head>
 <%@ include file="../frontHeader.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/train.css" rel="stylesheet">
+<link href="${rootPath}/css/train.css" rel="stylesheet">
 <title>我的培训</title>
 
 <style type="text/css">

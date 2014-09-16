@@ -306,7 +306,9 @@
             <result name="input">/pages/table/tableIndex.jsp</result>
         </action>
         <action name="initTable" class="actions.backend.ProductLevelAction" method="initTable"/>
-        <action name="queryTable" class="actions.backend.ProductLevelAction" method="queryTable"/>
+        <action name="queryTable" class="actions.backend.ProductLevelAction" method="queryTable">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
         <action name="exportTable" class="actions.backend.ProductLevelAction" method="exportTable"/>
 
         <action name="delete" class="actions.backend.ProductLevelAction" method="delete">
@@ -329,7 +331,9 @@
             <result name="input">/pages/table/tableIndex.jsp</result>
         </action>
         <action name="initTable" class="actions.backend.ProductAction" method="initTable"/>
-        <action name="queryTable" class="actions.backend.ProductAction" method="queryTable"/>
+        <action name="queryTable" class="actions.backend.ProductAction" method="queryTable">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
         <action name="exportTable" class="actions.backend.ProductAction" method="exportTable"/>
 
         <action name="delete" class="actions.backend.ProductAction" method="delete">
