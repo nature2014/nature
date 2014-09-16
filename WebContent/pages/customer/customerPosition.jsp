@@ -1,7 +1,10 @@
 <head>
     <%@ include file="../commonHeader.jsp" %>
 </head>
-
+<ul class="breadcrumb">
+    <li>客户管理</li>
+    <li class="active">客户在哪里</li>
+</ul>
 <style type="text/css">
     #allmap {
         width: 100%;

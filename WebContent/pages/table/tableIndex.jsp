@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <ul class="breadcrumb">
-                <li><a href="#"><i class="fa fa-home"></i>首页</a></li>
+                <li><a href="${rootPath}/backend/index.action"><i class="fa fa-home"></i>首页</a></li>
                     ${tableTitle}
             </ul>
             <!--breadcrumbs end -->

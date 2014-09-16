@@ -1,10 +1,10 @@
 <%@ include file="/pages/commonHeader.jsp" %>
 <script type="text/javascript">
     function selectMenu(menu, parameter) {
-        if(null != parameter) {
-            $("#"+menu)[0].href = $("#"+menu)[0].href + parameter;
+        if (null != parameter) {
+            $("#" + menu)[0].href = $("#" + menu)[0].href + parameter;
         }
-        $("#"+menu)[0].click();
+        $("#" + menu)[0].click();
     }
 </script>
 <section id="container">
@@ -33,6 +33,7 @@
                     <ul class="sub">
                         <li><a href="${rootPath}/backend/customer/index.action">客户信息</a></li>
                         <li><a href="${rootPath}/backend/customer/customerPosition.action">客户在哪里</a></li>
+                        <li><a href="${rootPath}/backend/customer/smsSend.action">群发短信</a></li>
                     </ul>
                 </li>
 

@@ -13,6 +13,10 @@
         font-size: 14px;
         line-height: 19px;
     }
+
+    .btn.btn-round {
+        margin: 2px
+    }
 </style>
 <head><title>大自然信息管理系统</title></head>
 <body>
@@ -54,13 +58,13 @@
                         for (var i = 0; i < imageArray.length; i++) {
                             if (imageArray[i].fileType == "image") {
                                 var imageUrl = '${rootPath}/upload/getImage.action?getfile=' + imageArray[i].fileName;
-                                var imageThumb = '${rootPath}/upload/getImage.action?getfile=' + imageArray[i].fileName;
+                                var imageThumb = '${rootPath}/upload/getImage.action?targetSize=380&getthumb=' + imageArray[i].fileName;
                                 image.push('<a style="width:308px;heigth:250px;float: left;margin:5px;border:2px solid #abe5b7;padding:2px" class="fancybox" rel="group" href="' + imageUrl + '" title="' + data[j].name + '">');
                                 image.push('<img style="width:300px;height:190px;display: block" src="' + imageThumb + '"/>');
-                                image.push('<span style="display: block"><b>产品</b>: ' + data[j].name + '</span>');
-                                image.push('<span style="display: block"><b>参考价格</b>: ￥' + data[j].price + '元</span>');
+                                image.push('<span style="display: block">【产品】' + data[j].name + '</span>');
+                                image.push('<span style="display: block;color: #fd8e51;font-size:14px">【参考价格】¥' + data[j].price + '</span>');
                                 image.push('<br>');
-                                image.push('<p style="display: block;overflow: hidden;max-height:90px"><b>摘要</b>: ' + data[j].summary + '</p>');
+                                image.push('<p style="display: block;overflow: hidden;max-height:90px">【摘要】' + data[j].summary + '</p>');
 
                                 image.push('</a>');
                             }

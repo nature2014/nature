@@ -61,7 +61,8 @@
     <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
     <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="${rootPath}/jslib/flatlab/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-    <decorator:head/>
+    <script type="text/javascript" src="${rootPath}/js/checkUtil.js"></script>
+      <decorator:head/>
   </head>
 
   <body>

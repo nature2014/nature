@@ -136,4 +136,14 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
         return SUCCESS;
     }
 
+    /**
+     * 短息配置控制中心
+     *
+     * @return
+     */
+    public String smsSend() {
+        super.addActionError("请检查短信网关，并且核对账户余额是否充足！");
+        return SUCCESS;
+    }
+
 }

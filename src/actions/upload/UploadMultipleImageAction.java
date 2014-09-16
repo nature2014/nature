@@ -52,6 +52,16 @@ public class UploadMultipleImageAction extends HttpServlet {
     //获取缩略图
     private String getthumb;
 
+    private int targetSize;
+
+    public int getTargetSize() {
+        return targetSize;
+    }
+
+    public void setTargetSize(int targetSize) {
+        this.targetSize = targetSize;
+    }
+
     public File[] getImages() {
         return images;
     }
@@ -108,22 +118,14 @@ public class UploadMultipleImageAction extends HttpServlet {
                 File file = new File(FILEPATH, this.getfile);
                 if (file.exists()) {
                     int bytes = 0;
-                    ServletOutputStream op = response.getOutputStream();
-
                     response.setContentType(getMimeType(file));
                     response.setContentLength((int) file.length());
                     response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
 
-                    byte[] bbuf = new byte[1024];
-                    DataInputStream in = new DataInputStream(new FileInputStream(file));
-
-                    while ((in != null) && ((bytes = in.read(bbuf)) != -1)) {
-                        op.write(bbuf, 0, bytes);
-                    }
-
-                    in.close();
-                    op.flush();
-                    op.close();
+                    FileInputStream from = new FileInputStream(file);
+                    //对拷文件流
+                    IOUtils.copy(from, response.getOutputStream());
+                    response.getOutputStream().close();
                 }
             } else if (StringUtils.isNotEmpty(delfile)) {
                 File file = new File(FILEPATH, this.delfile);
@@ -147,7 +149,12 @@ public class UploadMultipleImageAction extends HttpServlet {
                         BufferedImage im = ImageIO.read(file);
                         if (im != null) {
                             //缩略图
-                            BufferedImage thumb = Scalr.resize(im, 120);
+                            BufferedImage thumb = null;
+                            if (targetSize == 0) {
+                                thumb = Scalr.resize(im, 120);
+                            } else {
+                                thumb = Scalr.resize(im, targetSize);
+                            }
                             ByteArrayOutputStream os = new ByteArrayOutputStream();
                             if (mimetype.endsWith("png")) {
                                 ImageIO.write(thumb, "PNG", os);

@@ -20,9 +20,7 @@
                 <div class="col-lg-10">
                     <input name="customer.id" type="hidden" value="${customer.id}"/>
                     <input type="text" placeholder="客户名称" name="customer.name" class="form-control"
-                           autofocus="autofocus"
                            required="required" value="${customer.name}"
-                           <s:if test="customer.id != null">readonly="readonly"</s:if>
                             />
                 </div>
             </div>
@@ -171,4 +169,21 @@
     </div>
 </section>
 <script type="text/javascript">
+    //please refer to form-validation-script.js
+    $(document).ready(function () {
+        $("#customer").validate({
+            rules: {
+                'customer.cellPhone': {
+                    required: true,
+                    cellPhone: true
+                }
+            },
+            messages: {
+                'customer.cellPhone': {
+                    required: "请输入手机",
+                    cellPhone: "请输入正确的手机号, 例如：13912332122"
+                }
+            }
+        });
+    });
 </script>
