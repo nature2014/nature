@@ -166,7 +166,7 @@
 <section class="panel" style="margin-bottom: 0px;">
     <header class="panel-heading">
         产品分类
-        <span class="tools pull-right">>
+        <span class="tools pull-right">
             <a href="javascript:showSlection()" class="fa fa-pencil-square-o"><s:property value="productLevelBean.name" default="所有产品" />[点击切换]</a>
         </span>
     </header>
@@ -187,15 +187,23 @@
                 </tr>
                 <tr>
                     <td class="product-image">
-                        <a href="#" title="查看产品详情" hidefocus="true">
-                            <s:iterator value="#bean.image" var="image" status="st">
+                        <s:iterator value="#bean.image" var="image" status="st">
+                            <a class="fancybox<s:property value="#bean.id" />" rel="group" href="${rootPath}/upload/getImage.action?getfile=<s:property value='%{#image.fileName}'/>" title="查看产品详情" hidefocus="true">
                                 <s:if test="#st.index < 3">
                                     <div class="thumb">
-                                        <img src="/upload/getImage.action?getthumb=<s:property value='%{#image.fileName}'/>">
+                                        <img src="${rootPath}/upload/getImage.action?getthumb=<s:property value='%{#image.fileName}'/>">
                                     </div>
                                 </s:if>
-                            </s:iterator>
-                        </a>
+                            </a>
+                        </s:iterator>
+
+                        <script type="text/javascript">
+                            $(function() {
+                                //    fancybox
+                                $(".fancybox<s:property value='#bean.id'/>").fancybox();
+                            });
+
+                        </script>
                         <%--<div class="desc">--%>
                             <%--<p class="baobei-name">--%>
                                 <%--<a data-point-url="http://gm.mmstat.com/listbought.2.6" class="J_MakePoint" href="http://item.taobao.com/item.htm?id=38642577049&amp;_u=e5ragbfaad8" target="_blank">--%>
@@ -259,6 +267,6 @@
 </div>
 </body>
 
-<script src="jslib/flatlab/js/common-scripts.js"></script>
+<%--<script src="${rootPath}/jslib/flatlab/js/common-scripts.js"></script>--%>
 
 </html>

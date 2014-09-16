@@ -29,7 +29,12 @@ public class WechatProductAction extends WechatBaseAuthAction {
             return "redirectBinding";
         }
         productLevelList = (List<ProductLevelBean>) productLevelBus.getAllLeaves().getResponseData();
-        productList = (List<ProductBean>) productBus.getAllLeaves().getResponseData();
+        if(null != productLevelBean && null != productLevelBean.getId()) {
+            productLevelBean = (ProductLevelBean) productLevelBus.getLeaf(productLevelBean.getId()).getResponseData();
+            productList = productBus.getProductsByProductLevelId(productLevelBean.getId());
+        } else {
+            productList = (List<ProductBean>) productBus.getAllLeaves().getResponseData();
+        }
         return SUCCESS;
     }
 
