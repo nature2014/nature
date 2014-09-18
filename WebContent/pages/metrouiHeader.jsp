@@ -18,12 +18,7 @@
     <script src="${rootPath}/jslib/flatlab/assets/metro-ui/js/prettify/prettify.js"></script>
     <script src="${rootPath}/jslib/flatlab/assets/metro-ui/js/holder/holder.js"></script>
 
-    <!-- Metro UI CSS JavaScript plugins -->
-    <script src="${rootPath}/jslib/flatlab/assets/metro-ui/js/load-metro.js"></script>
-
     <!-- Local JavaScript -->
-    <script src="${rootPath}/jslib/flatlab/assets/metro-ui/js/docs.js"></script>
-    <script src="${rootPath}/jslib/flatlab/assets/metro-ui/js/github.info.js"></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.validate.min.js" type="text/javascript"></script>
     
     <style type="text/css">

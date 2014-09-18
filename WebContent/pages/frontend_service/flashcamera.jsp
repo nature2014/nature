@@ -212,8 +212,8 @@
                         cache: false,
                         data: {image:canvas.toDataURL("image/png"),code:window.figureNumber},
                         success : function(data, status) {
-                             jQuery("#personicon").attr("src",data+"?time="+new Date().getTime());
-                             jQuery("#iconpath").val(data+"?time="+new Date().getTime());
+                             jQuery("#personicon").attr("src",data+"&time="+new Date().getTime());
+                             jQuery("#iconpath").val(data+"&time="+new Date().getTime());
                         },
                         error: function(){
 
@@ -254,7 +254,6 @@
                 ctx.clearRect(0, 0, 320, 240);
 
                 var img = new Image();
-                img.src = "/image/logo.gif";
                 img.onload = function () {
                     ctx.drawImage(img, 129, 89);
                 }

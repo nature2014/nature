@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<object classid="clsid:CA69969C-2F27-41D3-954D-A48B941C3BA7" type="application/x-oleobject" name="zkf" id="ZKFPEngX1" codebase="pages/finger_function/fingerInstaller.exe">
+<object classid="clsid:CA69969C-2F27-41D3-954D-A48B941C3BA7" type="application/x-oleobject" name="zkf" id="ZKFPEngX1" codebase="${rootPath}/pages/finger_function/fingerInstaller.exe">
     <param name="EnrollCount" value="2"/>
     <param name="SensorIndex" value="0"/>
     <param name="Threshold" value="10"/>
@@ -36,7 +36,7 @@
  {
    window.localFingerPath = 'C:\\data\\img\\';
    //window.remoteServerPath = '<s:property value="@util.ServerContext@getValue('vitualstorepngdirectory')"/>';
-   window.remoteServerPath = 'pages/finger_function/pseudo.jpg';
+   window.remoteServerPath = '${rootPath}/pages/finger_function/pseudo.jpg';
    window.fingerEng = document.getElementById("ZKFPEngX1");
    try{
      fingerEng.InitEngine();
