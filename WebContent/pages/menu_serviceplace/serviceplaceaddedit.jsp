@@ -60,7 +60,7 @@
                                                 number:"地点编码必须是数值型"
                                             },
                                             "servicePlace.parentid":{
-                                                required:"请选择归属医院区域"
+                                                required:"请选择归属区域"
                                             }
                                         }
                                     });
@@ -70,7 +70,7 @@
                     </div>
                     <s:if test="#request.type==0">
                     <div class="form-group has-success">
-                        <label class="col-lg-2 control-label">归属医院区域</label>
+                        <label class="col-lg-2 control-label">归属区域</label>
                         <div class="col-lg-10">
                             <s:select name="servicePlace.parentid" list="innerHospital"  listKey="id" listValue="name" value="%{servicePlace.parentid}"></s:select>
                         </div>
@@ -117,7 +117,7 @@
                     </div>
                     <s:if test="#request.type==1">
                         <div class="form-group has-success">
-                            <label class="col-lg-2 control-label">医院区域</label>
+                            <label class="col-lg-2 control-label">区域</label>
                             <div class="col-lg-10">
                                 <s:select list="#{0:'公司内',1:'公司外'}"  name="servicePlace.area" value="%{servicePlace.area}"></s:select>
                             </div>

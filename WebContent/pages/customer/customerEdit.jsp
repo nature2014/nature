@@ -176,13 +176,19 @@
                 'customer.cellPhone': {
                     required: true,
                     cellPhone: true
-                }
+                },
+                'customer.email': {
+                    email: true
+                },
             },
             messages: {
                 'customer.cellPhone': {
                     required: "请输入手机",
                     cellPhone: "请输入正确的手机号, 例如：13912332122"
-                }
+                },
+                'customer.email': {
+                    email: "请输入正确的邮箱, 例如：test@qq.com"
+                },
             }
         });
     });

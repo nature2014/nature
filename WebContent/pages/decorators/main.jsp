@@ -33,6 +33,15 @@
         .form-control{
             color: #000000;
         }
+        .imagedesigner {
+            left: 220px;
+            top: 5px;
+            border-radius: 40px;
+            -moz-border-radius: 40px;
+            width: 80px;
+            height: 80px;
+            border: 2px solid gray;
+        }
     </style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>

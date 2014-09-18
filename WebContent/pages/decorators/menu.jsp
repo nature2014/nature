@@ -34,6 +34,7 @@
                         <li><a href="${rootPath}/backend/customer/index.action">客户信息</a></li>
                         <li><a href="${rootPath}/backend/customer/customerPosition.action">客户在哪里</a></li>
                         <li><a href="${rootPath}/backend/customer/smsSend.action">群发短信</a></li>
+                        <li><a href="${rootPath}/backend/customer/emailSend.action">群发邮件</a></li>
                     </ul>
                 </li>
 

@@ -205,6 +205,9 @@ public class Bean implements BeanContext, Cloneable, Serializable {
      * @return List<SC> �ӱ�����
      */
     public <SC> SC getParentBean(Class<SC> subClass, String parentIdValue) {
+        if (parentIdValue == null) {
+            return null;
+        }
         String key = subClass + parentIdValue;
         if (cacheSubBeans.containsKey(key)) {
             return (SC) cacheSubBeans.get(key).get(0);

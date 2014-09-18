@@ -11,9 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.ClientQQMail;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,6 +127,7 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
 
         return SUCCESS;
     }
+
     @Override
     public String delete() throws Exception {
         if (getId() != null) {
@@ -132,6 +135,7 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
         }
         return SUCCESS;
     }
+
     /**
      * 客户的位置视图，基于百度地图
      *
@@ -152,4 +156,51 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
         return SUCCESS;
     }
 
+    /**
+     * 短息配置控制中心
+     *
+     * @return
+     */
+    public String emailSend() {
+        ArrayList<String> emails = new ArrayList<>();
+        if (this.customerBeanList != null) {
+            for (CustomerBean cb : this.customerBeanList) {
+                if (cb != null && cb.getEmail() != null) {
+                    emails.add(cb.getEmail());
+                }
+            }
+            if (emails.size() > 0) {
+                try {
+                    ClientQQMail.sendEmail(emails.toArray(new String[emails.size()]), mailTitle, content);
+                    super.addActionMessage("群发邮件发送成功！");
+                } catch (Exception e) {
+                    LOG.error("发送群发邮件错误 {}", e.getMessage());
+                    super.addActionMessage("发送群发邮件错误！");
+                }
+                return SUCCESS;
+            }
+        }
+        super.addActionError("请选择正确的客户邮箱来发送邮件！");
+        return SUCCESS;
+    }
+
+    private String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    private String mailTitle;
+
+    public String getMailTitle() {
+        return mailTitle;
+    }
+
+    public void setMailTitle(String mailTitle) {
+        this.mailTitle = mailTitle;
+    }
 }

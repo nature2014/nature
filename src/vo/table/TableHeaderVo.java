@@ -197,7 +197,7 @@ public class TableHeaderVo {
                 sb.append(this.searchOptions[1][i]);
                 sb.append("';}");
             }
-            sb.append("}");
+            sb.append("return '';}");
             return sb.toString();
         }
         return null;

@@ -1,14 +1,12 @@
 package actions.backend;
 
 import actions.upload.UploadMultipleImageAction;
-import bl.beans.ImageInfoBean;
-import bl.beans.ProductBean;
-import bl.beans.ProductLevelBean;
-import bl.beans.SourceCodeBean;
+import bl.beans.*;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
 import bl.mongobus.ProductBusiness;
 import bl.mongobus.ProductLevelBusiness;
+import bl.mongobus.VolunteerBusiness;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -27,11 +25,23 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
     private static final long serialVersionUID = -5222876000116738224L;
     private static Logger LOG = LoggerFactory.getLogger(ProductAction.class);
     protected final static ProductLevelBusiness PLS = (ProductLevelBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_PRODUCTLEVEL);
+    protected final static VolunteerBusiness VTB = (VolunteerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_VOLUNTEER);
+
     private String jsonInitImage;
     private List<ImageInfoBean> image;
     private ProductBean product;
 
     private List<ProductLevelBean> listProductLevel;
+
+    private List<VolunteerBean> listVolunteerBean;
+
+    public List<VolunteerBean> getListVolunteerBean() {
+        return listVolunteerBean;
+    }
+
+    public void setListVolunteerBean(List<VolunteerBean> listVolunteerBean) {
+        this.listVolunteerBean = listVolunteerBean;
+    }
 
     public List<ProductLevelBean> getListProductLevel() {
         return listProductLevel;
@@ -80,13 +90,24 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
         TableInitVo init = new TableInitVo();
         init.getAoColumns().add(new TableHeaderVo("image", "产品效果图"));
         init.getAoColumns().add(new TableHeaderVo("name", "产品名称").enableSearch());
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
+        String[][] listVolunteerCodes = new String[2][listVolunteerBean.size()];
+        if (listVolunteerBean.size() > 0) {
+            for (int i = 0; i < listVolunteerBean.size(); i++) {
+                listVolunteerCodes[0][i] = listVolunteerBean.get(i).getId();
+                listVolunteerCodes[1][i] = listVolunteerBean.get(i).getName();
+            }
+        } else {
+            listVolunteerCodes = null;
+        }
+        init.getAoColumns().add(new TableHeaderVo("volunteerBeanId", "设计师").addSearchOptions(listVolunteerCodes).enableSearch());
         init.getAoColumns().add(new TableHeaderVo("code", "编码").enableSearch());
-        List<ProductLevelBean> productLevelBeans = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
-        String[][] productLevelCodes = new String[2][productLevelBeans.size()];
-        if (productLevelBeans.size() > 0) {
-            for (int i = 0; i < productLevelBeans.size(); i++) {
-                productLevelCodes[0][i] = productLevelBeans.get(i).getId();
-                productLevelCodes[1][i] = productLevelBeans.get(i).getName();
+        listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
+        String[][] productLevelCodes = new String[2][listProductLevel.size()];
+        if (listProductLevel.size() > 0) {
+            for (int i = 0; i < listProductLevel.size(); i++) {
+                productLevelCodes[0][i] = listProductLevel.get(i).getId();
+                productLevelCodes[1][i] = listProductLevel.get(i).getName();
             }
         } else {
             productLevelCodes = null;
@@ -111,6 +132,8 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
             ProductBean userTmp = (ProductBean) getBusiness().getLeafByName(product.getName()).getResponseData();
             if (userTmp != null) {
                 addActionError("产品存在");
+                listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
+                listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
                 return FAILURE;
             } else {
                 product.set_id(ObjectId.get());
@@ -129,12 +152,14 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
 
     @Override
     public String add() throws Exception {
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
         listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
         return SUCCESS;
     }
 
     @Override
     public String edit() throws Exception {
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
         listProductLevel = (List<ProductLevelBean>) PLS.getAllLeaves().getResponseData();
         product = (ProductBean) getBusiness().getLeaf(getId()).getResponseData();
         //初始化图片列表

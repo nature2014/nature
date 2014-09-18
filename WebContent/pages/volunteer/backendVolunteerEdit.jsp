@@ -47,6 +47,16 @@
                 <input name="volunteer.code" type="text" value="${volunteer.code}" class="form-control" required="required" placeholder="请输入工号"/>
              </div>
          </div>
+         <div class="form-group has-success">
+             <label class="col-lg-2 control-label">用户头像</label>
+
+             <div class="col-lg-10">
+                 <img id="volunteer_logo" class="imagedesigner" src="${volunteer.iconpath}"/>
+                 <input type="text" placeholder="用户头像地址" name="volunteer.iconpath" class="form-control"
+                        required="required" value="${volunteer.iconpath}" onkeyup="jQuery('#volunteer_logo').attr('src',this.value);"/>
+
+             </div>
+         </div>
          <div class="form-group has-error">
              <label class="col-lg-2 control-label">状态</label>
              <div class="col-lg-10">

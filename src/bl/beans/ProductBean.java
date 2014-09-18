@@ -99,4 +99,27 @@ public class ProductBean extends Bean {
         this.productLevelBean = super.getParentBean(ProductLevelBean.class, this.productLevelId);
         return this.productLevelBean;
     }
+
+    private String volunteerBeanId;
+
+    private VolunteerBean volunteerBean;
+
+    public String getVolunteerBeanId() {
+        return volunteerBeanId;
+    }
+
+    public void setVolunteerBeanId(String volunteerBeanId) {
+        this.volunteerBeanId = volunteerBeanId;
+    }
+
+    public void setVolunteerBean(VolunteerBean volunteerBean) {
+        this.volunteerBean = volunteerBean;
+    }
+    public VolunteerBean getVolunteerBean() {
+        if (this.volunteerBean != null) {
+            return this.volunteerBean;
+        }
+        this.volunteerBean = super.getParentBean(VolunteerBean.class, this.volunteerBeanId);
+        return this.volunteerBean;
+    }
 }

@@ -14,9 +14,8 @@ import java.text.MessageFormat;
 
 /**
  * this Interceptor mainly focus on business exception that is inherited with {@link bl.exceptions.MiServerException}
- * 
+ *
  * @author peter
- * 
  */
 public class MiServerExceptionInterceptor extends AbstractInterceptor {
     protected static Logger LOG = LoggerFactory.getLogger(MiServerExceptionInterceptor.class);
@@ -24,7 +23,7 @@ public class MiServerExceptionInterceptor extends AbstractInterceptor {
 
     @Override
     public String intercept(ActionInvocation invocation) throws Exception {
-        String result;
+        String result = ActionSupport.ERROR;
         try {
             result = invocation.invoke();
         } catch (MiServerException e) {
@@ -35,9 +34,10 @@ public class MiServerExceptionInterceptor extends AbstractInterceptor {
                 as.addActionError(errorMessage);
                 return as.INPUT;
             } else {
-                LOG.error("This action exception is: {}", e);
-                throw new WrappedRuntimeException(e);
+                LOG.error("This action exception is: {}", e.getMessage());
             }
+        } catch (Exception ex) {
+            LOG.error("This system process exception is: {}", ex.getMessage());
         }
         return result;
     }

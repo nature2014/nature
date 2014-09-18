@@ -21,7 +21,6 @@
                     <input type="text" placeholder="产品名称" name="product.name" class="form-control"
                            autofocus="autofocus"
                            required="required" value="${product.name}"
-                           <s:if test="product.id != null">readonly="readonly"</s:if>
                             />
                 </div>
             </div>
@@ -31,6 +30,16 @@
                 <div class="col-lg-10">
                     <input type="text" placeholder="编码" name="product.code" class="form-control"
                            required="required" value="${product.code}">
+                </div>
+            </div>
+            <div class="form-group has-success">
+                <label class="col-lg-2 control-label">设计师</label>
+
+                <div class="col-lg-10">
+                    <s:if test="listVolunteerBean!=null">
+                        <s:select name="product.volunteerBeanId" list="listVolunteerBean" listKey="id" listValue="name"
+                                  value="%{product.volunteerBeanId}" cssClass="form-control"/>
+                    </s:if>
                 </div>
             </div>
             <div class="form-group has-success">

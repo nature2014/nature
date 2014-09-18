@@ -194,7 +194,21 @@ public class VolunteerBusiness extends MongoCommonBusiness<BeanContext, Voluntee
     return dataVo;
   }
 
-  @Override
+    /**
+     * 通过面试的人才可以作为合格的员工
+     *
+     * @return
+     */
+    public List<VolunteerBean> getPassedInterviewedVolunteers() {
+        TableQueryVo query = new TableQueryVo();
+        query.getFilter().put("status", VolunteerBean.INTERVIEWED);
+        query.getFilter().put("isDeleted_!=", true);
+        TableDataVo dataVo = query(query);
+        return dataVo.getAaData();
+    }
+
+
+    @Override
   public BusinessResult updateLeaf(BeanContext origBean, BeanContext newBean) {
     BusinessResult result = super.updateLeaf(origBean, newBean);
     VolunteerBean bean = (VolunteerBean)newBean;

@@ -14,9 +14,11 @@ import org.slf4j.LoggerFactory;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -53,6 +55,8 @@ public class UploadMultipleImageAction extends HttpServlet {
     private String getthumb;
 
     private int targetSize;
+    //缓存文件时间为7天
+    private final static int adddays = 7 * 24 * 3600 * 1000;
 
     public int getTargetSize() {
         return targetSize;
@@ -110,22 +114,80 @@ public class UploadMultipleImageAction extends HttpServlet {
         this.getthumb = getthumb;
     }
 
+    public static boolean checkHeaderCache(File file, HttpServletRequest request, HttpServletResponse response) {
+        long modelLastModifiedDate = file.lastModified();
+        long header = request.getDateHeader("If-Modified-Since");
+        long now = System.currentTimeMillis();
+        if (header > 0 && adddays > 0) {
+            if (modelLastModifiedDate > header) {
+                // adddays = 0; // reset
+                response.setStatus(HttpServletResponse.SC_OK);
+                return true;
+            }
+            if (header + adddays > now) {
+                // during the period happend modified
+                response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+                return false;
+            }
+        }
+
+        // if over expire data, see the Etags;
+        // ETags if ETags no any modified
+        String previousToken = request.getHeader("If-None-Match");
+        if (previousToken != null && previousToken.equals(Long.toString(modelLastModifiedDate))) {
+            // not modified
+            response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+            return false;
+        }
+        // if th model has modified , setup the new modified date
+        response.setHeader("ETag", Long.toString(modelLastModifiedDate));
+        setRespHeaderCache(request, response);
+        return true;
+    }
+
+    public static void setRespHeaderCache(HttpServletRequest request, HttpServletResponse response) {
+        String maxAgeDirective = "max-age=" + adddays / 1000;
+        response.setHeader("Cache-Control", maxAgeDirective);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.addDateHeader("Last-Modified", System.currentTimeMillis());
+        response.addDateHeader("Expires", System.currentTimeMillis() + adddays);
+    }
+
     public String getImage() {
         try {
+            HttpServletRequest request = ServletActionContext.getRequest();
             HttpServletResponse response = ServletActionContext.getResponse();
 
             if (StringUtils.isNotEmpty(this.getfile)) {
                 File file = new File(FILEPATH, this.getfile);
-                if (file.exists()) {
-                    int bytes = 0;
-                    response.setContentType(getMimeType(file));
-                    response.setContentLength((int) file.length());
-                    response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
 
-                    FileInputStream from = new FileInputStream(file);
-                    //对拷文件流
-                    IOUtils.copy(from, response.getOutputStream());
-                    response.getOutputStream().close();
+                if (file.exists()) {
+                    String mimetype = getMimeType(file);
+                    if (mimetype.endsWith("jpg") || mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
+                        //检查图片是否过期
+                        if (!checkHeaderCache(file, request, response)) {
+                            return null;
+                        }
+                        response.setContentType(mimetype);
+                        response.setContentLength((int) file.length());
+
+                        FileInputStream from = new FileInputStream(file);
+                        //对拷文件流
+                        IOUtils.copy(from, response.getOutputStream());
+                        response.getOutputStream().close();
+                    } else {
+                        //此为普通二进制文件
+                        response.setContentType(getMimeType(file));
+                        response.setContentLength((int) file.length());
+                        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
+                        response.setContentType("application/octef-stream");
+                        response.setContentLength((int) file.length());
+                        FileInputStream from = new FileInputStream(file);
+                        //对拷文件流
+                        IOUtils.copy(from, response.getOutputStream());
+                        response.getOutputStream().close();
+                        from.close();
+                    }
                 }
             } else if (StringUtils.isNotEmpty(delfile)) {
                 File file = new File(FILEPATH, this.delfile);
@@ -146,6 +208,10 @@ public class UploadMultipleImageAction extends HttpServlet {
                 if (file.exists()) {
                     String mimetype = getMimeType(file);
                     if (mimetype.endsWith("jpg") || mimetype.endsWith("png") || mimetype.endsWith("jpeg") || mimetype.endsWith("gif")) {
+                        //检查图片是否过期
+                        if (!checkHeaderCache(file, request, response)) {
+                            return null;
+                        }
                         BufferedImage im = ImageIO.read(file);
                         if (im != null) {
                             //缩略图
@@ -177,15 +243,6 @@ public class UploadMultipleImageAction extends HttpServlet {
                             srvos.close();
                             os.close();
                         }
-                    } else {
-                        //此为普通二进制文件
-                        response.setContentType("application/octef-stream");
-                        response.setContentLength((int) file.length());
-                        FileInputStream from = new FileInputStream(file);
-                        //对拷文件流
-                        IOUtils.copy(from, response.getOutputStream());
-                        response.getOutputStream().close();
-                        from.close();
                     }
                 }
             }
@@ -202,6 +259,7 @@ public class UploadMultipleImageAction extends HttpServlet {
         JSONObject outPutJson = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         try {
+            HttpServletRequest request = ServletActionContext.getRequest();
             HttpServletResponse response = ServletActionContext.getResponse();
             writer = response.getWriter();
             response.setContentType("application/json");
@@ -219,7 +277,6 @@ public class UploadMultipleImageAction extends HttpServlet {
                 IOUtils.copy(from, to);
                 IOUtils.closeQuietly(to);
                 IOUtils.closeQuietly(from);
-
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("fileName", fileName);
                 jsonObject.put("name", imagesFileName[i]);

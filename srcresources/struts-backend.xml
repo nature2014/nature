@@ -302,8 +302,14 @@
         <action name="smsSend" class="actions.backend.CustomerAction">
             <result name="success">/pages/customer/smsSend.jsp</result>
         </action>
-        <action name="smsSend" class="actions.backend.CustomerAction" method="smsSend">
+        <action name="smsSendSave" class="actions.backend.CustomerAction" method="smsSend">
             <result name="success">/pages/customer/smsSend.jsp</result>
+        </action>
+        <action name="emailSend" class="actions.backend.CustomerAction">
+            <result name="success">/pages/customer/emailSend.jsp</result>
+        </action>
+        <action name="emailSendSave" class="actions.backend.CustomerAction" method="emailSend">
+            <result name="success">/pages/customer/emailSend.jsp</result>
         </action>
     </package>
 
