@@ -6,6 +6,7 @@ package bl.beans;
 
 import actions.IgnoreJsonField;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Transient;
 
 import java.util.Collections;
 import java.util.List;
@@ -84,7 +85,7 @@ public class ProductBean extends Bean {
     }
 
     private String productLevelId;
-
+    @Transient
     private ProductLevelBean productLevelBean;
 
     public void setProductLevelBean(ProductLevelBean productLevelBean) {
@@ -102,6 +103,7 @@ public class ProductBean extends Bean {
 
     private String volunteerBeanId;
 
+    @Transient
     private VolunteerBean volunteerBean;
 
     public String getVolunteerBeanId() {
