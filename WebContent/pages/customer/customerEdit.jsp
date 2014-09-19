@@ -15,6 +15,13 @@
         <form id="customer" class="form-horizontal tasi-form" onsubmit="return checkForm()" action="${rootPath}/backend/customer/save.action"
               method="post">
             <div class="form-group has-success">
+                <label class="col-lg-2 control-label">公司名称</label>
+                <div class="col-lg-10">
+                    <input type="text" placeholder="公司名称" name="customer.company" class="form-control"
+                           required="required" value="${customer.company}" />
+                </div>
+            </div>
+            <div class="form-group has-success">
                 <label class="col-lg-2 control-label">客户名称</label>
 
                 <div class="col-lg-10">
@@ -26,11 +33,11 @@
             </div>
 
             <div class="form-group has-success">
-                <label class="col-lg-2 control-label">客户图标</label>
+                <label class="col-lg-2 control-label">公司Logo</label>
 
                 <div class="col-lg-10">
                     <img id="customer_logo" style="width:240px;height:80px;float:left" src="${customer.logo}"/>
-                    <input type="text" placeholder="客户图标" name="customer.logo" class="form-control"
+                    <input type="text" placeholder="公司Logo" name="customer.logo" class="form-control"
                            required="required" value="${customer.logo}" onkeyup="jQuery('#customer_logo').attr('src',this.value);"/>
 
                 </div>

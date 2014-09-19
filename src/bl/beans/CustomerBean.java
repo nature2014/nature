@@ -17,6 +17,8 @@ public class CustomerBean extends Bean {
     //客户的图标
     private String logo;
     private String address;
+    //联系人
+    private String company;
     private String cellPhone;
     private String fixedPhone;
     private String qq;
@@ -25,6 +27,14 @@ public class CustomerBean extends Bean {
     private float longitude; // 经度坐标
     private float latitude; // 纬度坐标
     private List<ImageInfoBean> image;
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public float getLongitude() {
         return longitude;
