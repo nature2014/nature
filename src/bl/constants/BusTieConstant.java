@@ -32,4 +32,8 @@ public interface BusTieConstant {
     public static final String BUS_CPATH_PRODUCT = "bl.mongobus.ProductBusiness";
 
     public static final String BUS_CPATH_PRODUCTLEVEL = "bl.mongobus.ProductLevelBusiness";
+
+    public static final String BUS_CPATH_REPORTORDER = "bl.mongobus.ReportOrderBusiness";
+
+    public static final String BUS_CPATH_ORDER = "bl.mongobus.OrderBusiness";
 }

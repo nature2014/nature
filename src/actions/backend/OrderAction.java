@@ -66,7 +66,6 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
-        init.getAoColumns().add(new TableHeaderVo("createTime", "接单日期").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("company", "公司名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("name", "客户姓名").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("cellPhone", "手机号码").enableSearch());
