@@ -96,13 +96,13 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
             listCustomerCodes = null;
         }
         init.getAoColumns().add(new TableHeaderVo("customerId", "联系人").addSearchOptions(listCustomerCodes).enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("name", "业务名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("customerFixedPhone", "固定电话").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("customerBean.qq", "QQ号码", false));
-        init.getAoColumns().add(new TableHeaderVo("customerBean.email", "邮箱", false));
-        init.getAoColumns().add(new TableHeaderVo("customerBean.wechat", "微信", false));
-        init.getAoColumns().add(new TableHeaderVo("customerBean.address", "地址", false));
+        init.getAoColumns().add(new TableHeaderVo("name", "业务名称").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("offerPrice", "测量报价(元)").disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("price", "金额(元)").disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("prePayment", "预付款(元)").disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("closePayment", "付清余款(元)").disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("unPayment", "未付款(元)").disableSearch());
 
         init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
         listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();

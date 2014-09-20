@@ -22,10 +22,10 @@ public class OrderBean extends Bean {
     private String customerId;
 
     //测量报价
-    private float offerPrice;
+    private float offerPrice = 0;
 
     //订单价格
-    private float price;
+    private float price = 0;
 
     //0、预付定金  1未付定金 2、报价未做
     private int prePaymentState = 0;
@@ -37,10 +37,10 @@ public class OrderBean extends Bean {
     private float actualIncome = 0;
 
     //已付余款
-    private float closePayment;
+    private float closePayment = 0;
 
     //未付款  price-prePayment-closePayment
-    private float unPayment;
+    private float unPayment = 0;
 
     public String getCustomerFixedPhone() {
         return this.getCustomerBean().getFixedPhone();

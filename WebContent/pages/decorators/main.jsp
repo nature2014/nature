@@ -68,27 +68,8 @@
     <script src="${rootPath}/jslib/flatlab/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript" charset="utf-8" ></script>
     <script src="${rootPath}/jslib/flatlab/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
-    <script src="${rootPath}/jslib/esl/esl.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="${rootPath}/jslib/flatlab/assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
     <script type="text/javascript" src="${rootPath}/js/checkUtil.js"></script>
-
-      <script>
-          require.config({
-              packages: [
-                  {
-                      name: 'echarts',
-                      location: '${rootPath}/jslib/echart-2.0.1',
-                      main: 'echarts'
-                  },
-                  {
-                      name: 'zrender',
-                      location: '${rootPath}/jslib/zrender-2.0.2',
-                      main: 'zrender'
-                  }
-              ]
-          });
-      </script>
-
       <decorator:head/>
   </head>
 
