@@ -58,43 +58,47 @@ public class SystemSettingAction extends BaseAction {
         return SUCCESS;
     }
 
-  public String pushMenu() throws UnsupportedEncodingException {
-    WechatMenu menu = this.getMenu();
-    String result;
-    if(MenuUtils.create(menu)){
-      result = "菜单更新成功";
-    } else {
-      result = "菜单更新失败";
+    public String pushMenu() throws UnsupportedEncodingException {
+        WechatMenu menu = this.getMenu();
+        String result;
+        if(MenuUtils.create(menu)){
+            result = "菜单更新成功";
+        } else {
+            result = "菜单更新失败";
+        }
+        //JSONObject jsonObject = JSONObject.fromObject(result);
+        writeJson(result);
+        return null;
     }
-    //JSONObject jsonObject = JSONObject.fromObject(result);
-    writeJson(result);
-    return null;
-  }
 
-  private WechatMenu getMenu() throws UnsupportedEncodingException {
-    WechatMenu menu = new WechatMenu();
-    WechatButton button1 = new WechatButton();
-    button1.setName("大自然广告");
+    private WechatMenu getMenu() throws UnsupportedEncodingException {
+        WechatMenu menu = new WechatMenu();
+        WechatButton button1 = new WechatButton();
+        button1.setName("大自然广告");
 
-    WechatButton subbutton11 = new WechatButton();
-    subbutton11.setName("产品展示");
-    subbutton11.setType("view");
-    subbutton11.setUrl(MenuUtils.getOAuthUrl("/wechat/productList.action"));
+        WechatButton subbutton11 = new WechatButton();
+        subbutton11.setName("产品展示");
+        subbutton11.setType("view");
+        subbutton11.setUrl(MenuUtils.getOAuthUrl("/wechat/productList.action"));
 
-    WechatButton button2 = new WechatButton();
-    button2.setName("最新优惠");
+        WechatButton button2 = new WechatButton();
+        button2.setName("最新优惠");
+        button2.setType("click");
+        button2.setKey("test1");
 
-    WechatButton button3 = new WechatButton();
-    button3.setName("我的订单");
+        WechatButton button3 = new WechatButton();
+        button3.setName("我的订单");
+        button3.setType("click");
+        button3.setKey("test2");
 
-    button1.addSubButton(subbutton11);
+        button1.addSubButton(subbutton11);
 
-    List<WechatButton> buttonList = new ArrayList<WechatButton>();
-    buttonList.add(button1);
-    buttonList.add(button2);
-    buttonList.add(button3);
+        List<WechatButton> buttonList = new ArrayList<WechatButton>();
+        buttonList.add(button1);
+        buttonList.add(button2);
+        buttonList.add(button3);
 
-    menu.setButton(buttonList);
-    return menu;
-  }
+        menu.setButton(buttonList);
+        return menu;
+    }
 }
