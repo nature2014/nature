@@ -33,7 +33,7 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
         Map filter = new HashMap();
         if (orderBean != null) {
             if (StringUtils.isNotEmpty(orderBean.getCustomerId())) {
-                filter.put("customerId =", orderBean.getCustomerId());
+                filter.put("customerId_=", orderBean.getCustomerId());
             }
         }
         List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(filter, null);

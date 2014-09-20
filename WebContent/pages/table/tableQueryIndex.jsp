@@ -40,7 +40,7 @@
     <!-- page start-->
     <section class="panel">
         <div class="panel-body" id="panelbody">
-            <form class="form-horizontal tasi-form" action="${rootPath}/${customPath}" method="get">
+            <form class="form-horizontal tasi-form" action="${rootPath}${customPath}" method="get">
                 <div class="form-group">
                     <s:set id="counter" value="0"/>
                     <s:iterator value="tableInit.aoColumns" var="column">
@@ -85,11 +85,14 @@
                 </div>
                 </s:if>
 
-                <a class="btn btn-info pull-right" style="margin-right:30px;margin-top: 15px;"
-                onclick="$('#errorarea').html('');$('#${tableId}').dataTable()._fnAjaxUpdate()">
-                <i class="fa fa-search"></i>
-                查询
-                </a>
+                <%--<a class="btn btn-info pull-right" style="margin-right:30px;margin-top: 15px;"--%>
+                <%--onclick="$('#errorarea').html('');$('#${tableId}').dataTable()._fnAjaxUpdate()">--%>
+                <%--<i class="fa fa-search"></i>--%>
+                <%--查询--%>
+                <%--</a>--%>
+                <button id="query" class="btn btn-info" type="submit" style="margin-left:80px;margin-right:80px">
+                    查询
+                </button>
             </form>
         </div>
 
@@ -111,6 +114,10 @@
 <!-- page end-->
 </body>
 <script>
+
+    var idName;
+    var tableId = "${tableId}";
+    var actionPrex = "${actionPrex}";
 
     // 格式化js时间
     var formatDateTime = function (obj, IsMi) {
