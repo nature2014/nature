@@ -1,10 +1,12 @@
 package actions.backend;
 
 import bl.beans.OrderBean;
+import bl.beans.VolunteerBean;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
 import bl.mongobus.CustomerBusiness;
 import bl.mongobus.OrderBusiness;
+import bl.mongobus.VolunteerBusiness;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -24,20 +26,25 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     private static final CustomerBusiness orderBusiness = (CustomerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_CUSTOMER);
     private static final long serialVersionUID = -5222876000116738224L;
     private static Logger LOG = LoggerFactory.getLogger(OrderAction.class);
+    protected final static VolunteerBusiness VTB = (VolunteerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_VOLUNTEER);
+
+    private List<VolunteerBean> listVolunteerBean;
+
+    public List<VolunteerBean> getListVolunteerBean() {
+        return listVolunteerBean;
+    }
+
+    public void setListVolunteerBean(List<VolunteerBean> listVolunteerBean) {
+        this.listVolunteerBean = listVolunteerBean;
+    }
 
     private OrderBean order;
 
-    private List<OrderBean> orderBeanList;
-
-    public List<OrderBean> getOrderBeanList() {
-        return orderBeanList;
-    }
-
-    public OrderBean getCustomer() {
+    public OrderBean getOrder() {
         return order;
     }
 
-    public void setCustomer(OrderBean order) {
+    public void setOrder(OrderBean order) {
         this.order = order;
     }
 
@@ -48,7 +55,7 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
 
     @Override
     public String getCustomJsp() {
-        return "/pages/order/makeOrder.jsp";
+        return "/pages/menu_order/makeOrder.jsp";
     }
 
     @Override
@@ -71,8 +78,23 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
         init.getAoColumns().add(new TableHeaderVo("name", "客户姓名").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("cellPhone", "手机号码").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("state", "订单状态").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("ResOfficer", "负责人").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("customerBean.qq", "QQ号码", false));
+        init.getAoColumns().add(new TableHeaderVo("customerBean.email", "邮箱", false));
+        init.getAoColumns().add(new TableHeaderVo("customerBean.wechat", "微信", false));
+        init.getAoColumns().add(new TableHeaderVo("customerBean.address", "地址", false));
+
+        init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "定价金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
+        String[][] listVolunteerCodes = new String[2][listVolunteerBean.size()];
+        if (listVolunteerBean.size() > 0) {
+            for (int i = 0; i < listVolunteerBean.size(); i++) {
+                listVolunteerCodes[0][i] = listVolunteerBean.get(i).getId();
+                listVolunteerCodes[1][i] = listVolunteerBean.get(i).getName();
+            }
+        } else {
+            listVolunteerCodes = null;
+        }
+        init.getAoColumns().add(new TableHeaderVo("resOfficer", "负责人").addSearchOptions(listVolunteerCodes).enableSearch());
 
         return init;
     }

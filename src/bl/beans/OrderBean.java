@@ -125,12 +125,14 @@ public class OrderBean extends Bean {
     @Transient
     private CustomerBean customerBean;
 
-    @IgnoreJsonField
     public CustomerBean getCustomerBean() {
         if (this.customerBean != null) {
             return this.customerBean;
         }
         this.customerBean = super.getParentBean(CustomerBean.class, this.customerId);
+        if (this.customerBean == null) {
+            return new CustomerBean();
+        }
         return this.customerBean;
     }
 
