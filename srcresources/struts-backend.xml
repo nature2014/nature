@@ -367,4 +367,32 @@
             <result name="input">/pages/product/productEdit.jsp</result>
         </action>
     </package>
+    <package name="order" namespace="/backend/order" extends="default-backend">
+        <action name="index" class="actions.backend.OrderAction" method="index">
+            <result name="input">/pages/table/tableIndex.jsp</result>
+        </action>
+        <action name="initTable" class="actions.backend.OrderAction" method="initTable"/>
+        <action name="queryTable" class="actions.backend.OrderAction" method="queryTable">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
+        <action name="exportTable" class="actions.backend.OrderAction" method="exportTable"/>
+
+        <action name="delete" class="actions.backend.OrderAction" method="delete">
+            <result name="success" type="chain">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+        <action name="add" class="actions.backend.OrderAction" method="add">
+            <result name="success">/pages/menu_order/orderEdit.jsp</result>
+        </action>
+        <action name="edit" class="actions.backend.OrderAction" method="edit">
+            <result name="success">/pages/menu_order/orderEdit.jsp</result>
+        </action>
+        <action name="save" class="actions.backend.OrderAction" method="save">
+            <result name="success" type="redirectAction">
+                <param name="actionName">index</param>
+            </result>
+            <result name="input">/pages/menu_order/orderEdit.jsp</result>
+        </action>
+    </package>
 </struts>
