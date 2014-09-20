@@ -1,113 +1,90 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
-<%@ include file="/pages/bootstrapHeader.jsp" %>
-<link href="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
-<script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
-<style>
-    #productgallery a, span, p {
-        font-family: "Microsoft Yahei", "雅黑";
-        text-decoration: none;
-        color: #666;
-        font-size: 14px;
-        line-height: 19px;
-    }
+<html>
+<head>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="${rootPath}/jslib/flatlab/js/jquery.js"></script>
+    <link href="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
+    <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
+    <title>大自然广告艺术有线公司</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    .btn.btn-round {
-        margin: 2px
-    }
+    <link href="./css/styleindex.css" rel="stylesheet" type="text/css" media="all"/>
 
-    .imagelink {
-        width: 308px;
-        heigth: 250px;
-        float: left;
-        margin: 5px;
-        border: 2px solid #abe5b7;
-        padding: 2px;
-        position: relative;
-    }
+</head>
+<body class="nature">
+<!--start header-->
+<div class="h_bg">
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo">
+                    <a href="{rootPath}/index.jsp"><img src="${rootPath}/img/logo.png"/> </a>
+                </div>
+                <div class="cssmenu">
+                    <ul>
+                        <li class="active" style="min-width:100px"><a href="${rootPath}/index.action"><span>前台管理</span></a></li>
 
-    .imagedesigner {
-        left: 220px;
-        top: 5px;
-        border-radius: 40px;
-        -moz-border-radius: 40px;
-        width: 80px;
-        height: 80px;
-        border: 2px solid gray;
-    }
-
-    .imagecavas {
-        position: absolute;
-        left: 220px;
-        top: 5px;
-        width: 200px;
-        height: 200px;
-    }
-
-    .imagedesignerback {
-        background-color: #8dffe6;
-        display: none;
-        padding-top: 40px;
-        border-radius: 80px;
-        -moz-border-radius: 80px;
-        width: 160px;
-        height: 160px;
-        border: 2px solid gray;
-    }
-
-    .imagebackrotate {
-        position: absolute;
-        display: block;
-        left: 0px;
-        top: 0px;
-        z-index: 100;
-    }
-
-    .imagethumb {
-        width: 300px;
-        height: 190px;
-        display: block
-    }
-
-    .imagetitle {
-        display: block;
-        font-size: 18px;
-        height: 30px;
-        font-family: "Microsoft Yahei", "雅黑";;
-        font-weight: bold;
-    }
-
-    .imageprice {
-        display: block;
-        color: #fd8e51;
-        font-size: 14px
-    }
-
-</style>
-<head><title>大自然信息管理系统</title></head>
-<body>
-<h1 align="center" style="color:deepskyblue">欢迎使用大自然信息管理系统</h1>
-
-<div style="margin: 0px auto; width: 980px;position:relative">
-    <div><img src="${rootPath}/img/nature.png" style="width:980px;height:280px"></div>
-    <div style="margin: 0px auto; width: 200px;position:absolute;left:800px;top:5px">
-        <a href="${rootPath}/index.action">
-            <button type="button" class="btn btn-round btn-success">前台管理</button>
-        </a>
-        <a href="${rootPath}/backend/login.action">
-            <button type="button" class="btn btn-round btn-success">后台管理</button>
-        </a>
+                        <li class="last" style="min-width:100px"><a href="${rootPath}/backend/login.action"><span>后台管理</span></a></li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
 </div>
-<section class="panel" style="padding:10px; margin: 10px auto;width:980px;">
-    <header class="panel-heading">
-        产品分类
-    </header>
-    <div id="productlevel" class="panel-body">
+<!-- start slider -->
+<div class="slider_bg">
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="slider">
+                <!-- #分类 -->
+                <div class="fluid_container">
+                    <div class="camera_wrap camera_azure_skin">
+                        <div class="container"><!-- start container -->
+                            <div><img src="${rootPath}/img/nature.png" style="width:980px;height:280px"></div>
+                            <ul id="filters" class="clearfix">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!-- end #分类-->
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
-</section>
-<div id="productgallery" style="padding:10px; margin: 10px auto;width:980px;height:100%"></div>
+</div>
+<!-- start content -->
+<div class="content_bg">
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="main" id="productgallery">
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- start footer -->
+<div class="footer_bg">
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="footer">
+                <div class="copy">
+                    <p class="w3-link">© weicuizi| copyright by&nbsp; <a href="http://www.ahdzrgg.com"> 大自然广告</a></p>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
 <script>
     // 格式化js时间
     var formatDateTime = function (obj, IsMi) {
@@ -137,16 +114,23 @@
                 var data = result.aaData;
                 if ($.isArray(data)) {
                     //处理图片信息
+                    var imageCounter = 0;
                     for (var j = 0; j < data.length; j++) {
                         var imageArray = data[j].image;
                         for (var i = 0; i < imageArray.length; i++) {
                             if (imageArray[i].fileType == "image") {
                                 var imageUrl = '${rootPath}/upload/getImage.action?getfile=' + imageArray[i].fileName;
                                 var imageThumb = '${rootPath}/upload/getImage.action?targetSize=380&getthumb=' + imageArray[i].fileName;
+                                if (imageCounter % 3 == 0) {
+                                    image.push('<div class="grids_1_of_3">');
+                                }
+                                image.push('<div class="grid_1_of_3 images_1_of_3 bg">');
+                                image.push('<h3>' + data[j].name + '</h3>');
                                 image.push('<a class="imagelink fancybox" rel="group" href="' + imageUrl + '" title="' + data[j].name + '">');
                                 image.push('<img class="imagethumb" src="' + imageThumb + '"/>');
-                                image.push('<span class="imagetitle">【标题】' + data[j].name + '</span>');
-                                image.push('<div class="imagecavas">');
+                                image.push('</a>');
+                                image.push('<div class="plus_btn">');
+                                image.push('<span class="imagecavas">');
                                 if (data[j].volunteerBean == null) {
                                     image.push('<img class="imagedesigner" src="${rootPath}/img/starheader.png"/>');
                                     image.push('<div class="imagedesignerback">');
@@ -158,22 +142,29 @@
                                     image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div>');
                                     image.push('<div>【手机】: ' + data[j].volunteerBean.cellPhone + ' </div></div>');
                                 }
-                                image.push('</div>');
-                                if (data[j].modifyTime != null) {
-                                    image.push('<span>【发布时间】' + formatDateTime(data[j].modifyTime.time) + '</span>');
-                                } else if (data[j].createTime != null) {
-                                    image.push('<span>【发布时间】' + formatDateTime(data[j].createTime.time) + '</span>');
-                                }
+                                image.push('</span>');
+                                image.push('</div><div class="clear"></div>');
+                                image.push('<p class="para">');
                                 image.push('<span class="imageprice">【参考价格】¥' + data[j].price + '</span>');
+                                if (data[j].modifyTime != null) {
+                                    image.push('【发布时间】' + formatDateTime(data[j].modifyTime.time));
+                                } else if (data[j].createTime != null) {
+                                    image.push('【发布时间】' + formatDateTime(data[j].createTime.time));
+                                }
                                 image.push('<br>');
-                                image.push('<p class="imagesummary">【摘要】' + data[j].summary + '</p>');
-
-                                image.push('</a>');
+                                image.push('【摘要】' + data[j].summary);
+                                image.push('</p>');
+                                image.push('</div>');
+                                if (imageCounter % 3 == 2) {
+                                    image.push('<div class="clear"></div>');
+                                    image.push('</div>');
+                                }
+                                imageCounter++;
                             }
                         }
                     }
 
-                    $('#productgallery').html(image.join(""));
+                    document.getElementById('productgallery').innerHTML = image.join("");
                     //图片快速浮优
                     jQuery(".fancybox").fancybox();
 
@@ -200,16 +191,15 @@
             var data = result.aaData;
             if ($.isArray(data)) {
                 //处理分类信息
-                level.push('<button type="button" class="btn btn-round btn-primary" style="margin-left:5px" data-level="">全部</button>');
+                level.push('<li><span class="filter active" data-filter="app card icon web">&nbsp;&nbsp;全&nbsp;&nbsp;&nbsp;&nbsp;部&nbsp;&nbsp;</span></li>');
                 for (var j = 0; j < data.length; j++) {
-                    level.push('<button type="button" class="btn btn-round btn-default" style="margin-left:5px" data-level="' + data[j].id + '">' + data[j].name + '</button>');
+                    level.push('<li><span class="filter" data-filter="logo web" data-level="' + data[j].id + '">' + data[j].name + '</span></li>');
                 }
-                $('#productlevel').html(level.join(""));
+                $('#filters').html(level.join(""));
 
-                $(".btn.btn-round").on("click", function () {
-                    $(".btn.btn-round").removeClass('btn-primary');
-                    $(".btn.btn-round").addClass('btn-default');
-                    $(this).addClass('btn-primary');
+                $(".filter").on("click", function () {
+                    $(".filter").removeClass('active');
+                    $(this).addClass('active');
                     //刷新产品数据
                     ajaxProduct($(this).attr('data-level'));
                 });
@@ -217,5 +207,3 @@
         }
     });
 </script>
-</body>
-</html>
