@@ -48,9 +48,9 @@
                     buffer.push('</li>');
                     buffer.push('<s:iterator value="value" var="volunteer" status="id">');
                     buffer.push('<li>');
-                    buffer.push('<span class="photo"><img src="${rootPath}/<s:property value="#volunteer.iconpath"/>"');
+                    buffer.push('<span class="photo"><img src="<s:property value="#volunteer.iconpath"/>"');
                     buffer.push('width="50px" height="50px"');
-                    buffer.push('onerror=\'this.src="${rootPath}/img/volunteer.png;"\'/></span>');
+                    buffer.push('onerror=\'this.src="${rootPath}/img/nature.png;"\'/></span>');
                     buffer.push('<span>姓名：<s:property value="#volunteer.name"/></span>');
                     buffer.push('<span>&nbsp;工号：<s:property value="#volunteer.code"/></span>');
                     buffer.push('<span>&nbsp;手机：<s:property value="#volunteer.cellPhone"/></span>');

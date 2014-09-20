@@ -31,7 +31,7 @@
     <div class="bg-user">
         <div class="bg-fh">
             <a href="index.action">
-                <img src="img/back.png" width="35" height="35" />
+                <img src="${rootPath}/img/back.png" width="35" height="35" />
             </a>
         </div>
         <div class="bg-top">我的注册</div>

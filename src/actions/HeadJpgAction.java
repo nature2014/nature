@@ -51,12 +51,27 @@ public class HeadJpgAction {
     //写一个输出流
     private InputStream pathStream;
 
+    private static File FILEPATH = null;
+    private static String contextPath = null;
+
+    static {
+        LOG.debug("初始化图片路径");
+        String catalinaHome = System.getProperty("catalina.home");
+        FILEPATH = new File(catalinaHome + File.separator + "upload");
+        if (!FILEPATH.exists()) {
+            //确保目录存在
+            FILEPATH.mkdir();
+        }
+        LOG.debug("初始化应用服务器上下文地址");
+        contextPath = ServletActionContext.getServletContext().getContextPath();
+    }
+
     public String uploadPersonPicture() {
         if (image != null) {
 
             try {
-                String realstorepngdirectory = ServerContext.getRealPngDir();
-                String vitualstorepngdirectory = ServerContext.getVirtualPngDir();
+                String realstorepngdirectory = FILEPATH.getAbsolutePath();
+                String vitualstorepngdirectory = contextPath + "/upload/getImage.action?getfile=";
                 String requestPath = null;
                 if (Files.notExists(Paths.get(realstorepngdirectory))) {
                     Files.createDirectories(Paths.get(realstorepngdirectory));

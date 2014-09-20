@@ -6,7 +6,7 @@
 <%@ taglib uri="/struts-tags" prefix="s" %>
     <script>
         cellFormatter["name"] = function ( data, type, full ) {
-            return '<img disable style="margin-right:10px" class="volunteerimg" src="'+full.iconpath+'" width="120px" height="80px"/><div>' + data+ '</div>';
+            return '<img disable style="margin-right:10px" class="volunteerimg imagedesigner" src="'+full.iconpath+'"/><div>' + data+ '</div>';
         }
 
         cellFormatter["occupation"] = function ( data, type, full ) {

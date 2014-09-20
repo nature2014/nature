@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>服务地点</title>
-    <script type="text/javascript" src="jslib/flatlab/assets/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="${rootPath}/jslib/flatlab/assets/ckeditor/ckeditor.js"></script>
     <script>
         jQuery(document).ready(function()
         {

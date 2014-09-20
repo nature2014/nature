@@ -38,11 +38,12 @@ public class MongoCommonBusiness<F, L> implements BusinessInterface,
     }
 
   public String getDBName() {
-    String dbFlag = DBUtils.getDBFlag();
+    /* String dbFlag = DBUtils.getDBFlag();
     if(!org.apache.commons.lang.StringUtils.isNotEmpty(dbFlag)) {
       dbFlag = "form";
     }
-    return dbFlag;
+    */
+    return dbName;
   }
 
 	@Override

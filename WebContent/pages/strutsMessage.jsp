@@ -7,36 +7,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/struts-tags" prefix="s" %>
 <style type="text/css">
-    .actionMessage{
+    .actionMessage {
         margin: 0px;
         padding: 0px;
         list-style: none;
         color: green;
         text-align: center;
     }
-    .actionMessage li{
+
+    .actionMessage li {
         font-size: 12px;
-     }
-    .errorMessage{
+    }
+
+    .error, .errorMessage {
         margin: 0px;
         padding: 0px;
         list-style: none;
         color: red;
         text-align: center;
     }
-    .errorMessage li{
+
+    .errorMessage li {
         font-size: 12px;
-     }
-    .fieldMessage{
+    }
+
+    .fieldMessage {
         margin: 0px;
         padding: 0px;
         list-style: none;
         color: red;
         text-align: center;
     }
-    .fieldMessage li{
+
+    .fieldMessage li {
         font-size: 12px;
-     }
+    }
 </style>
 <div>
     <s:actionerror/>
