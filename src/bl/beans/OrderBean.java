@@ -1,11 +1,13 @@
 package bl.beans;
 
 import actions.IgnoreJsonField;
+import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 
 /**
  * Created by pli on 14-9-18.
  */
+@Entity(value = "backend_order")
 public class OrderBean extends Bean {
     //客户公司名称
     private String customerCompany;
@@ -100,7 +102,7 @@ public class OrderBean extends Bean {
         this.customerBean = customerBean;
     }
 
-    //订单状态 0 测量报价 1设计 2看稿 3修改定稿 4定价金额 5预付款下单 6制作 7安装  8付清余款
+    //订单状态 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下单 6制作 7安装  8付清余款
     private int state;
 
     public static enum OState {
@@ -125,12 +127,14 @@ public class OrderBean extends Bean {
     @Transient
     private CustomerBean customerBean;
 
-    @IgnoreJsonField
     public CustomerBean getCustomerBean() {
         if (this.customerBean != null) {
             return this.customerBean;
         }
         this.customerBean = super.getParentBean(CustomerBean.class, this.customerId);
+        if (this.customerBean == null) {
+            return new CustomerBean();
+        }
         return this.customerBean;
     }
 
@@ -179,7 +183,7 @@ public class OrderBean extends Bean {
     }
 
     public void setResOfficer(String resOfficer) {
-        resOfficer = resOfficer;
+        this.resOfficer = resOfficer;
     }
 
     public String getComments() {
@@ -188,5 +192,13 @@ public class OrderBean extends Bean {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public float getOfferPrice() {
+        return offerPrice;
+    }
+
+    public void setOfferPrice(float offerPrice) {
+        this.offerPrice = offerPrice;
     }
 }
