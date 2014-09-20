@@ -19,7 +19,7 @@
         <s:iterator value="customerBeanList" id="service">
         <s:set name="found" value="true"/>
         var buffer = [];
-        buffer.push('<span>客户名称：<s:property value="#service.name"/></span></a>');
+        buffer.push('<span>客户姓名：<s:property value="#service.name"/></span></a>');
         var detail = [];
         detail.push('<div style="width:200px;"><span style="float:left;">固定电话：<s:property value="#service.fixedPhone"/></span>');
         detail.push('<span style="float:left;">手机号码：<s:property value="#service.cellPhone"/></span>');

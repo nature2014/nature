@@ -9,10 +9,10 @@ import org.mongodb.morphia.annotations.Transient;
 public class OrderBean extends Bean {
     //客户公司名称
     private String customerCompany;
-    //客户名称
+    //客户姓名
     private String customerName;
 
-    //客户名称
+    //客户姓名
     private String customerFixedPhone;
     //客户手机号码
     private String customerCellPhone;
@@ -41,7 +41,7 @@ public class OrderBean extends Bean {
     private float unPayment;
 
     public String getCustomerFixedPhone() {
-        return customerFixedPhone;
+        return this.getCustomerBean().getFixedPhone();
     }
 
     public void setCustomerFixedPhone(String customerFixedPhone) {
@@ -49,7 +49,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerCellPhone() {
-        return customerCellPhone;
+        return this.getCustomerBean().getCellPhone();
     }
 
     public void setCustomerCellPhone(String customerCellPhone) {
@@ -117,7 +117,7 @@ public class OrderBean extends Bean {
     }
 
     //负责人，外键字段，指向员工表的主键
-    private String ResOfficer;
+    private String resOfficer;
 
     //订单备注
     private String comments;
@@ -135,7 +135,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerCompany() {
-        return customerCompany;
+        return this.getCustomerBean().getCompany();
     }
 
     public void setCustomerCompany(String customerCompany) {
@@ -143,7 +143,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerName() {
-        return customerName;
+        return this.getCustomerBean().getName();
     }
 
     public void setCustomerName(String customerName) {
@@ -175,11 +175,11 @@ public class OrderBean extends Bean {
     }
 
     public String getResOfficer() {
-        return ResOfficer;
+        return resOfficer;
     }
 
     public void setResOfficer(String resOfficer) {
-        ResOfficer = resOfficer;
+        resOfficer = resOfficer;
     }
 
     public String getComments() {
