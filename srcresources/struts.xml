@@ -19,6 +19,7 @@
         <global-results>
             <result name="error">/pages/generalError.jsp</result>
             <result name="tableIndex">/pages/table/tableIndex.jsp</result>
+            <result name="tableQueryIndex">/pages/table/tableQueryIndex.jsp</result>
             <result name="tologin">/html/welcome.jsp</result>
         </global-results>
         <global-exception-mappings>

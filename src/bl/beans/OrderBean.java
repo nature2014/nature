@@ -1,7 +1,6 @@
 package bl.beans;
 
 import actions.IgnoreJsonField;
-import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 
 /**
@@ -22,24 +21,24 @@ public class OrderBean extends Bean {
     private String customerId;
 
     //测量报价
-    private float offerPrice = 0;
+    private float offerPrice;
 
     //订单价格
-    private float price = 0;
+    private float price;
 
     //0、预付定金  1未付定金 2、报价未做
     private int prePaymentState = 0;
 
-    //订单预付款价
+    //预付款
     private float prePayment = 0;
 
     //实际收入prePayment+closePayment
     private float actualIncome = 0;
 
-    //结算时候的价
-    private float closePayment = 0;
+    //已付余款
+    private float closePayment;
 
-    //未付的钱  price-prePayment-closePayment
+    //未付款  price-prePayment-closePayment
     private float unPayment;
 
     public String getCustomerFixedPhone() {

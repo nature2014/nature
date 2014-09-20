@@ -169,7 +169,12 @@
             <result name="failure">/pages/volunteer/backendVolunteerInterviewEdit.jsp</result>
         </action>
 	</package>
-	
+	<package name="report" namespace="/backend/report" extends="default-backend">
+        <action name="initTable" class="actions.backend.ReportOrderAction" method="initTable"/>
+        <action name="order" class="actions.backend.ReportOrderAction" method="index"/>
+        <action name="reportOrderData" class="actions.backend.ReportOrderAction" method="reportOrderData" />
+	</package>
+
     <package name="serviceplace" namespace="/backend/serviceplace" extends="default-backend">
         <action name="index" class="actions.backend.BackendServicePlaceAction" method="index">
             <result name="input">/pages/table/tableIndex.jsp?type=${type}</result>

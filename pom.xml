@@ -184,7 +184,7 @@
               <artifactId>maven-war-plugin</artifactId>
               <version>2.3</version>
               <configuration>
-                  <outputDirectory>D:\\apache-tomcat-8.0.9\\webapps</outputDirectory>
+                  <outputDirectory>d:\\develop\\apache-tomcat-7.0.54\\webapps</outputDirectory>
                   <warSourceDirectory>WebContent</warSourceDirectory>
                   <failOnMissingWebXml>false</failOnMissingWebXml>
               </configuration>
