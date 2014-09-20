@@ -81,6 +81,9 @@
         <action name="productList" class="actions.wechat.WechatProductAction" method="search">
             <result name="success">/pages/wechat/productList.jsp</result>
         </action>
+        <action name="loadRecords" class="actions.wechat.WechatProductAction" method="loadRecords">
+            <result name="success" type="freemarker">/ftl/wechat/lazyLoadImages.ftl</result>
+        </action>
     </package> 
     
     <package name="user" namespace="/wechat/user" extends="default-wechat">

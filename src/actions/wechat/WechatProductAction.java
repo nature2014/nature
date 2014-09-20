@@ -1,12 +1,17 @@
 package actions.wechat;
 
+import bl.beans.ImageInfoBean;
 import bl.beans.ProductBean;
 import bl.beans.ProductLevelBean;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
 import bl.mongobus.ProductBusiness;
 import bl.mongobus.ProductLevelBusiness;
+import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 
+import javax.servlet.ServletContext;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,25 +24,63 @@ public class WechatProductAction extends WechatBaseAuthAction {
 
     private List<ProductLevelBean> productLevelList;
     private List<ProductBean> productList;
+    private List<ImageInfoBean> imageList;
     private ProductLevelBean productLevelBean;
     private ProductBean productBean;
-
+    private int index;
+    private int count = 10;
+    private int totalCount;
+    private String rootPath;
 
     public String search() {
-
-        if(null == volunteer) {
-            return "redirectBinding";
-        }
         productLevelList = (List<ProductLevelBean>) productLevelBus.getAllLeaves().getResponseData();
-        if(null != productLevelBean && null != productLevelBean.getId()) {
+        if(null != productLevelBean && StringUtils.isNotEmpty(productLevelBean.getId())) {
             productLevelBean = (ProductLevelBean) productLevelBus.getLeaf(productLevelBean.getId()).getResponseData();
-            productList = productBus.getProductsByProductLevelId(productLevelBean.getId());
+            if(null != productLevelBean) {
+                productList = productBus.getProductsByProductLevelId(productLevelBean.getId());
+            }
         } else {
             productList = (List<ProductBean>) productBus.getAllLeaves().getResponseData();
         }
+        if(null == productList) return SUCCESS;
+        List<ImageInfoBean> images = new ArrayList<ImageInfoBean>();
+        for(ProductBean product : productList) {
+            for(ImageInfoBean productImage: product.getImage()){
+                productImage.setProduct(product);
+                images.add(productImage);
+            }
+        }
+        int start = index;
+        index = Math.min(images.size(), index + 10);
+        imageList = images.subList(start, index);
+        totalCount = images.size();
         return SUCCESS;
     }
 
+    public String loadRecords() {
+        productLevelList = (List<ProductLevelBean>) productLevelBus.getAllLeaves().getResponseData();
+        if(null != productLevelBean && StringUtils.isNotEmpty(productLevelBean.getId())) {
+            productLevelBean = (ProductLevelBean) productLevelBus.getLeaf(productLevelBean.getId()).getResponseData();
+            if(null != productLevelBean) {
+                productList = productBus.getProductsByProductLevelId(productLevelBean.getId());
+            }
+        } else {
+            productList = (List<ProductBean>) productBus.getAllLeaves().getResponseData();
+        }
+        if(null == productList) return SUCCESS;
+        List<ImageInfoBean> images = new ArrayList<ImageInfoBean>();
+        for(ProductBean product : productList) {
+            for(ImageInfoBean productImage: product.getImage()){
+                productImage.setProduct(product);
+                images.add(productImage);
+            }
+        }
+        int start = index;
+        index = Math.min(images.size(), index + 10);
+        imageList = images.subList(start, index);
+        totalCount = images.size();
+        return SUCCESS;
+    }
     public List<ProductLevelBean> getProductLevelList() {
         return productLevelList;
     }
@@ -69,5 +112,47 @@ public class WechatProductAction extends WechatBaseAuthAction {
     public void setProductBean(ProductBean productBean) {
         this.productBean = productBean;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public List<ImageInfoBean> getImageList() {
+        return imageList;
+    }
+
+    public void setImageList(List<ImageInfoBean> imageList) {
+        this.imageList = imageList;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public String getRootPath() {
+        ServletContext s = ServletActionContext.getServletContext();
+        return (String) s.getAttribute("rootPath");
+    }
+
+    public void setRootPath(String rootPath) {
+        this.rootPath = rootPath;
+    }
+
 
 }

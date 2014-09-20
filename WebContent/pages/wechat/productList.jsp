@@ -137,13 +137,58 @@
         .product-table .sep-row {
             height: 10px;
         }
+
+
+        #filters {
+            padding:0;
+            list-style:none;
+        }
+        #filters li {
+            display:inline-block;
+            margin-right: 5px;
+            margin-bottom: 10px;
+        }
+        #filters li span {
+            font-size:12px;
+            display: block;
+            padding: 10px 10px;
+            color: #455670;
+            background: #F2F2F2;
+            border: 1px solid #EEE;
+            text-decoration: none;
+            cursor: pointer;
+            text-transform: capitalize;
+            transition: 0.5s all;
+            -webkit-transition: 0.5s all;
+            -moz-transition: 0.5s all;
+            -o-transition: 0.5s all;
+        }
+        #filters li span.active,#filters li span:hover {
+            background: #6AD1DD;
+            border: 1px solid #53C4D1;
+            color:#fff;
+        }
+
     </style>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#" + '<s:property value="servicePlaceId"/>').css("background", "url('../img/accept_item.png') no-repeat scroll 180px 0px #F77B6F");
+            $('#query_body').toggle();
+
+            loadNextNRecords();
+
+            $(".fancybox").fancybox();
+
+            $(".filter").on("click", function () {
+                $(".filter").removeClass('active');
+                $(this).addClass('active');
+                //刷新产品数据
+                selectProductLevel($(this).attr('data-level'));
+            });
         });
 
-        function selectProductLevel(selectedId, selectedName) {
+        var index = 0;
+        var totalCount = <s:property value="totalCount" />;
+        function selectProductLevel(selectedId) {
             //$(".selection").css("background", "none repeat scroll 0 0 #505B71");
             //$("#"+selectedId).css("background", "url('../img/accept_item.png') no-repeat scroll 180px 0px #F77B6F");
 
@@ -152,12 +197,22 @@
             $("#queryForm").submit();
         }
 
-        function showSlection(){
-            $("#selectionDiv").css("display", "");
-        }
-
-        function cancelSelection(){
-            $("#selectionDiv").css("display", "none");
+        function loadNextNRecords() {
+            var actionUrl = "${rootPath}/wechat/loadRecords.action?index=" + index;
+            $.ajax(
+            {
+                type        : "get",
+                dataType    : "json",
+                url         : actionUrl,
+                complete    : function(data) {
+                    console.log(data.responseText);
+                    $("#productTable").append(data.responseText);
+                    if(index >= totalCount) {
+                        $("#loadButton").text("总共（"+totalCount+"）条记录！");
+                        $("#loadButton").attr("disabled","disabled");
+                    }
+                }
+            });
         }
 
     </script>
@@ -167,100 +222,45 @@
     <header class="panel-heading">
         产品分类
         <span class="tools pull-right">
-            <a href="javascript:showSlection()" class="fa fa-pencil-square-o"><s:property value="productLevelBean.name" default="所有产品" />[点击切换]</a>
+            <a class="fa fa-chevron-up" href="javascript:void(0)" onclick="$('#query_body').toggle();$(this).toggleClass('fa-chevron-up fa-chevron-down');">
+                <s:property value="productLevelBean.name" default="所有产品" />
+            </a>
         </span>
     </header>
-
-    <table class="product-table">
-        <col class="product-image" width="*">
-        <col class="product-price" width="100px">
-        <s:iterator value="productList" var="bean">
-            <tbody>
-                <tr class="sep-row"><td colspan="2"></td></tr>
-                <tr>
-                    <td class="column">
-                        <span><s:property value="#bean.name" /></span>
-                    </td>
-                    <td class="column">
-                        <span>单价</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="product-image">
-                        <s:iterator value="#bean.image" var="image" status="st">
-                            <a class="fancybox<s:property value="#bean.id" />" rel="group" href="${rootPath}/upload/getImage.action?getfile=<s:property value='%{#image.fileName}'/>" title="查看产品详情" hidefocus="true">
-                                <s:if test="#st.index < 3">
-                                    <div class="thumb">
-                                        <img src="${rootPath}/upload/getImage.action?getthumb=<s:property value='%{#image.fileName}'/>">
-                                    </div>
-                                </s:if>
-                            </a>
-                        </s:iterator>
-
-                        <script type="text/javascript">
-                            $(function() {
-                                //    fancybox
-                                $(".fancybox<s:property value='#bean.id'/>").fancybox();
-                            });
-
-                        </script>
-                        <%--<div class="desc">--%>
-                            <%--<p class="baobei-name">--%>
-                                <%--<a data-point-url="http://gm.mmstat.com/listbought.2.6" class="J_MakePoint" href="http://item.taobao.com/item.htm?id=38642577049&amp;_u=e5ragbfaad8" target="_blank">--%>
-                                    <%--红玫瑰七夕情人节鲜花速递全国花店送花上海北京杭州广州武汉昆明--%>
-                                <%--</a>--%>
-                                <%--<a data-point-url="http://gm.mmstat.com/listbought.2.7" class="J_MakePoint" target="_blank" href="http://trade.taobao.com/trade/detail/tradeSnap.htm?tradeID=750905701044381&amp;snapShot=true">[交易快照]</a>--%>
-                            <%--</p>--%>
-                        <%--</div>--%>
-                    </td>
-                    <td class="product-price">
-                        <%--<em class="origin-price special-num">409.00</em><br>--%>
-                        <i class="special-num"><s:property value="#bean.price" /></i>
-                    </td>
-                </tr>
-            </tbody>
-        </s:iterator>
-    </table>
+    <section id="query_body" class="panel-body">
+        <form action="#" class="form-horizontal  tasi-form">
+            <ul id="filters">
+                <li>
+                    <span data-filter="app card icon web" class="filter">&nbsp;&nbsp;全&nbsp;&nbsp;&nbsp;&nbsp;部&nbsp;&nbsp;</span>
+                </li>
+                <s:iterator value="productLevelList" var="productLevel">
+                    <li>
+                        <span data-level="<s:property value='#productLevel.id' />" data-filter="logo web" class="filter">
+                            <s:property value="#productLevel.name" />
+                        </span>
+                    </li>
+                </s:iterator>
+            </ul>
+        </form>
+    </section>
 </section>
 
-<div id="selectionDiv" style="position:absolute; top:0px; left:0px; width:100%; height:100%; background-color: #ffffff; display: none;">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <section class="panel" style="margin-bottom: 0px;">
-                    <header class="panel-heading">
-                        大自艺术广告
-                    </header>
-                    <div class="panel-body" style="display: block; ">
-                        <form action="#" class="form-horizontal  tasi-form">
-                            <div class="form-group" style="margin-bottom: 0px;">
-                                <ul class="social-link-footer list-unstyled">
-                                    <s:iterator value="productLevelList" var="productLevel">
-                                        <li>
-                                            <a id="<s:property value="#productLevel.id"></s:property>" class="selection" style="width: 200px;"
-                                            href="javascript:selectProductLevel('<s:property value="#productLevel.id"/>', '<s:property value="#productLevel.name"/>')">
-                                            <s:property value="#productLevel.name" />
-                                            </a>
-                                        </li>
-                                    </s:iterator>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="row" style="margin-bottom: 20px; text-align: center;">
-            <div class="col-xs-12" >
-                <button type="button" class="btn btn-info btn-block" onclick="cancelSelection()">返回上一页</button>
-            </div>
-        </div>
+<table id="productTable" class="product-table">
+    <col class="product-image" width="*">
+    <col class="product-price" width="100px">
 
+</table>
+
+<div class="row" style="margin: 5px; text-align: center;">
+    <div class="col-xs-12" >
+        <button type="button" id="loadButton" class="btn btn-info btn-block" onclick="loadNextNRecords()">加载更多...</button>
     </div>
 </div>
 
+</div>
+
 <div style="display: none">
-    <form id="queryForm" action="wechat/productList.action" method="post">
+    <form id="queryForm" action="${rootPath}/wechat/productList.action" method="post">
         <input type="hidden" name="openID" value="<s:property value='openID'/>" >
         <input type="hidden" id="productLevelId" name="productLevelBean.id" value="<s:property value='productLevelBean.id'/>">
     </form>
