@@ -36,7 +36,7 @@
         }
 
         function retrieveData( sSource, aoData, fnCallback ) {
-            // 将客户名称加入参数数组
+            // 将客户姓名加入参数数组
             //aoData.push( { "name": "customerName", "value": "asdas" } );//添加自己的额外参数
             if($("#name").val()) {
                 aoData.push( { "name": "filter['name']", "value": $("#name").val() } );

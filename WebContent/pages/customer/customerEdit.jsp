@@ -22,11 +22,11 @@
                 </div>
             </div>
             <div class="form-group has-success">
-                <label class="col-lg-2 control-label">客户名称</label>
+                <label class="col-lg-2 control-label">客户姓名</label>
 
                 <div class="col-lg-10">
                     <input name="customer.id" type="hidden" value="${customer.id}"/>
-                    <input type="text" placeholder="客户名称" name="customer.name" class="form-control"
+                    <input type="text" placeholder="客户姓名" name="customer.name" class="form-control"
                            required="required" value="${customer.name}"
                             />
                 </div>

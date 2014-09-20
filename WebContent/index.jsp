@@ -6,7 +6,7 @@
     <script src="${rootPath}/jslib/flatlab/js/jquery.js"></script>
     <link href="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet"/>
     <script src="${rootPath}/jslib/flatlab/assets/fancybox/source/jquery.fancybox.js"></script>
-    <title>大自然广告艺术有线公司</title>
+    <title>桐城市大自然艺术广告有限责任公司</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
