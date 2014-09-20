@@ -63,7 +63,7 @@
 
                 <div class="col-lg-10">
                     <s:select cssClass="form-control" name="product.state" list="#{'0':'上架', '1':'下架'}"
-                              value="product.state"/>
+                              value="order.resOfficer"/>
                 </div>
             </div>
             <div class="form-group has-success">
@@ -94,3 +94,24 @@
     </div>
 </section>
 
+<script type="text/javascript">
+    //please refer to form-validation-script.js
+    $(document).ready(function () {
+        $("#product").validate({
+            rules: {
+                'product.price': {
+                    required: true,
+                    min: 0,
+                    max: 999999
+                }
+            },
+            messages: {
+                'product.price': {
+                    required: "请输入价格",
+                    min: "金额必须大于等于0",
+                    max: "金额必须小于等于999999"
+                }
+            }
+        });
+    });
+</script>

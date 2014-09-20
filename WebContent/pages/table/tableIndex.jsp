@@ -373,6 +373,13 @@ $(document).ready(function () {
 window.admin = true;
 window.actionPrex = "${actionPrex}";
 </s:if>
+
+<s:iterator value="tableInit.aoColumns" var="column">
+<s:if test="%{#column.cellFormatter!=null}">
+<s:property value="#column.cellFormatter"/>;
+</s:if>
+</s:iterator>
+
 </script>
 <s:if test="customJs != null && customJs.length() > 0">
     <script src="${customJs}" type="text/javascript"></script>
@@ -411,11 +418,6 @@ window.actionPrex = "${actionPrex}";
         }
     }
 
-    <s:iterator value="tableInit.aoColumns" var="column">
-    <s:if test="%{#column.cellFormatter!=null}">
-    <s:property value="#column.cellFormatter"/>;
-    </s:if>
-    </s:iterator>
 
     $(function() {
         //图片快速浮优
