@@ -5,8 +5,10 @@ import bl.beans.OrderBean;
 import bl.common.BeanContext;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.util.JSONUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,11 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
             jsonArray.add(tmpObject);
         }
         rootObject.put("list", jsonArray);
+        try{
+            rootObject.put("dataList", JSONArray.fromObject(orderBeanList));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return rootObject;
     }
 
@@ -86,8 +93,14 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
 
     private Map culPaymentStatus(List<OrderBean> orderBeanList) {
         Map map = new HashMap();
-        map.put("unpay", 123.23);
-        map.put("pay", 1244.82);
+        float unpay = 0.00f;
+        float pay = 0.00f;
+        for (OrderBean orderBean : orderBeanList) {
+            pay += orderBean.getActualIncome();
+            unpay += orderBean.getUnPayment();
+        }
+        map.put("unpay", unpay);
+        map.put("pay", pay);
         return map;
     }
 }

@@ -70,7 +70,7 @@
             var oTable = $('#' + tableId).dataTable({
                 // set the initial value
                 "bPaginate": false,
-                "sDom": "<'row'<'col-lg-6'l><'col-lg-6'f>r>t<'row'<'col-lg-6'i><'col-lg-6'p>>",
+                "sDom": "",
                 "sPaginationType": "bootstrap",
                 "aoColumns": headers,
                 "bServerSide": false,
