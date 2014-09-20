@@ -35,6 +35,7 @@
         </div>
     </div>
 </div>
+
 <!-- start slider -->
 <div class="slider_bg">
     <div class="wrap">
@@ -44,7 +45,13 @@
                 <div class="fluid_container">
                     <div class="camera_wrap camera_azure_skin">
                         <div class="container"><!-- start container -->
-                            <div><img src="${rootPath}/img/nature.png" style="width:980px;height:280px"></div>
+                            <div>
+                                <img src="${rootPath}/img/nature.png" style="width:980px;height:280px">
+                                <div style="position: absolute; top:5px; right: 5px; z-index: 1000;">
+                                    <img src="${rootPath}/img/wechat_account.jpg" style="width:100px;height:100px">
+                                    <p style="margin-left: 12px;">微信关注我</p>
+                                </div>
+                            </div>
                             <ul id="filters" class="clearfix">
                             </ul>
                         </div>
