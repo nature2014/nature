@@ -1,6 +1,7 @@
 package bl.beans;
 
 import actions.IgnoreJsonField;
+import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 
 /**
