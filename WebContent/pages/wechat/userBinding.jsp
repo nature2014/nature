@@ -32,21 +32,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-4  control-label" for="userName">证件号</label>
+                    <label class="col-xs-4  control-label" for="name">姓名</label>
+                    <div class="col-xs-8">
+                        <input class="form-control" id="name" name="name" value="<s:property value='name'/>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-4  control-label" for="identityCardNumber">证件号</label>
                     <div class="col-xs-8">
                         <input class="form-control" id="identityCardNumber" name="identityCardNumber" value="<s:property value='identityCardNumber'/>">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-4  control-label" for="userName">登录账号</label>
+                    <label class="col-xs-4  control-label" for="cellPhone">手机号</label>
                     <div class="col-xs-8">
-                        <input class="form-control" id="userName" name="userName" value="<s:property value='userName'/>">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-4  control-label" for="password">登录密码</label>
-                    <div class="col-xs-8">
-                        <input class="form-control" type="password" id="password" name="password">
+                        <input class="form-control" id="cellPhone" name="cellPhone" value="<s:property value='cellPhone'/>">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-info btn-block">点击绑定</button>

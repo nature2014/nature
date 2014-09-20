@@ -355,6 +355,9 @@ public class MongoCommonBusiness<F, L> implements BusinessInterface,
 	}
 
   public void updateRecordsByCondition(String targetColumn, Object targetValue, String conditionName, Object conditionValue){
+    if(null == targetValue) {
+        return;
+    }
     Datastore dc = MongoDBConnectionFactory.getDatastore(getDBName());
     UpdateOperations<L> ops
         = dc.createUpdateOperations(this.clazz).set(targetColumn, targetValue);

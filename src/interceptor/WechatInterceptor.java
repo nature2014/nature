@@ -89,7 +89,7 @@ public class WechatInterceptor extends AbstractInterceptor {
           VolunteerBean volunteer;
           VolunteerBusiness vb = (VolunteerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_VOLUNTEER);
           volunteer = vb.getVolunteerBeanByOpenID(action.getOpenID());
-          if(null != volunteer && volunteer.getStatus() == 2) {
+          if(null != volunteer) {
             action.setVolunteer(volunteer);
             if(null == wechatUser) {
               wechatUser = volunteer.getWechat();

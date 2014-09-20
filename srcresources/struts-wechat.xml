@@ -77,6 +77,10 @@
         <action name="serviceDescription" class="actions.wechat.WechatServiceDescriptionAction" method="outDescription">
             <result name="success">/pages/wechat/servicedescription.jsp</result>
         </action>
+
+        <action name="productList" class="actions.wechat.WechatProductAction" method="search">
+            <result name="success">/pages/wechat/productList.jsp</result>
+        </action>
     </package> 
     
     <package name="user" namespace="/wechat/user" extends="default-wechat">
