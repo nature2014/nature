@@ -11,16 +11,100 @@ public class OrderBean extends Bean {
     private String customerCompany;
     //客户名称
     private String customerName;
+
+    //客户名称
+    private String customerFixedPhone;
+    //客户手机号码
+    private String customerCellPhone;
     //外键客户表
     private String customerId;
+
+    //测量报价
+    private float offerPrice;
+
     //订单价格
     private float price;
 
-    //订单状态 0 看稿  1 修改定稿 2 预付款下单 3 制作 4安装  5付清余款
+    //0、预付定金  1未付定金 2、报价未做
+    private int prePaymentState = 0;
+
+    //订单预付款价
+    private float prePayment = 0;
+
+    //实际收入prePayment+closePayment
+    private float actualIncome = 0;
+
+    //结算时候的价
+    private float closePayment;
+
+    //未付的钱  price-prePayment-closePayment
+    private float unPayment;
+
+    public String getCustomerFixedPhone() {
+        return customerFixedPhone;
+    }
+
+    public void setCustomerFixedPhone(String customerFixedPhone) {
+        this.customerFixedPhone = customerFixedPhone;
+    }
+
+    public String getCustomerCellPhone() {
+        return customerCellPhone;
+    }
+
+    public void setCustomerCellPhone(String customerCellPhone) {
+        this.customerCellPhone = customerCellPhone;
+    }
+
+    public int getPrePaymentState() {
+        return prePaymentState;
+    }
+
+    public void setPrePaymentState(int prePaymentState) {
+        this.prePaymentState = prePaymentState;
+    }
+
+    public float getPrePayment() {
+        return prePayment;
+    }
+
+    public void setPrePayment(float prePayment) {
+        this.prePayment = prePayment;
+    }
+
+    public float getActualIncome() {
+        return this.prePayment + this.closePayment;
+    }
+
+    public void setActualIncome(float actualIncome) {
+        this.actualIncome = actualIncome;
+    }
+
+    public float getClosePayment() {
+        return closePayment;
+    }
+
+    public void setClosePayment(float closePayment) {
+        this.closePayment = closePayment;
+    }
+
+    public float getUnPayment() {
+        return this.price - this.prePayment - this.closePayment;
+    }
+
+    public void setUnPayment(float unPayment) {
+        this.unPayment = unPayment;
+    }
+
+    public void setCustomerBean(CustomerBean customerBean) {
+        this.customerBean = customerBean;
+    }
+
+    //订单状态 0 测量报价 1设计 2看稿 3修改定稿 4定价金额 5预付款下单 6制作 7安装  8付清余款
     private int state;
 
     public static enum OState {
-        Look(0), Modification(1), Advance(2), Make(3), Install(4), Close(5);
+        offPrice(0), Design(1), LookStuff(2), Modification(3), Price(4), PrePayment(5), Make(6), Install(7), Close(8);
         private int value;
 
         OState(int value) {

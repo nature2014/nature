@@ -215,7 +215,9 @@ padding-bottom: 4%;
 	left: 35%;
 	bottom: -30px;
 }
-
+.imagethumb {
+  height: 220px;
+}
 .imagedesigner {
     left: 220px;
     top: 5px;
