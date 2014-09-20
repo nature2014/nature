@@ -28,16 +28,16 @@ public class OrderBean extends Bean {
     //0、预付定金  1未付定金 2、报价未做
     private int prePaymentState = 0;
 
-    //订单预付款价
+    //预付款
     private float prePayment = 0;
 
     //实际收入prePayment+closePayment
     private float actualIncome = 0;
 
-    //结算时候的价
+    //已付余款
     private float closePayment;
 
-    //未付的钱  price-prePayment-closePayment
+    //未付款  price-prePayment-closePayment
     private float unPayment;
 
     public String getCustomerFixedPhone() {
