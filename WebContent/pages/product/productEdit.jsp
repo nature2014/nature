@@ -63,7 +63,7 @@
 
                 <div class="col-lg-10">
                     <s:select cssClass="form-control" name="product.state" list="#{'0':'上架', '1':'下架'}"
-                              value="product.state"/>
+                              value="order.resOfficer"/>
                 </div>
             </div>
             <div class="form-group has-success">

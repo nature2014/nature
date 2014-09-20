@@ -1,5 +1,6 @@
 package actions.backend;
 
+import bl.beans.CustomerBean;
 import bl.beans.OrderBean;
 import bl.beans.VolunteerBean;
 import bl.constants.BusTieConstant;
@@ -27,8 +28,17 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     private static final long serialVersionUID = -5222876000116738224L;
     private static Logger LOG = LoggerFactory.getLogger(OrderAction.class);
     protected final static VolunteerBusiness VTB = (VolunteerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_VOLUNTEER);
-
+    protected final static CustomerBusiness CTB = (CustomerBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_CUSTOMER);
+    private List<CustomerBean> listCustomerBean;
     private List<VolunteerBean> listVolunteerBean;
+
+    public List<CustomerBean> getListCustomerBean() {
+        return listCustomerBean;
+    }
+
+    public void setListCustomerBean(List<CustomerBean> listCustomerBean) {
+        this.listCustomerBean = listCustomerBean;
+    }
 
     public List<VolunteerBean> getListVolunteerBean() {
         return listVolunteerBean;
@@ -74,16 +84,27 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
         init.getAoColumns().add(new TableHeaderVo("createTime", "接单日期").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("company", "公司名称").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("name", "客户姓名").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("cellPhone", "手机号码").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("customerCompany", "公司名称").enableSearch());
+        listCustomerBean = (List<CustomerBean>) CTB.getAllLeaves().getResponseData();
+        String[][] listCustomerCodes = new String[2][listCustomerBean.size()];
+        if (listCustomerBean.size() > 0) {
+            for (int i = 0; i < listCustomerBean.size(); i++) {
+                listCustomerCodes[0][i] = listCustomerBean.get(i).getId();
+                listCustomerCodes[1][i] = listCustomerBean.get(i).getName();
+            }
+        } else {
+            listCustomerCodes = null;
+        }
+        init.getAoColumns().add(new TableHeaderVo("customerId", "联系人").addSearchOptions(listCustomerCodes).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("name", "业务名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("customerFixedPhone", "固定电话").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerBean.qq", "QQ号码", false));
         init.getAoColumns().add(new TableHeaderVo("customerBean.email", "邮箱", false));
         init.getAoColumns().add(new TableHeaderVo("customerBean.wechat", "微信", false));
         init.getAoColumns().add(new TableHeaderVo("customerBean.address", "地址", false));
 
-        init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "定价金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
         listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
         String[][] listVolunteerCodes = new String[2][listVolunteerBean.size()];
         if (listVolunteerBean.size() > 0) {
@@ -119,8 +140,17 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     }
 
     @Override
+    public String add() {
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
+        listCustomerBean = (List<CustomerBean>) CTB.getAllLeaves().getResponseData();
+        return SUCCESS;
+    }
+
+    @Override
     public String edit() throws Exception {
         order = (OrderBean) getBusiness().getLeaf(getId()).getResponseData();
+        listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
+        listCustomerBean = (List<CustomerBean>) CTB.getAllLeaves().getResponseData();
         return SUCCESS;
     }
 
@@ -131,4 +161,6 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
         }
         return SUCCESS;
     }
+
+
 }
