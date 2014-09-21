@@ -147,7 +147,6 @@
                                     image.push('<img class="imagedesigner" src="' + data[j].volunteerBean.iconpath + '"/>');
                                     image.push('<div class="imagedesignerback">');
                                     image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div>');
-                                    image.push('<div>【手机】: ' + data[j].volunteerBean.cellPhone + ' </div></div>');
                                 }
                                 image.push('</span>');
                                 image.push('</div><div class="clear"></div>');

@@ -47,6 +47,7 @@ public class WechatProductAction extends WechatBaseAuthAction {
         for(ProductBean product : productList) {
             for(ImageInfoBean productImage: product.getImage()){
                 productImage.setProduct(product);
+                product.setVolunteerBean(product.getVolunteerBean());
                 images.add(productImage);
             }
         }

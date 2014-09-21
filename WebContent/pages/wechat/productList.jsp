@@ -106,11 +106,11 @@
         }
 
         .product-image {
-            /*width: 90%;*/
+            width: 40%;
         }
 
         .product-price {
-            /*width: 10%;*/
+            width: 60%;
         }
 
         .product-table tbody td {
@@ -119,8 +119,8 @@
 
         .product-table td {
             line-height: 1.5;
-            padding-left: 20px;
-            padding-right: 0;
+            padding-left: 10px;
+            padding-right: 10px;
             text-align: left;
             overflow: hidden;
             vertical-align: top;

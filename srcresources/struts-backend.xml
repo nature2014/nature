@@ -169,7 +169,7 @@
             <result name="failure">/pages/volunteer/backendVolunteerInterviewEdit.jsp</result>
         </action>
 	</package>
-	<package name="report" namespace="/backend/report" extends="default-backend">
+	<package name="orderreport" namespace="/backend/orderreport" extends="default-backend">
         <action name="initTable" class="actions.backend.ReportOrderAction" method="initTable"/>
         <action name="order" class="actions.backend.ReportOrderAction" method="index"/>
         <action name="reportOrderData" class="actions.backend.ReportOrderAction" method="reportOrderData" />

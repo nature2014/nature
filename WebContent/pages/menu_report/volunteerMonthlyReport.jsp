@@ -6,10 +6,10 @@
 <head>
     <title>签到管理</title>
 
-    <link href="jslib/flatlab/assets/morris.js-0.4.3/morris.css" rel="stylesheet" />
+    <link href="${rootPath}/jslib/flatlab/assets/morris.js-0.4.3/morris.css" rel="stylesheet" />
 
-    <script src="jslib/flatlab/assets/morris.js-0.4.3/morris.min.js" type="text/javascript"></script>
-    <script src="jslib/flatlab/assets/morris.js-0.4.3/raphael-min.js" type="text/javascript"></script>
+    <script src="${rootPath}/jslib/flatlab/assets/morris.js-0.4.3/morris.min.js" type="text/javascript"></script>
+    <script src="${rootPath}/jslib/flatlab/assets/morris.js-0.4.3/raphael-min.js" type="text/javascript"></script>
 
 
     <style type="text/css">
@@ -50,7 +50,7 @@
 
     <div class="panel-body">
         <div class="adv-table dataTables_wrapper form-inline">
-            <form class="form-horizontal filter-panel" method="post" action="backend/report/volunteerMonthlyReport.action">
+            <form class="form-horizontal filter-panel" method="post" action="${rootPath}/backend/report/volunteerMonthlyReport.action">
                 <div class="row mt15">
                     <div class="col-lg-3 col-md-3 filter-column">
                         <label class="pull-left control-label" for="selectYear">年份</label>

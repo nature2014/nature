@@ -49,7 +49,7 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
 
     @Override
     public String getCustomPath() {
-        return "/backend/report/order.action";
+        return "/backend/orderreport/order.action";
     }
 
     @Override

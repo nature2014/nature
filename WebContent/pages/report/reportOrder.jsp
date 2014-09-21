@@ -50,7 +50,7 @@
                     type: "get",//使用get方法访问后台
                     dataType: "json",//返回json格式的数据
                     contentType: "application/json",
-                    url: "${rootPath}/backend/report/reportOrderData.action?orderBean.customerId=${orderBean.customerId}",//要访问的后台地址
+                    url: "${rootPath}/backend/orderreport/reportOrderData.action?orderBean.customerId=${orderBean.customerId}",//要访问的后台地址
                     success: function (msg) {//msg为返回的数据，在这里做数据绑定
                         $.each(msg.list, function (i, obj) {
                             drawChart(ec, 'main' + i, obj.data);
