@@ -13,9 +13,10 @@
     <td class="product-price">
         <span>${bean.product.name!}</span><br>
         <i class="special-num" style="color:orange;font-size:18px">¥${bean.product.price!}</i><br>
-        <span>【设计师】:${bean.product.volunteerBean.name!}</span>
-        <img src="${bean.product.volunteerBean.iconpath!}" style="border-radius: 40px;-moz-border-radius: 40px;width: 40px;height: 40px;"/><br>
-        <span>【手机】:${bean.product.volunteerBean.cellPhone!}</span>
+        <#if bean.product.volunteerBean??>
+            <span>【设计师】:${bean.product.volunteerBean.name!}</span>
+            <img src="${bean.product.volunteerBean.iconpath!}" style="border-radius: 40px;-moz-border-radius: 40px;width: 40px;height: 40px;"/><br>
+        </#if>
     </td>
 </tr>
 </tbody>
