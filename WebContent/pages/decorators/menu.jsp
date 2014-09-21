@@ -55,7 +55,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="${rootPath}/backend/order/index.action">订单记录</a></li>
-                        <li><a href="${rootPath}/backend/report/order.action">订单报表</a></li>
+                        <li><a href="${rootPath}/backend/orderreport/order.action">订单报表</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
