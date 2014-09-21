@@ -84,6 +84,13 @@
         <action name="loadRecords" class="actions.wechat.WechatProductAction" method="loadRecords">
             <result name="success" type="freemarker">/ftl/wechat/lazyLoadImages.ftl</result>
         </action>
+
+        <action name="queryOrders" class="actions.wechat.WechatOrderAction" method="query">
+            <result name="success">/pages/wechat/orderList.jsp</result>
+        </action>
+        <action name="getOrderDetails" class="actions.wechat.WechatOrderAction" method="getOrder">
+            <result name="success">/pages/wechat/orderDetail.jsp</result>
+        </action>
     </package> 
     
     <package name="user" namespace="/wechat/user" extends="default-wechat">

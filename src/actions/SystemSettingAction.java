@@ -84,7 +84,7 @@ public class SystemSettingAction extends BaseAction {
         WechatButton subbutton12 = new WechatButton();
         subbutton12.setName("订单查询");
         subbutton12.setType("view");
-        subbutton12.setUrl(MenuUtils.getRedirectUrl("/wechat/productList.action"));
+        subbutton12.setUrl(MenuUtils.getRedirectUrl("/wechat/queryOrders.action"));
 
         WechatButton button2 = new WechatButton();
         button2.setName("员工管理");

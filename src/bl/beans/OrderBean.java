@@ -1,6 +1,7 @@
 package bl.beans;
 
 import actions.IgnoreJsonField;
+import org.apache.commons.lang3.StringUtils;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 
@@ -51,7 +52,11 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerCellPhone() {
-        return this.getCustomerBean().getCellPhone();
+        String result = this.getCustomerBean().getCellPhone();
+        if(StringUtils.isEmpty(result)){
+            result = this.customerCellPhone;
+        }
+        return result;
     }
 
     public void setCustomerCellPhone(String customerCellPhone) {
