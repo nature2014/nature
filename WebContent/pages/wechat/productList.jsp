@@ -198,7 +198,7 @@
         }
 
         function loadNextNRecords() {
-            var actionUrl = "${rootPath}/wechat/loadRecords.action?index=" + index;
+            var actionUrl = "${rootPath}/wechat/loadRecords.action?productLevelBean.id=<s:property value='productLevelBean.id' />&index=" + index;
             $.ajax(
             {
                 type        : "get",
