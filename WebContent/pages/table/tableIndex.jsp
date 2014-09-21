@@ -369,9 +369,11 @@ $(document).ready(function () {
         });
     });
 });
-<s:if test="#session['sessionUser'].name=='admin'">
+<s:if test="#session['backendSessionUser'].name=='admin'">
 window.admin = true;
 window.actionPrex = "${actionPrex}";
+operationButtons.push('<a class="btn btn-info" onclick=\'window.exportExcel=true;$("#${tableId}").dataTable()._fnAjaxUpdate()\'><i class="fa fa-plus"></i> 批量导出 </a>');
+
 </s:if>
 
 <s:iterator value="tableInit.aoColumns" var="column">

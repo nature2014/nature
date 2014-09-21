@@ -45,5 +45,5 @@ jQuery("#decoratebody").on("mouseout",".volunteerimg",function(){
 });
 
 if(typeof window.admin!='undefined'){
-    operationButtons.push('<a class="btn btn-success" href="'+window.actionPrex+'/batchimportview.action"><i class="fa fa-plus"></i> 批量导入 </a>');
+    operationButtons.push('<a class="btn btn-info" href="'+window.actionPrex+'/batchimportview.action"><i class="fa fa-plus"></i> 批量导入 </a>');
 }

@@ -54,4 +54,9 @@ public class ImageInfoBean {
     public void setProduct(ProductBean product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

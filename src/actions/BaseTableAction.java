@@ -67,6 +67,7 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
         //忽略的标注类型
         config.addIgnoreFieldAnnotation(IgnoreJsonField.class);
     }
+
     /**
      * The Action Prefix that will be append action. like : getRequest().getContextPath() + "/datatable".
      *
@@ -75,21 +76,24 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
     public abstract String getActionPrex();
 
     //在ADD DELETE EDIT 增加参数传递
-    public String getAddButtonParameter(){
+    public String getAddButtonParameter() {
         return "";
     }
 
     /**
-     *
      * @return
      */
     public String getCustomJs() {
         return null;
-    };
+    }
+
+    ;
 
     public String getCustomJsp() {
         return null;
-    };
+    }
+
+    ;
 
 
     public String getTableTitle() {
@@ -101,26 +105,23 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
     }
 
     /**
-     *
      * @return
      */
     public abstract TableInitVo getTableInit();
 
     /**
-     *
      * @return
      */
     public B getBusiness() {
         if (business == null) {
             ParameterizedType t = (ParameterizedType) this.getClass().getGenericSuperclass();
             Type[] ts = t.getActualTypeArguments();
-            business = (B) SingleBusinessPoolManager.getBusObj(((Class<B>)ts[0]).getCanonicalName());
+            business = (B) SingleBusinessPoolManager.getBusObj(((Class<B>) ts[0]).getCanonicalName());
         }
         return (B) business;
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -177,7 +178,7 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
 
         HttpServletResponse response = ServletActionContext.getResponse();
         response.setContentType("application/msexcel;charset=UTF-8");  //两种方法都可以
-        String fileName = this.getTableId()+".xls";
+        String fileName = this.getTableId() + ".xls";
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
 
         //客户端不缓存
@@ -192,8 +193,10 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
             Row row = sheet.createRow(0);
             int columnLength = 0;
             for (int i = 0; i < tableHeader.size(); i++) {
-                row.createCell(columnLength).setCellValue(tableHeader.get(i).getsTitle());
-                columnLength++;
+                if (!tableHeader.get(i).isHiddenColumn()) {
+                    row.createCell(columnLength).setCellValue(tableHeader.get(i).getsTitle());
+                    columnLength++;
+                }
             }
 
             int index = 1;
@@ -202,13 +205,15 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
                 int columnLengthData = 0;
                 for (int i = 0; i < tableHeader.size(); i++) {
                     TableHeaderVo thv = tableHeader.get(i);
-                    //可读性的属性才可以反射
-                    if (PropertyUtils.isReadable(vo, thv.getmData()) && PropertyUtils.getProperty(vo, thv.getmData()) != null) {
-                        row.createCell(columnLengthData).setCellValue(thv.convertValue(PropertyUtils.getProperty(vo, thv.getmData())));
-                    } else {
-                        row.createCell(columnLengthData).setCellValue("");
+                    if (!thv.isHiddenColumn()) {
+                        //可读性的属性才可以反射
+                        if (PropertyUtils.isReadable(vo, thv.getmData()) && PropertyUtils.getProperty(vo, thv.getmData()) != null) {
+                            row.createCell(columnLengthData).setCellValue(thv.convertValue(PropertyUtils.getProperty(vo, thv.getmData())));
+                        } else {
+                            row.createCell(columnLengthData).setCellValue("");
+                        }
+                        columnLengthData++;
                     }
-                    columnLengthData++;
                 }
                 index++;
             }
@@ -221,8 +226,8 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
         }
         return null;
     }
+
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -232,7 +237,6 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -241,7 +245,6 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */
@@ -250,7 +253,6 @@ public abstract class BaseTableAction<B extends TableBusinessInterface> extends 
     }
 
     /**
-     *
      * @return
      * @throws Exception
      */

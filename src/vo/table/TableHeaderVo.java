@@ -24,7 +24,7 @@ public class TableHeaderVo {
     private boolean bSearchable = false;
     private boolean bVisible = true;
     private String suffixed = "";
-    //true 仅仅显示在搜索条件里但不出现在grid表头里
+    //true 仅仅显示在搜索条件里但不出现在grid表头里，也不出现在导出结果参考 BaseTableAction.exportTable
     private boolean hiddenColumn = false;
 
     public boolean isHiddenColumn() {
