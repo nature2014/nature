@@ -249,6 +249,16 @@
             }
         });
         jQuery("form").on("submit", function () {
+            if ($("#orderStateValue").val() < 8) {
+                var price = $("input[name='order.price']").val();
+                var prePayment = $("input[name='order.prePayment']").val();
+                if (prePayment * 1 > price * 1) {
+                    alert('您的预付款不能大于订单价格，请重新核对！');
+                    return false;
+                } else {
+                    return true;
+                }
+            }
             if ($("#orderStateValue").val() == 8) {
                 var price = $("input[name='order.price']").val();
                 var prePayment = $("input[name='order.prePayment']").val();
