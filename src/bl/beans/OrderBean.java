@@ -102,8 +102,8 @@ public class OrderBean extends Bean {
         this.customerBean = customerBean;
     }
 
-    //订单状态 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下单 6制作 7安装  8付清余款
-    private int state;
+    //-1表示缺省值，起始状体  订单状态 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下单 6制作 7安装  8付清余款
+    private int state = -1;
 
     public static enum OState {
         offPrice(0), Design(1), LookStuff(2), Modification(3), Price(4), PrePayment(5), Make(6), Install(7), Close(8);

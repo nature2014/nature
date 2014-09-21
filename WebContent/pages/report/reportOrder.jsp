@@ -1,4 +1,23 @@
 <!--main content start-->
+<script src="${rootPath}/jslib/esl/esl.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    require.config({
+        packages: [
+            {
+                name: 'echarts',
+                location: '${rootPath}/jslib/echart-2.0.1',
+                main: 'echarts'
+            },
+            {
+                name: 'zrender',
+                location: '${rootPath}/jslib/zrender-2.0.2',
+                main: 'zrender'
+            }
+        ]
+    });
+</script>
+
 <script src="${rootPath}/js/inlineedittable.js"></script>
 <div class="container-fluid">
     <div class="row-fluid example">

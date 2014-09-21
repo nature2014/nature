@@ -108,16 +108,16 @@
 
                             $(".md_process_i").on("click", function (evt) {
                                 var index = $(evt.target).attr("data-index");
-                                if (index < (parseInt('${order.state}') + 1)) {
+                                if (index <= (parseInt('${order.state}') + 1)) {
                                     $(".hiddenGroup").hide();
                                     $(".showGroup" + index).show();
                                 }
                                 //表明进入下一个状态
-                                else if (index == parseInt('${order.state}') + 1) {
+                                if (index == parseInt('${order.state}') + 1) {
                                     if ($("#prePaymentState").val() == 2) {
                                         alert("对不起！由于你当前订单处于报价未做状态！");
                                     } else {
-                                        $("#progressLength").width($("#progressLength").width() + 72);
+                                        $("#progressLength").width(index * 60 + 12);
                                         $("#orderStateValue").val(index);
                                     }
                                 }

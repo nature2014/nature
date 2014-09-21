@@ -50,7 +50,15 @@
 <script>
     cellFormatter["state"] = function (data, type, full) {
         var process = [];
-        var proArray = ['测量报价', '设计', '看稿', '修改定稿', '金额', '预付款下单', '制作', '安装', '付清余款'];
+        var wrapPre = '预付款下单';
+        if (full.prePaymentState == 1) {
+            wrapPre = '未付定金';
+        } else if (full.prePaymentState == 2) {
+            wrapPre = '报价未做';
+        } else if (data >= 5) {
+            wrapPre = '预付定金';
+        }
+        var proArray = ['测量报价', '设计', '看稿', '修改定稿', '金额', wrapPre, '制作', '安装', '付清余款'];
         process.push('<div class="md_process_wrap">');
         var length = data * 60 + 12;
         process.push('<div class="md_process_sd" style=" width: ' + length + 'px; "></div>');
@@ -60,4 +68,9 @@
         process.push('</div>');
         return process.join('');
     };
+
+    $(".form-horizontal.tasi-form [name='createTime_gteq']").attr("data-date-format", "yyyy-mm-dd");
+    $(".form-horizontal.tasi-form [name='createTime_gteq']").datepicker();
+    $(".form-horizontal.tasi-form [name='createTime_lteq']").attr("data-date-format", "yyyy-mm-dd");
+    $(".form-horizontal.tasi-form [name='createTime_lteq']").datepicker();
 </script>
