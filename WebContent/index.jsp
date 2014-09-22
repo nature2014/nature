@@ -146,7 +146,7 @@
                                 } else {
                                     image.push('<img class="imagedesigner" src="' + data[j].volunteerBean.iconpath + '"/>');
                                     image.push('<div class="imagedesignerback">');
-                                    image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div>');
+                                    image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div></div>');
                                 }
                                 image.push('</span>');
                                 image.push('</div><div class="clear"></div>');
