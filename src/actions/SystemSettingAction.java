@@ -79,12 +79,12 @@ public class SystemSettingAction extends BaseAction {
         WechatButton subbutton11 = new WechatButton();
         subbutton11.setName("产品展示");
         subbutton11.setType("view");
-        subbutton11.setUrl(MenuUtils.getRedirectUrl("/wechat/productList.action"));
+        subbutton11.setUrl(MenuUtils.getFullUrl("/wechat/productList.action"));
 
         WechatButton subbutton12 = new WechatButton();
         subbutton12.setName("订单查询");
         subbutton12.setType("view");
-        subbutton12.setUrl(MenuUtils.getRedirectUrl("/wechat/queryOrders.action"));
+        subbutton12.setUrl(MenuUtils.getFullUrl("/wechat/queryOrders.action"));
 
         WechatButton button2 = new WechatButton();
         button2.setName("员工管理");
@@ -117,6 +117,11 @@ public class SystemSettingAction extends BaseAction {
         WechatButton button3 = new WechatButton();
         button3.setName("公司动态");
 
+        WechatButton subbutton30 = new WechatButton();
+        subbutton30.setName("谁在这里");
+        subbutton30.setType("view");
+        subbutton30.setUrl(MenuUtils.getOAuthUrl("/wechat/peopleHere.action"));
+
         WechatButton subbutton31 = new WechatButton();
         subbutton31.setName("志愿者招募");
         subbutton31.setType("view");
@@ -146,6 +151,7 @@ public class SystemSettingAction extends BaseAction {
         button2.addSubButton(subbutton24);
         button2.addSubButton(subbutton25);
 
+        button3.addSubButton(subbutton30);
         button3.addSubButton(subbutton31);
         button3.addSubButton(subbutton32);
         button3.addSubButton(subbutton33);
