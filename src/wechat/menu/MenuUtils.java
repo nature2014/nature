@@ -21,7 +21,7 @@ public class MenuUtils {
     protected final static Logger LOG = LoggerFactory.getLogger(HttpClientHelper.class);
 
     public static String getFullUrl(String url) throws UnsupportedEncodingException {
-        return ServerContext.getDomainName() + URLEncoder.encode(url, "UTF-8");
+        return ServerContext.getDomainName() + url;
     }
 
     public static String getRedirectUrl(String url) throws UnsupportedEncodingException {
