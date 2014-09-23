@@ -104,8 +104,8 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
         init.getAoColumns().add(new TableHeaderVo("price", "订单价格(元)").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("prePayment", "预付款(元)").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("actualIncome", "实际收入(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("closePayment", "已付余款(元)").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("unPayment", "未付款(元)").disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("closePayment", "已付余款(元)").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
         listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
         String[][] listVolunteerCodes = new String[2][listVolunteerBean.size()];
