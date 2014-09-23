@@ -171,13 +171,14 @@
             </div>
 
             <div class="form-group has-success showGroup8 hiddenGroup" style="display:none">
-                <label class="col-lg-2 control-label">已付余款(元)</label>
+                <label class="col-lg-2 control-label">付清余款(元)</label>
 
                 <div class="col-lg-10">
-                    <input type="text" placeholder="已付余款(元)" class="form-control" name="order.closePayment"
+                    <input type="text" placeholder="付清余款(元)" class="form-control" name="order.closePayment"
                            value="${order.closePayment}"/>
                 </div>
             </div>
+
             <div class="form-group has-success">
                 <label class="col-lg-2 control-label">其它</label>
 
@@ -243,8 +244,8 @@
                 },
                 'order.closePayment': {
                     required: "请输入已付余款",
-                    min: "已付余款必须大于等于0",
-                    max: "已付余款必须小于等于999999"
+                    min: "付清余款必须大于等于0",
+                    max: "付清余款必须小于等于999999"
                 }
             }
         });
@@ -263,8 +264,8 @@
                 var price = $("input[name='order.price']").val();
                 var prePayment = $("input[name='order.prePayment']").val();
                 var closePayment = $("input[name='order.closePayment']").val();
-                if (Math.abs(price * 1 - prePayment * 1 - closePayment * 1) > 0.001) {
-                    alert('您的已付余款+预付款不等于订单价格，请重新核对！');
+                if (price * 1 < prePayment * 1 + closePayment * 1) {
+                    alert('您的已付余款+预付款应该不能大于订单价格，请重新核对！');
                     return false;
                 } else {
                     return true;

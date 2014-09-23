@@ -17,6 +17,7 @@ import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
 import vo.table.TableQueryVo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,9 +85,12 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
         init.getAoColumns().add(new TableHeaderVo("createTime", "接单日期").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("createTime_gteq", "起始时间").setHiddenColumn(true).enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "结束时间").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("payDate", "结算日期").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCompany", "公司名称").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("createTime_gteq", "接单日期&gt;=").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "接单日期&lt;=").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("payDate_gteq", "结算日期&gt;=").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("payDate_lteq", "结算日期&lt;=").setHiddenColumn(true).enableSearch());
         listCustomerBean = (List<CustomerBean>) CTB.getAllLeaves().getResponseData();
         String[][] listCustomerCodes = new String[2][listCustomerBean.size()];
         if (listCustomerBean.size() > 0) {
@@ -98,14 +102,14 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
             listCustomerCodes = null;
         }
         init.getAoColumns().add(new TableHeaderVo("customerId", "联系人").addSearchOptions(listCustomerCodes).enableSearch());
-        //init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("name", "业务名称").enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("offerPrice", "测量报价(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("price", "订单价格(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("prePayment", "预付款(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("actualIncome", "实际收入(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("unPayment", "未付款(元)").disableSearch());
-        init.getAoColumns().add(new TableHeaderVo("closePayment", "已付余款(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("offerPrice", "测量报价(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("price", "订单价格(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("prePayment", "预付款(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("actualIncome", "实际收入(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("unPayment", "欠款(元)").disableSearch());
+        //init.getAoColumns().add(new TableHeaderVo("closePayment", "付清余款(元)").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("state", "订单状态").addSearchOptions(new String[][]{{"0", "1", "2", "3", "4", "5", "6", "7", "8"}, {"测量报价", "设计", "看稿", "修改定稿", "金额", "预付款下单", "制作", "安装", "付清余款"}}).enableSearch());
         listVolunteerBean = (List<VolunteerBean>) VTB.getPassedInterviewedVolunteers();
         String[][] listVolunteerCodes = new String[2][listVolunteerBean.size()];
@@ -136,6 +140,11 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
             OrderBean origCustomer = (OrderBean) getBusiness().getLeaf(order.getId().toString()).getResponseData();
             OrderBean newCustomer = (OrderBean) origCustomer.clone();
             BeanUtils.copyProperties(newCustomer, order);
+            //结账日期
+            if (newCustomer.getPayDate() == null && order.getState() == OrderBean.OState.Close.getValue()) {
+                //自动完成结账日期
+                newCustomer.setPayDate(new Date(System.currentTimeMillis()));
+            }
             getBusiness().updateLeaf(origCustomer, newCustomer);
         }
         return SUCCESS;

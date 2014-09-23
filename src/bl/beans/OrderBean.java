@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
 
+import java.util.Date;
+
 /**
  * Created by pli on 14-9-18.
  */
@@ -53,7 +55,7 @@ public class OrderBean extends Bean {
 
     public String getCustomerCellPhone() {
         String result = this.getCustomerBean().getCellPhone();
-        if(StringUtils.isEmpty(result)){
+        if (StringUtils.isEmpty(result)) {
             result = this.customerCellPhone;
         }
         return result;
@@ -205,5 +207,15 @@ public class OrderBean extends Bean {
 
     public void setOfferPrice(float offerPrice) {
         this.offerPrice = offerPrice;
+    }
+
+    Date payDate = null;
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 }

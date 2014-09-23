@@ -9,7 +9,7 @@
         position: relative;
         height: 23px;
         margin: 0 auto;
-        padding: 30px 0 24px;
+        padding: 50px 0 24px;
         width: 492px;
         background: url("${rootPath}/img/process_sd.png") 0px 10px repeat-x;
         background-size: 60px 30px;
@@ -48,17 +48,26 @@
     }
 </style>
 <script>
+    operationButtons = [
+        '<a class="btn btn-info" href="${actionPrex}/add.action?${addButtonParameter}"><i class="fa fa-plus"></i> 添加 </a>'
+    ];
+    //格式化payDate
+    cellFormatter["payDate"] = function (data, type, full) {
+        if (data != null) {
+            return formatDateTime(data.time, false);
+        } else {
+            return "";
+        }
+    }
     cellFormatter["state"] = function (data, type, full) {
         var process = [];
-        var wrapPre = '预付款下单';
+        var wrapPre = '预付款下单<br>(¥' + full.prePayment + '元)';
         if (full.prePaymentState == 1) {
-            wrapPre = '未付定金';
+            wrapPre = '未付定金(¥' + 0 + '元)';
         } else if (full.prePaymentState == 2) {
             wrapPre = '报价未做';
-        } else if (data >= 5) {
-            wrapPre = '预付定金';
         }
-        var proArray = ['测量报价', '设计', '看稿', '修改定稿', '金额', wrapPre, '制作', '安装', '付清余款'];
+        var proArray = ['测量报价<br>(¥' + full.offerPrice + '元)', '设计', '看稿', '修改定稿', '订单价格<br>(¥' + full.price + '元)', wrapPre, '制作', '安装', '付清余款<br>(¥' + full.closePayment + '元)'];
         process.push('<div class="md_process_wrap">');
         var length = data * 60 + 12;
         process.push('<div class="md_process_sd" style=" width: ' + length + 'px; "></div>');
@@ -73,4 +82,9 @@
     $(".form-horizontal.tasi-form [name='createTime_gteq']").datepicker();
     $(".form-horizontal.tasi-form [name='createTime_lteq']").attr("data-date-format", "yyyy-mm-dd");
     $(".form-horizontal.tasi-form [name='createTime_lteq']").datepicker();
+
+    $(".form-horizontal.tasi-form [name='payDate_gteq']").attr("data-date-format", "yyyy-mm-dd");
+    $(".form-horizontal.tasi-form [name='payDate_gteq']").datepicker();
+    $(".form-horizontal.tasi-form [name='payDate_lteq']").attr("data-date-format", "yyyy-mm-dd");
+    $(".form-horizontal.tasi-form [name='payDate_lteq']").datepicker();
 </script>
