@@ -44,14 +44,14 @@
                                 <label class="col-lg-1 control-label" style="margin-bottom:10px;text-align:right;">${column.sTitle}</label>
 
                                 <div class="col-lg-3" style="margin-bottom:10px;">
-                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
+                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}" placeholder="${column.sTitle}">
                                 </div>
                             </s:if>
                             <s:else>
                                 <label class="col-lg-1 control-label" style="margin-bottom:10px;text-align:right;">${column.sTitle}</label>
 
                                 <div class="col-lg-3" style="margin-bottom:10px;">
-                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
+                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}" placeholder="${column.sTitle}">
                                         <option value="">&nbsp;</option>
                                         <s:iterator value="#column.searchOptions[0]" status="rowstatus">
                                             <option value="<s:property value="#column.searchOptions[0][#rowstatus.index]"/>"><s:property

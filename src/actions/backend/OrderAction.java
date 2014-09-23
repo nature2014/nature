@@ -87,10 +87,10 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
         init.getAoColumns().add(new TableHeaderVo("createTime", "接单日期").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("payDate", "结算日期").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("createTime_gteq", "接单日期&gt;=").setHiddenColumn(true).enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "接单日期&lt;=").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "接单日期&lt;").setHiddenColumn(true).enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCompany", "公司名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("payDate_gteq", "结算日期&gt;=").setHiddenColumn(true).enableSearch());
-        init.getAoColumns().add(new TableHeaderVo("payDate_lteq", "结算日期&lt;=").setHiddenColumn(true).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("payDate_lteq", "结算日期&lt;").setHiddenColumn(true).enableSearch());
         listCustomerBean = (List<CustomerBean>) CTB.getAllLeaves().getResponseData();
         String[][] listCustomerCodes = new String[2][listCustomerBean.size()];
         if (listCustomerBean.size() > 0) {
