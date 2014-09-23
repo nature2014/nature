@@ -8,6 +8,7 @@ import bl.instancepool.SingleBusinessPoolManager;
 import com.opensymphony.xwork2.ModelDriven;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 import net.sf.json.util.CycleDetectionStrategy;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -35,7 +36,7 @@ import java.util.List;
  */
 public abstract class QueryTableAction<B extends TableBusinessInterface> extends BaseAction implements ModelDriven<TableQueryVo> {
 
-    protected TableQueryVo model;
+    public TableQueryVo model;
     protected TableBusinessInterface business;
     private String id;
     private String[] ids;
@@ -57,13 +58,29 @@ public abstract class QueryTableAction<B extends TableBusinessInterface> extends
         this.ids = ids;
     }
 
-    private static JsonConfig config = new JsonConfig();
+    public static JsonConfig config = new JsonConfig();
 
     //静态初始化全局的JSON序列化配置
     static {
         config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
         //忽略的标注类型
         config.addIgnoreFieldAnnotation(IgnoreJsonField.class);
+
+        config.registerJsonValueProcessor(Date.class, new JsonValueProcessor() {
+            @Override
+            public Object processObjectValue(String key, Object value, JsonConfig arg2) {
+                System.out.println("key:" + key);
+                System.out.println("value:" + value);
+                if(value == null){
+                    return value;
+                }
+                return new SimpleDateFormat("yyyy-MM-dd").format(value);
+            }
+            @Override
+            public Object processArrayValue(Object value, JsonConfig arg1) {
+                return value;
+            }
+        });
     }
     /**
      * The Action Prefix that will be append action. like : getRequest().getContextPath() + "/datatable".
@@ -160,5 +177,9 @@ public abstract class QueryTableAction<B extends TableBusinessInterface> extends
         JSONObject jsonObject = JSONObject.fromObject(table, config);
         writeJson(jsonObject);
         return null;
+    }
+
+    public void setModel(TableQueryVo model) {
+        this.model = model;
     }
 }

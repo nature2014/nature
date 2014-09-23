@@ -7,6 +7,7 @@ import actions.upload.UploadMultipleImageAction;
 import bl.beans.CustomerBean;
 import bl.beans.ImageInfoBean;
 import bl.beans.OrderBean;
+import bl.beans.VolunteerBean;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
 import bl.mongobus.CustomerBusiness;
@@ -20,8 +21,10 @@ import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.ClientQQMail;
+import util.StringUtil;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
+import vo.table.TableQueryVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,8 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
     protected final static ReportOrderBusiness reportOrderBusiness = (ReportOrderBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_REPORTORDER);
     protected final static CustomerBusiness customerBusiness = (CustomerBusiness) SingleBusinessPoolManager
             .getBusObj(BusTieConstant.BUS_CPATH_CUSTOMER);
+    protected final static VolunteerBusiness volunteerBusiness = (VolunteerBusiness) SingleBusinessPoolManager.getBusObj
+            (BusTieConstant.BUS_CPATH_VOLUNTEER);
 
     private OrderBean orderBean;
 
@@ -53,27 +58,64 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
     }
 
     @Override
+    public TableQueryVo getModel() {
+        if (model == null) {
+            model = new TableQueryVo();
+        }
+        //默认按着订单接单时间的降序显示在TableIndex.jsp
+        model.getSort().remove("userName");
+        model.getSort().put("createTime", "desc");
+        model.getFilter().put("isDeleted_!=", true);
+        return model;
+    }
+
+    @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
-        //初始化公司
+        //初始化公司名称
         {
-            List<CustomerBean> customerBeanList = customerBusiness.queryDataByCondition(null, null);
+            List<CustomerBean> customerBeanList = (List<CustomerBean>) customerBusiness.getAllLeaves()
+                    .getResponseData();
             String[][] searchOptions = new String[2][customerBeanList.size()];
             for (int i = 0; i < customerBeanList.size(); i++) {
                 CustomerBean customerBean = customerBeanList.get(i);
                 searchOptions[0][i] = customerBean.getId();
-                searchOptions[1][i] = customerBean.getName();
+                if (StringUtils.isNotEmpty(customerBean.getName())) {
+                    searchOptions[1][i] = customerBean.getName();
+                } else {
+                    searchOptions[1][i] = customerBean.getCompany();
+                }
             }
-            init.getAoColumns().add(new TableHeaderVo("orderBean.customerId", "公司名称").addSearchOptions(searchOptions).enableSearch());
+            init.getAoColumns().add(new TableHeaderVo("customerId", "客户名称").addSearchOptions(searchOptions)
+                    .enableSearch());
         }
+        //初始化业务人员
+        {
+            List<VolunteerBean> volunteerBeanList = (List<VolunteerBean>) volunteerBusiness.getAllLeaves().getResponseData();
+            String[][] searchOptions = new String[2][volunteerBeanList.size()];
+            for (int i = 0; i < volunteerBeanList.size(); i++) {
+                VolunteerBean volunteerBean = volunteerBeanList.get(i);
+                searchOptions[0][i] = volunteerBean.getId();
+                searchOptions[1][i] = volunteerBean.getName();
+            }
+            init.getAoColumns().add(new TableHeaderVo("resOfficer", "负责人").addSearchOptions(searchOptions)
+                    .enableSearch());
+        }
+        //联系号码
+        init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("createTime_gteq", "起始时间").setHiddenColumn(true).enableSearch()
+                .setSClass("cdate"));
+        init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "结束时间").setHiddenColumn(true).enableSearch()
+                .setSClass("cdate"));
+
         return init;
     }
 
     public String reportOrderData() {
         JSONObject jsonObject = new JSONObject();
-        if (orderBean != null) {
-            jsonObject = reportOrderBusiness.getReportOrderData(orderBean);
-        }else{
+        if (getModel() != null) {
+            jsonObject = reportOrderBusiness.getReportOrderData(getModel());
+        } else {
             jsonObject.put("data", new JSONArray());
             jsonObject.put("dataList", new JSONArray());
         }

@@ -21,7 +21,7 @@ public class OrderBean extends Bean {
     private String customerFixedPhone;
     //客户手机号码
     private String customerCellPhone;
-    //外键客户表
+    //外键客户�?
     private String customerId;
 
     //测量报价
@@ -30,10 +30,10 @@ public class OrderBean extends Bean {
     //订单价格
     private float price = 0;
 
-    //0、预付定金  1未付定金 2、报价未做
+    //0、预付定�?  1未付定金 2、报价未�?
     private int prePaymentState = 0;
 
-    //预付款
+    //预付�?
     private float prePayment = 0;
 
     //实际收入prePayment+closePayment
@@ -42,11 +42,11 @@ public class OrderBean extends Bean {
     //已付余款
     private float closePayment = 0;
 
-    //未付款  price-prePayment-closePayment
+    //未付�?  price-prePayment-closePayment
     private float unPayment = 0;
 
     public String getCustomerFixedPhone() {
-        return this.getCustomerBean().getFixedPhone();
+        return this.customerFixedPhone;
     }
 
     public void setCustomerFixedPhone(String customerFixedPhone) {
@@ -54,11 +54,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerCellPhone() {
-        String result = this.getCustomerBean().getCellPhone();
-        if (StringUtils.isEmpty(result)) {
-            result = this.customerCellPhone;
-        }
-        return result;
+        return this.customerCellPhone;
     }
 
     public void setCustomerCellPhone(String customerCellPhone) {
@@ -109,7 +105,7 @@ public class OrderBean extends Bean {
         this.customerBean = customerBean;
     }
 
-    //-1表示缺省值，起始状体  订单状态 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下单 6制作 7安装  8付清余款
+    //-1表示缺省值，起始状体  订单状�?? 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下�? 6制作 7安装  8付清余款
     private int state = -1;
 
     public static enum OState {
@@ -125,8 +121,10 @@ public class OrderBean extends Bean {
         }
     }
 
-    //负责人，外键字段，指向员工表的主键
+    //负责人，外键字段，指向员工表的主�?
     private String resOfficer;
+
+    private String resOfficerName;
 
     //订单备注
     private String comments;
@@ -146,7 +144,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerCompany() {
-        return this.getCustomerBean().getCompany();
+        return this.customerCompany;
     }
 
     public void setCustomerCompany(String customerCompany) {
@@ -208,7 +206,13 @@ public class OrderBean extends Bean {
     public void setOfferPrice(float offerPrice) {
         this.offerPrice = offerPrice;
     }
+    public String getResOfficerName() {
+        return resOfficerName;
+    }
 
+    public void setResOfficerName(String resOfficerName) {
+        this.resOfficerName = resOfficerName;
+    }
     Date payDate = null;
 
     public Date getPayDate() {
