@@ -96,7 +96,7 @@
                     <script>
                         $(document).ready(function () {
                             var process = [];
-                            var proArray = ['测量报价', '设计', '看稿', '修改定稿', '金额', '预付款下单', '制作', '安装', '付清余款'];
+                            var proArray = ['测量报价', '设计', '看稿', '修改定稿', '订单价格', '预付款下单', '制作', '安装', '已付余款'];
                             process.push('<div class="md_process_wrap">');
                             var length = parseInt('${order.state}') * 60 + 12;
                             process.push('<div id="progressLength" class="md_process_sd" style=" width: ' + length + 'px; "></div>');
@@ -141,7 +141,8 @@
                 <label class="col-lg-2 control-label">预付款状态</label>
 
                 <div class="col-lg-10">
-                    <s:select cssClass="form-control" id="prePaymentState" name="order.prePaymentState" list="#{'0':'预付定金', '1':'未付定金','2':'报价未做'}"
+                    <s:select cssClass="form-control" id="prePaymentState" name="order.prePaymentState"
+                              list="#{'0':'预付定金', '1':'未付定金','2':'报价未做'}"
                               value="order.prePaymentState"/>
                 </div>
             </div>
@@ -171,10 +172,10 @@
             </div>
 
             <div class="form-group has-success showGroup8 hiddenGroup" style="display:none">
-                <label class="col-lg-2 control-label">付清余款(元)</label>
+                <label class="col-lg-2 control-label">已付余款(元)</label>
 
                 <div class="col-lg-10">
-                    <input type="text" placeholder="付清余款(元)" class="form-control" name="order.closePayment"
+                    <input type="text" placeholder="已付余款(元)" class="form-control" name="order.closePayment"
                            value="${order.closePayment}"/>
                 </div>
             </div>
@@ -184,7 +185,7 @@
 
                 <div class="col-lg-10">
                     <textarea placeholder="其它" name="order.comments" class="form-control"
-                              required="required" rows="5">${order.comments}</textarea>
+                               rows="5">${order.comments}</textarea>
                 </div>
             </div>
 
@@ -244,33 +245,29 @@
                 },
                 'order.closePayment': {
                     required: "请输入已付余款",
-                    min: "付清余款必须大于等于0",
-                    max: "付清余款必须小于等于999999"
+                    min: "已付余款必须大于等于0",
+                    max: "已付余款必须小于等于999999"
                 }
             }
         });
         jQuery("form").on("submit", function () {
-            if ($("#orderStateValue").val() < 8) {
-                var price = $("input[name='order.price']").val();
-                var prePayment = $("input[name='order.prePayment']").val();
-                if (prePayment * 1 > price * 1) {
-                    alert('您的预付款不能大于订单价格，请重新核对！');
-                    return false;
-                } else {
-                    return true;
-                }
+            var price = $("input[name='order.price']").val();
+            var prePayment = $("input[name='order.prePayment']").val();
+            var closePayment = $("input[name='order.closePayment']").val();
+
+            if (prePayment * 1 > price * 1) {
+                alert('您的预付款不能大于订单价格，请重新核对！');
+                return false;
             }
-            if ($("#orderStateValue").val() == 8) {
-                var price = $("input[name='order.price']").val();
-                var prePayment = $("input[name='order.prePayment']").val();
-                var closePayment = $("input[name='order.closePayment']").val();
-                if (price * 1 < prePayment * 1 + closePayment * 1) {
-                    alert('您的已付余款+预付款应该不能大于订单价格，请重新核对！');
-                    return false;
-                } else {
-                    return true;
-                }
+            if (closePayment * 1 > price * 1) {
+                alert('您的已付余款不能大于订单价格，请重新核对！');
+                return false;
             }
+            if (price * 1 < prePayment * 1 + closePayment * 1) {
+                alert('您的已付余款+预付款应该不能大于订单价格，请重新核对！');
+                return false;
+            }
+            return true;
         });
     });
 </script>

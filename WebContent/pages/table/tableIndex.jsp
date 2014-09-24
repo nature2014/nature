@@ -32,26 +32,25 @@
         <div class="panel-body" id="panelbody" style="display: none">
 
             <form class="form-horizontal tasi-form">
-                <div class="form-group">
                     <s:set id="counter" value="0"/>
                     <s:iterator value="tableInit.aoColumns" var="column">
                         <s:if test="%{#column.isbSearchable()==true}">
                             <s:set id="counter" value="%{#counter+1}"/>
                             <s:if test="#counter % 3 ==1">
-                                <div class="col-lg-12" >
+                                <div class="col-lg-12" style="height:40px">
                             </s:if>
                             <s:if test="#column.searchOptions==null">
-                                <label class="col-lg-1 control-label" style="margin-bottom:10px;text-align:right;">${column.sTitle}</label>
+                                <label class="col-lg-2 control-label">${column.sTitle}</label>
 
-                                <div class="col-lg-3" style="margin-bottom:10px;">
-                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}" placeholder="${column.sTitle}">
+                                <div class="col-lg-2">
+                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
                                 </div>
                             </s:if>
                             <s:else>
-                                <label class="col-lg-1 control-label" style="margin-bottom:10px;text-align:right;">${column.sTitle}</label>
+                                <label class="col-lg-2 control-label">${column.sTitle}</label>
 
-                                <div class="col-lg-3" style="margin-bottom:10px;">
-                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}" placeholder="${column.sTitle}">
+                                <div class="col-lg-2">
+                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
                                         <option value="">&nbsp;</option>
                                         <s:iterator value="#column.searchOptions[0]" status="rowstatus">
                                             <option value="<s:property value="#column.searchOptions[0][#rowstatus.index]"/>"><s:property
@@ -66,7 +65,6 @@
                         </s:if>
                     </s:iterator>
                     <s:if test="#counter % 3 !=0">
-                </div>
                 </s:if>
 
                 <a class="btn btn-info pull-right" style="margin-right:30px;margin-top: 15px;"

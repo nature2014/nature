@@ -24,8 +24,8 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
     protected final static OrderBusiness orderBusiness = (OrderBusiness) SingleBusinessPoolManager.getBusObj
             (BusTieConstant.BUS_CPATH_ORDER);
 
-    private static String ECHARTS_PIE_TEMPLATE = "{title:{text:'用户付费情况',x:'center'},tooltip:{trigger:'item',formatter:\"{a} <br/>{b} : {c}元 ({d}%)\"},legend:{orient:'vertical',x:'left',data:['未付款','已付款']},calculable:true,series:[{name:'付款状态',type:'pie',radius:'55%',center:['50%','60%'],data:[{value:425,name:'未付款'},{value:1024,name:'已付款'}]}]}";
-    private static String ECHARTS_INPAY_TOP5_TEMPLATE = "{\"title\":{\"text\":\"公司收入TOP5\"},\"tooltip\":{\"trigger\":\"axis\"},\"legend\":{\"data\":[\"订单价格\",\"收入\"]},\"calculable\":true,\"xAxis\":[{\"type\":\"value\",\"boundaryGap\":[0,0.01]}],\"yAxis\":[{\"type\":\"category\",\"data\":[]}],\"series\":[{\"name\":\"订单价格\",\"type\":\"bar\",\"data\":[]},{\"name\":\"收入\",\"type\":\"bar\",\"data\":[]}]}";
+    private static String ECHARTS_PIE_TEMPLATE = "{title:{text:'用户付费情况',x:'center'},tooltip:{trigger:'item',formatter:\"{a} <br/>{b} : {c}元 ({d}%)\"},legend:{orient:'vertical',x:'left',data:['未付款','已付余款']},calculable:true,series:[{name:'付款状态',type:'pie',radius:'55%',center:['50%','60%'],data:[{value:425,name:'未付款'},{value:1024,name:'已付余款'}]}]}";
+    private static String ECHARTS_INPAY_TOP5_TEMPLATE = "{\"title\":{\"text\":\"前5名客户收入\"},\"tooltip\":{\"trigger\":\"axis\"},\"legend\":{\"data\":[\"订单价格\",\"实际收入\"]},\"calculable\":true,\"xAxis\":[{\"type\":\"value\",\"boundaryGap\":[0,0.01]}],\"yAxis\":[{\"type\":\"category\",\"data\":[]}],\"series\":[{\"name\":\"订单价格\",\"type\":\"bar\",\"data\":[]},{\"name\":\"实际收入\",\"type\":\"bar\",\"data\":[]}]}";
 
     public ReportOrderBusiness() {
         this.clazz = OrderBean.class;

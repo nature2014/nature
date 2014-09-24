@@ -67,7 +67,7 @@
         } else if (full.prePaymentState == 2) {
             wrapPre = '报价未做';
         }
-        var proArray = ['测量报价<br>(¥' + full.offerPrice + '元)', '设计', '看稿', '修改定稿', '订单价格<br>(¥' + full.price + '元)', wrapPre, '制作', '安装', '付清余款<br>(¥' + full.closePayment + '元)'];
+        var proArray = ['测量报价<br>(¥' + full.offerPrice + '元)', '设计', '看稿', '修改定稿', '订单价格<br>(¥' + full.price + '元)', wrapPre, '制作', '安装', '已付余款<br>(¥' + full.closePayment + '元)'];
         process.push('<div class="md_process_wrap">');
         var length = data * 60 + 12;
         process.push('<div class="md_process_sd" style=" width: ' + length + 'px; "></div>');
