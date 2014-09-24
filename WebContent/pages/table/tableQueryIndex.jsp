@@ -52,12 +52,23 @@
                             <s:if test="#column.searchOptions==null">
                                 <label class="col-lg-1 control-label"
                                        style="margin-bottom:10px;text-align:right;">${column.sTitle}</label>
-
-                                <div class="col-lg-3" style="margin-bottom:10px;">
-                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}"
-                                           value="" name="filter['${column.mData}']"
-                                           placeholder="${column.sTitle}">
-                                </div>
+                                <s:if test="#column.sClass=='cdate'">
+                                    <div class="col-lg-3" style="margin-bottom:10px;">
+                                        <input id="${column.mData}" type="text" class="form-control ${column.sClass}"
+                                               value="" name="filter['${column.mData}']"  data-date-format="yyyy-mm-dd"
+                                               placeholder="${column.sTitle}">
+                                        <script>
+                                            $("#${column.mData}").datepicker();
+                                        </script>
+                                    </div>
+                                </s:if>
+                                <s:else>
+                                    <div class="col-lg-3" style="margin-bottom:10px;">
+                                        <input id="${column.mData}" type="text" class="form-control ${column.sClass}"
+                                               value="" name="filter['${column.mData}']"
+                                               placeholder="${column.sTitle}">
+                                    </div>
+                                </s:else>
                             </s:if>
                             <s:else>
                                 <label class="col-lg-1 control-label"
@@ -122,6 +133,8 @@
     var idName;
     var tableId = "${tableId}";
     var actionPrex = "${actionPrex}";
+    var cellFormatter = {};
+    window.exportExcel = false;
 
     // 格式化js时间
     var formatDateTime = function (obj, IsMi) {
@@ -366,6 +379,33 @@
             });
         });
     });
+
+    // 格式化js时间
+    var formatDateTime = function (obj, IsMi) {
+        var myDate = new Date(obj);
+        var year = myDate.getFullYear();
+        var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+        var day = ("0" + myDate.getDate()).slice(-2);
+        var h = ("0" + myDate.getHours()).slice(-2);
+        var m = ("0" + myDate.getMinutes()).slice(-2);
+        var s = ("0" + myDate.getSeconds()).slice(-2);
+        var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+        if (IsMi == true) {
+            return year + "-" + month + "-" + day;
+        }
+        else {
+            return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+        }
+    };
+
+    //格式化createTime  modifyTime
+    cellFormatter["modifyTime"] = cellFormatter["createTime"] = function (data, type, full) {
+        if (data != null) {
+            return formatDateTime(data.time, false);
+        } else {
+            return "";
+        }
+    }
 
 </script>
 

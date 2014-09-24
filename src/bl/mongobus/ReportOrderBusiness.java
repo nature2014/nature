@@ -32,7 +32,25 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
     }
 
     public JSONObject getReportOrderData(TableQueryVo model) {
-        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(model.getFilter(), null);
+        Map map = new HashMap<>();
+        try {
+            for (Object key : model.getFilter().keySet()) {
+                Object value = model.getFilter().get(key);
+                if (value instanceof String[]) {
+                    if (value != null && StringUtils.isNotEmpty(((String[]) value)[0])) {
+                        map.put(key, value);
+                    }
+                } else {
+                    if (value != null) {
+                        map.put(key, value);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(map, null);
         JSONObject rootObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Map> reportDataMap = new ArrayList<Map>();
@@ -92,16 +110,16 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
         JSONObject echartObject = JSONObject.fromObject(ECHARTS_INPAY_TOP5_TEMPLATE);
         for (int i = 0; i < 5 && i < actualIncomeFlaotList.size(); i++) {
             Map.Entry<String, Float> entry = actualIncomeFlaotList.get(i);
-            try{
+            try {
                 String name = idNameMap.get(entry.getKey());
                 //界面上只能展示6个字符长度
-                if(name.length() > 6){
+                if (name.length() > 6) {
                     name = name.substring(0, 6);
                 }
                 echartObject.getJSONArray("yAxis").getJSONObject(0).getJSONArray("data").add(name);
                 echartObject.getJSONArray("series").getJSONObject(0).getJSONArray("data").add(priceFlaotMap.get(entry.getKey()));
                 echartObject.getJSONArray("series").getJSONObject(1).getJSONArray("data").add(entry.getValue());
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

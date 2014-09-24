@@ -46,7 +46,7 @@
                     type: "get",//使用get方法访问后台
                     dataType: "json",//返回json格式的数据
                     contentType: "application/json",
-                    url: "${rootPath}/backend/orderreport/reportOrderData.action?filter['customerId']=${model.filter['customerId'][0]}&filter['resOfficer']=${model.filter['resOfficer'][0]}&filter['customerCellPhone']=${model.filter['customerCellPhone'][0]}",
+                    url: "${rootPath}/backend/orderreport/reportOrderData.action?filter['customerId']=${model.filter['customerId'][0]}&filter['resOfficer']=${model.filter['resOfficer'][0]}&filter['customerCellPhone']=${model.filter['customerCellPhone'][0]}&filter['createTime_gteq']=${model.filter['createTime_gteq'][0]}&filter['createTime_lteq']=${model.filter['createTime_lteq'][0]}",
                     success: function (msg) {//msg为返回的数据，在这里做数据绑定
                         window.orderGridId.fnAddData(msg.dataList);
                         if (msg.list.length > 0) {
