@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import util.StringUtil;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
 import vo.table.TableQueryVo;
@@ -133,6 +134,15 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
 
     @Override
     public String save() throws Exception {
+        if (StringUtils.isNotEmpty(order.getCustomerId())) {
+            CustomerBean customerBean = order.getCustomerBean();
+            if(null != customerBean) {
+                order.setCustomerName(customerBean.getName());
+                order.setCustomerCellPhone(customerBean.getCellPhone());
+                order.setCustomerCompany(customerBean.getCompany());
+                order.setCustomerFixedPhone(customerBean.getFixedPhone());
+            }
+        }
         if (StringUtils.isBlank(order.getId())) {
             order.set_id(ObjectId.get());
             getBusiness().createLeaf(order);

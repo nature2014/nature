@@ -123,7 +123,7 @@ public class SystemSettingAction extends BaseAction {
         subbutton30.setUrl(MenuUtils.getOAuthUrl("/wechat/peopleHere.action"));
 
         WechatButton subbutton31 = new WechatButton();
-        subbutton31.setName("志愿者招募");
+        subbutton31.setName("员工注册");
         subbutton31.setType("view");
         subbutton31.setUrl(MenuUtils.getOAuthUrl("/wechat/volunteerRecruit.action"));
 

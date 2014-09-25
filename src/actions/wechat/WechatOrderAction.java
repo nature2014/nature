@@ -7,9 +7,7 @@ import bl.mongobus.CustomerBusiness;
 import bl.mongobus.OrderBusiness;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangronghua on 14-9-21.
@@ -26,7 +24,9 @@ public class WechatOrderAction extends WechatBaseAuthAction {
         if(StringUtils.isNotEmpty(customerCellPhone)) {
             Map<String, String> query = new HashMap<String, String>();
             query.put("customerCellPhone_=", customerCellPhone);
-            orderBeanList = orderBusiness.queryDataByCondition(query, null);
+            Set<String> sorted = new HashSet();
+            sorted.add("-createTime");
+            orderBeanList = orderBusiness.queryDataByCondition(query, sorted);
         }
         return SUCCESS;
     }

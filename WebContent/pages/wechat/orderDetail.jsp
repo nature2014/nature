@@ -48,7 +48,7 @@
                     <div class="message-body msg-in">
                         <span class="arrow"></span>
                         <div class="text">
-                            <p class="attribution"><a href="#">测量报价</a></p>
+                            <p class="attribution"><a href="#">测量报价(¥<s:property value="orderBean.offerPrice" />元)</a></p>
                         </div>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="message-body msg-in">
                         <span class="arrow"></span>
                         <div class="text">
-                            <p class="attribution"><a href="#">金额</a></p>
+                            <p class="attribution"><a href="#">订单价格(¥<s:property value="orderBean.price" />元)</a></p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,15 @@
                     <div class="message-body msg-in">
                         <span class="arrow"></span>
                         <div class="text">
-                            <p class="attribution"><a href="#">预付款下单</a></p>
+                            <s:if test="orderBean.prePaymentState == 0">
+                                <p class="attribution"><a href="#">预付款下单(¥<s:property value="orderBean.prePayment" />元)</a></p>
+                            </s:if>
+                            <s:elseif test="orderBean.prePaymentState == 1">
+                                <p class="attribution"><a href="#">未付定金(¥0元)</a></p>
+                            </s:elseif>
+                            <s:elseif test="orderBean.prePaymentState == 2">
+                                <p class="attribution"><a href="#">报价未做</a></p>
+                            </s:elseif>
                         </div>
                     </div>
                 </div>
@@ -160,7 +168,7 @@
                     <div class="message-body msg-in">
                         <span class="arrow"></span>
                         <div class="text">
-                            <p class="attribution"><a href="#">付清余款</a></p>
+                            <p class="attribution"><a href="#">已付余款(¥<s:property value="orderBean.closePayment" />元)</a></p>
                         </div>
                     </div>
                 </div>

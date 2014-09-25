@@ -47,6 +47,8 @@
         <thead>
         <tr>
             <th>订单号</th>
+            <th>订单日期</th>
+            <th>业务名称</th>
             <th>客户名称</th>
         </tr>
         </thead>
@@ -56,6 +58,8 @@
                 <td>
                     <a href="${rootPath}/wechat/getOrderDetails.action?orderBean.id=<s:property value="#bean.id" />"><s:property value="#bean.id" /></a>
                 </td>
+                <td><s:date name="#bean.createTime" format="yyyy-MM-dd" /></td>
+                <td><s:property value="#bean.name" /></td>
                 <td><s:property value="#bean.customerName" /></td>
             </tr>
         </s:iterator>
