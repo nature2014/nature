@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -227,5 +228,6 @@ public class Bean implements BeanContext, Cloneable, Serializable {
     }
 
     //�����
+    @Transient
     private Map<String, List> cacheSubBeans = new HashMap<String, List>();
 }
