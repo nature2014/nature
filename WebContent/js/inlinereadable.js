@@ -16,9 +16,7 @@
             }
             var tableId = initData.tableId;
             var headers = initData.headerTypes;
-            var editHtml = '<button title="编辑" style="margin-left:5px" class="edit btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>';
             var saveHtml = '<button title="保存" style="margin-left:5px" class="save btn btn-primary btn-xs"><i class="fa fa-save"></i></button>';
-            var deleteHtml = '<button title="删除" style="margin-left:5px" class="delete btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></button>';
             var cancelHtml = '<button title="取消" style="margin-left:5px" class="cancel btn btn-danger btn-xs"><i class="fa fa-undo"></i></button>';
 
             function restoreRow(oTable, nRow) {
@@ -36,7 +34,6 @@
                 var jqTds = $('>td', nRow);
                 for (var i = 0; i < headers.length; i++) {
                     if (headers[i].type == 'text') {
-                        alert('asdf');
                         jqTds[i].innerHTML = '<input type="text" class="form-control small" value="' + aData[headers[i].mData] + '">';
                     } else if (headers[i].type == 'select') {
                         var createSelected = '<select class="form-control small" value="' + aData[headers[i].mData] + '">';

@@ -143,6 +143,12 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
                 order.setCustomerFixedPhone(customerBean.getFixedPhone());
             }
         }
+        if(StringUtils.isNotEmpty(order.getResOfficer())){
+            VolunteerBean volunteerBean = (VolunteerBean)VTB.getLeaf(order.getResOfficer()).getResponseData();
+            if(volunteerBean != null){
+                order.setResOfficerName(volunteerBean.getName());
+            }
+        }
         if (StringUtils.isBlank(order.getId())) {
             order.set_id(ObjectId.get());
             getBusiness().createLeaf(order);

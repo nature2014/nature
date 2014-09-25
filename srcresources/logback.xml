@@ -21,8 +21,8 @@
     </appender>
 
 
-    <root level="WARN">
-        <appender-ref ref="FILE"/>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>

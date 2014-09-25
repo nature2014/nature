@@ -50,7 +50,24 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
             e.printStackTrace();
         }
 
-        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(map, null);
+        Set<String> sortedMappingMongo = new HashSet<String>();
+        LinkedHashMap<String, String> lhm = model.getSort();
+        if (lhm != null) {
+            Iterator<String> it = lhm.keySet().iterator();
+            while (it.hasNext()) {
+                String key = it.next();
+                String value = lhm.get(key);
+                if (value != null && !value.isEmpty()) {
+                    if (value.equals("asc")) {
+                        sortedMappingMongo.add(key);
+                    } else {
+                        sortedMappingMongo.add("-" + key);
+                    }
+                }
+            }
+        }
+
+        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(map, sortedMappingMongo);
         JSONObject rootObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Map> reportDataMap = new ArrayList<Map>();
