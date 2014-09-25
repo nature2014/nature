@@ -32,42 +32,9 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
     }
 
     public JSONObject getReportOrderData(TableQueryVo model) {
-        Map map = new HashMap<>();
-        try {
-            for (Object key : model.getFilter().keySet()) {
-                Object value = model.getFilter().get(key);
-                if (value instanceof String[]) {
-                    if (value != null && StringUtils.isNotEmpty(((String[]) value)[0])) {
-                        map.put(key, value);
-                    }
-                } else {
-                    if (value != null) {
-                        map.put(key, value);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Set<String> sortedMappingMongo = transeSortMap(model);
 
-        Set<String> sortedMappingMongo = new HashSet<String>();
-        LinkedHashMap<String, String> lhm = model.getSort();
-        if (lhm != null) {
-            Iterator<String> it = lhm.keySet().iterator();
-            while (it.hasNext()) {
-                String key = it.next();
-                String value = lhm.get(key);
-                if (value != null && !value.isEmpty()) {
-                    if (value.equals("asc")) {
-                        sortedMappingMongo.add(key);
-                    } else {
-                        sortedMappingMongo.add("-" + key);
-                    }
-                }
-            }
-        }
-
-        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(map, sortedMappingMongo);
+        List<OrderBean> orderBeanList = orderBusiness.queryDataByCondition(model.getFilter(), sortedMappingMongo);
         JSONObject rootObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         List<Map> reportDataMap = new ArrayList<Map>();
@@ -94,6 +61,26 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
             e.printStackTrace();
         }
         return rootObject;
+    }
+
+    private Set<String> transeSortMap(TableQueryVo model) {
+        Set<String> sortedMappingMongo = new HashSet<String>();
+        LinkedHashMap<String, String> lhm = model.getSort();
+        if (lhm != null) {
+            Iterator<String> it = lhm.keySet().iterator();
+            while (it.hasNext()) {
+                String key = it.next();
+                String value = lhm.get(key);
+                if (value != null && !value.isEmpty()) {
+                    if (value.equals("asc")) {
+                        sortedMappingMongo.add(key);
+                    } else {
+                        sortedMappingMongo.add("-" + key);
+                    }
+                }
+            }
+        }
+        return sortedMappingMongo;
     }
 
     private JSONObject culInpayTop5(List<OrderBean> orderBeanList) {
