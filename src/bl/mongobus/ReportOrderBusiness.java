@@ -101,7 +101,7 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
                 actualIncomeFlaotMap.put(orderBean.getCustomerId(), orderBean.getActualIncome());
             }
             if (idNameMap.get(orderBean.getCustomerId()) == null) {
-                idNameMap.put(orderBean.getCustomerId(), orderBean.getCustomerBean().getName());
+                idNameMap.put(orderBean.getCustomerId(), orderBean.getCustomerName());
             }
         }
 

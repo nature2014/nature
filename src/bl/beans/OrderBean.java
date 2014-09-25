@@ -21,7 +21,7 @@ public class OrderBean extends Bean {
     private String customerFixedPhone;
     //客户手机号码
     private String customerCellPhone;
-    //外键客户�?
+    //外键客户�?
     private String customerId;
 
     //测量报价
@@ -30,10 +30,10 @@ public class OrderBean extends Bean {
     //订单价格
     private float price = 0;
 
-    //0、预付定�?  1未付定金 2、报价未�?
+    //0、预付定�?  1未付定金 2、报价未�?
     private int prePaymentState = 0;
 
-    //预付�?
+    //预付�?
     private float prePayment = 0;
 
     //实际收入prePayment+closePayment
@@ -42,7 +42,7 @@ public class OrderBean extends Bean {
     //已付余款
     private float closePayment = 0;
 
-    //未付�?  price-prePayment-closePayment
+    //未付�?  price-prePayment-closePayment
     private float unPayment = 0;
 
     public String getCustomerFixedPhone() {
@@ -105,7 +105,7 @@ public class OrderBean extends Bean {
         this.customerBean = customerBean;
     }
 
-    //-1表示缺省值，起始状体  订单状�?? 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下�? 6制作 7安装  8付清余款
+    //-1表示缺省值，起始状体  订单状�?? 0 测量报价 1设计 2看稿 3修改定稿 4金额 5预付款下�? 6制作 7安装  8付清余款
     private int state = -1;
 
     public static enum OState {
@@ -121,7 +121,7 @@ public class OrderBean extends Bean {
         }
     }
 
-    //负责人，外键字段，指向员工表的主�?
+    //负责人，外键字段，指向员工表的主�?
     private String resOfficer;
 
     private String resOfficerName;
@@ -132,6 +132,7 @@ public class OrderBean extends Bean {
     @Transient
     private CustomerBean customerBean;
 
+    @IgnoreJsonField
     public CustomerBean getCustomerBean() {
         if (this.customerBean != null) {
             return this.customerBean;
@@ -152,7 +153,7 @@ public class OrderBean extends Bean {
     }
 
     public String getCustomerName() {
-        return this.getCustomerBean().getName();
+        return this.customerName;
     }
 
     public void setCustomerName(String customerName) {
