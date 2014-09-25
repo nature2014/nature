@@ -56,7 +56,7 @@
         <s:iterator value="orderBeanList" var="bean">
             <tr>
                 <td>
-                    <a href="${rootPath}/wechat/getOrderDetails.action?orderBean.id=<s:property value="#bean.id" />"><s:property value="#bean.id" /></a>
+                    <a href="${rootPath}/wechat/getOrderDetails.action?orderBean.id=<s:property value="#bean.id" />"><s:property value="#bean.id.substring(10)" /></a>
                 </td>
                 <td><s:date name="#bean.createTime" format="yyyy-MM-dd" /></td>
                 <td><s:property value="#bean.name" /></td>
