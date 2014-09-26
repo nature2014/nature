@@ -21,7 +21,7 @@
 <script src="${rootPath}/js/inlinereadable.js"></script>
 
 <form id="exportForm" action="${rootPath}/backend/orderreport/exportTable.action?filter['customerId']=${model.filter['customerId'][0]}&filter['resOfficer']=${model.filter['resOfficer'][0]}&filter['customerCellPhone']=${model.filter['customerCellPhone'][0]}&filter['createTime_gteq']=${model.filter['createTime_gteq'][0]}&filter['createTime_lteq']=${model.filter['createTime_lteq'][0]}" method="post">
-    <button id="exportData" class="btn btn-info" type="submit" style="margin-left:80px;margin-right:80px">
+    <button id="exportData" class="btn btn-info" type="submit" style="margin-left:30px;">
         批量导出
     </button>
 </form>
