@@ -69,6 +69,10 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
         return model;
     }
 
+    public String getTableId() {
+        return this.getClass().getSimpleName() + "_table";
+    }
+
     @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
@@ -107,6 +111,16 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
                 .setSClass("cdate"));
         init.getAoColumns().add(new TableHeaderVo("createTime_lteq", "结束时间").setHiddenColumn(true).enableSearch()
                 .setSClass("cdate"));
+
+        init.getAoColumns().add(new TableHeaderVo("offerPrice", "测量报价").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("price", "订单价格").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("prePayment", "预付款").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("closePayment", "已付余款").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("actualIncome", "实际收入").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("unPayment", "未付款").setHiddenColumn(false).disableSearch());
+        init.getAoColumns().add(new TableHeaderVo("createTime", "接单日期").setHiddenColumn(false).disableSearch()
+                .setSClass("cdate"));
+
         if (LOG.isDebugEnabled()) {
             LOG.debug(JSONObject.fromObject(init, config).toString());
         }
@@ -116,6 +130,7 @@ public class ReportOrderAction extends QueryTableAction<ReportOrderBusiness> {
     public String reportOrderData() {
         JSONObject jsonObject = new JSONObject();
         if (getModel() != null) {
+            filterEmptyValue(getModel());
             jsonObject = reportOrderBusiness.getReportOrderData(getModel());
         } else {
             jsonObject.put("data", new JSONArray());

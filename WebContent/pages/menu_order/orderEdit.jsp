@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="form-group has-success">
-                <label class="col-lg-2 control-label">客户</label>
+                <label class="col-lg-2 control-label">客户名称</label>
 
                 <div class="col-lg-10">
                     <s:if test="listCustomerBean!=null">

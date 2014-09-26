@@ -173,6 +173,7 @@
         <action name="initTable" class="actions.backend.ReportOrderAction" method="initTable"/>
         <action name="order" class="actions.backend.ReportOrderAction" method="index"/>
         <action name="reportOrderData" class="actions.backend.ReportOrderAction" method="reportOrderData" />
+        <action name="exportTable" class="actions.backend.ReportOrderAction" method="exportTable"/>
 	</package>
 
     <package name="serviceplace" namespace="/backend/serviceplace" extends="default-backend">
