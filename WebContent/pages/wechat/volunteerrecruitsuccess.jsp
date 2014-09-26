@@ -23,7 +23,7 @@
         <button type="button" class="btn btn-info btn-block" onclick="custom_close()">点击此处，返回微信！</button>
         <br>
         <br>
-        <p>感谢您在线申请苏州大学附属第一医院博习员工服务，请前往医院本部完成后续的指纹和图像采集等相关注册信息。</p>
+        <p>感谢您使用大自然员工微信服务，请联系管理员完成后续的指纹和图像采集等相关注册信息。</p>
     </div>
 
 </section>
