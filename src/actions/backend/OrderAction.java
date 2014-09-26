@@ -102,7 +102,7 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
         } else {
             listCustomerCodes = null;
         }
-        init.getAoColumns().add(new TableHeaderVo("customerId", "联系人").addSearchOptions(listCustomerCodes).enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("customerId", "客户名称").addSearchOptions(listCustomerCodes).enableSearch());
         init.getAoColumns().add(new TableHeaderVo("customerCellPhone", "手机号码").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("name", "业务名称").enableSearch());
         //init.getAoColumns().add(new TableHeaderVo("offerPrice", "测量报价(元)").disableSearch());

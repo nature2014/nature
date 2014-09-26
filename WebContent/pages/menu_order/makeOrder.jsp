@@ -46,11 +46,23 @@
         margin-left: -40px;
         font: 400 12px/20px helvetica, tahoma, arial, sans-serif;
     }
+
+    a {
+        color: blue;
+    }
 </style>
 <script>
     operationButtons = [
         '<a class="btn btn-info" href="${actionPrex}/add.action?${addButtonParameter}"><i class="fa fa-plus"></i> 添加 </a>'
     ];
+    //格式化payDate
+    cellFormatter["customerId"] = function (data, type, full) {
+        if (data != null) {
+            return '<a href="${rootPath}/backend/customer/index.action?name=' + full.customerName + '">' + full.customerName + '</a>';
+        } else {
+            return "";
+        }
+    }
     //格式化payDate
     cellFormatter["payDate"] = function (data, type, full) {
         if (data != null) {
