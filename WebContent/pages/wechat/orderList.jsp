@@ -46,7 +46,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>订单号</th>
             <th>订单日期</th>
             <th>业务名称</th>
             <th>客户名称</th>
@@ -56,9 +55,8 @@
         <s:iterator value="orderBeanList" var="bean">
             <tr>
                 <td>
-                    <a href="${rootPath}/wechat/getOrderDetails.action?orderBean.id=<s:property value="#bean.id" />"><s:property value="#bean.id.substring(10)" /></a>
+                    <a href="${rootPath}/wechat/getOrderDetails.action?orderBean.id=<s:property value="#bean.id" />"><s:date name="#bean.createTime" format="yyyy-MM-dd" /></a>
                 </td>
-                <td><s:date name="#bean.createTime" format="yyyy-MM-dd" /></td>
                 <td><s:property value="#bean.name" /></td>
                 <td><s:property value="#bean.customerName" /></td>
             </tr>
