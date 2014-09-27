@@ -11,6 +11,7 @@ import bl.mongobus.TrainCourseServicePlaceBusiness;
 import com.opensymphony.xwork2.ActionSupport;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.struts2.ServletActionContext;
 import org.bson.types.ObjectId;
 
 import util.ServerContext;
@@ -31,7 +32,6 @@ public class BackendServicePlaceAction extends BaseBackendAction<ServicePlaceBus
     ServicePlaceBean servicePlace = null;
     ServicePlaceBusiness sp = (ServicePlaceBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_SERVICEPLACE);
     private static final TrainCourseServicePlaceBusiness tcspBus = (TrainCourseServicePlaceBusiness) SingleBusinessPoolManager.getBusObj(BusTieConstant.BUS_CPATH_TRAINCOURSESERVICEPLACE);
-
     private int type = 0;
     private String[] serviceicons = null;
 
@@ -61,6 +61,20 @@ public class BackendServicePlaceAction extends BaseBackendAction<ServicePlaceBus
         this.type = type;
     }
 
+    private static File FILEPATH = null;
+    private static String contextPath = null;
+
+    static {
+        LOG.debug("初始化图标路径");
+        String catalinaHome = System.getProperty("catalina.home");
+        FILEPATH = new File(catalinaHome + File.separator + "upload" + File.separator + "serviceplace");
+        if (!FILEPATH.exists()) {
+            //确保目录存在
+            FILEPATH.mkdir();
+        }
+        LOG.debug("初始化应用服务器上下文地址");
+        contextPath = ServletActionContext.getServletContext().getContextPath();
+    }
     public String servicePlaceList() {
         HashMap<String,Integer> filterByType = new HashMap<String,Integer>();
         filterByType.put("type",this.type);
@@ -93,12 +107,12 @@ public class BackendServicePlaceAction extends BaseBackendAction<ServicePlaceBus
 
     public String servicePlaceAddEdit() {
         //read file list
-        File iconList = new File(ServerContext.getValue("realserviceplacedirectory"));
+        File iconList = FILEPATH;
         if(iconList.isDirectory() && iconList.exists()){
             String[] list = iconList.list();
             //convert to virtual path within tomcat service.
             serviceicons = new String[list.length];
-            String vitual = ServerContext.getValue("vitualserviceiplacedirectory");
+            String vitual = contextPath + "/upload/getImage.action?getfile=serviceplace/";
             for (int i = 0; i < list.length; i++) {
                 serviceicons[i] = vitual+ list[i];
             }
@@ -130,12 +144,12 @@ public class BackendServicePlaceAction extends BaseBackendAction<ServicePlaceBus
             }
         } catch (MiServerException miEx) {
             //read file list
-            File iconList = new File(ServerContext.getValue("realserviceplacedirectory"));
+            File iconList = FILEPATH;
             if (iconList.isDirectory() && iconList.exists()) {
                 String[] list = iconList.list();
                 //convert to virtual path within tomcat service.
                 serviceicons = new String[list.length];
-                String vitual = ServerContext.getValue("vitualserviceiplacedirectory");
+                String vitual = contextPath + "/upload/serviceplace/";
                 for (int i = 0; i < list.length; i++) {
                     serviceicons[i] = vitual + list[i];
                 }

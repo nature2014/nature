@@ -43,7 +43,7 @@
                 <s:iterator value="#parent.selections" var="us">
                     <s:if test="aub.servicePlaceId==#us.id">
                         <div class="hosp-green hosp-focus">
-                            <div class="plase-img"><img src="${rootPath}/<s:property value="#us.serviceicon"/>"></div>
+                            <div class="plase-img"><img src="<s:property value="#us.serviceicon"/>"></div>
                             <div class="plase-font"><s:property value="#us.name"/></div>
                             <form action="${rootPath}/userFront/checkOut.action" method="post">
                                 <input type="hidden" name="servicePlaceId" value="<s:property value="#us.id"/>"/>
@@ -55,7 +55,7 @@
                         <s:if test="aub==null">
                             <div class="hosp-green"
                                  <s:if test="aub==null">onclick="jQuery('.hosp-green').removeClass('hosp-focus');jQuery(this).addClass('hosp-focus');"</s:if>>
-                                <div class="plase-img"><img src="${rootPath}/<s:property value="#us.serviceicon"/>"></div>
+                                <div class="plase-img"><img src="<s:property value="#us.serviceicon"/>"></div>
                                 <div class="plase-font"><s:property value="#us.name"/></div>
                                 <form action="${rootPath}/userFront/checkInSubmit.action" method="post">
                                     <input type="hidden" name="servicePlaceId" value="<s:property value="#us.id"/>"/>
@@ -75,7 +75,7 @@
                     <s:if test="#us.type==0 && #parent.id==#us.parentid">
                         <s:if test="aub.servicePlaceId==#us.id">
                             <div class="hosp-green hosp-focus">
-                                <div class="plase-img"><img src="${rootPath}/<s:property value="#us.serviceicon"/>"></div>
+                                <div class="plase-img"><img src="<s:property value="#us.serviceicon"/>"></div>
                                 <div class="plase-font"><s:property value="#us.name"/></div>
                                 <form action="${rootPath}/userFront/checkOut.action" method="post">
                                     <input type="hidden" name="servicePlaceId" value="<s:property value="#us.id"/>"/>
@@ -87,7 +87,7 @@
                           <s:if test="aub==null">
                             <div class="hosp-green"
                                  <s:if test="aub==null">onclick="jQuery('.hosp-green').removeClass('hosp-focus');jQuery(this).addClass('hosp-focus');"</s:if>>
-                                <div class="plase-img"><img src="${rootPath}/<s:property value="#us.serviceicon"/>"></div>
+                                <div class="plase-img"><img src="<s:property value="#us.serviceicon"/>"></div>
                                 <div class="plase-font"><s:property value="#us.name"/></div>
                                 <form action="${rootPath}/userFront/checkInSubmit.action" method="post">
                                     <input type="hidden" name="servicePlaceId" value="<s:property value="#us.id"/>"/>
