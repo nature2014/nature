@@ -136,7 +136,7 @@
         <div class="panel-body boder" style="position:relative; padding-top: 0px; padding-bottom: 0px;">
 
             <a class="task-thumb col-xs-4" href="#">
-                <img width="60px" height="50px" src="<s:property value='%{#bean.iconpath}'/>" class="" style="margin-right: 10px; width: 60px; height: 50px; position: static;" disable="">
+                <img  src="<s:property value='%{#bean.iconPath}'/>" class="" style="width: 60px; height: 60px;border-radius:30px; position: static;" disable="">
             </a>
             <div class="task-thumb-details" style="margin: 0 0 0 0;">
                 <p style="padding: 0px"><s:property value='%{#bean.name}'/></p>
@@ -148,10 +148,10 @@
             <p style="position: absolute; right:2px; top:0px;"><s:property value="%{#bean.description}" /> </p>
 
             <s:if test="#bean.status == 1">
-                <img style="position: absolute; right:2px; top:20px;" src="img/wechat.jpg">
+                <img style="position: absolute; right:2px; top:20px;" src="${rootPath}/img/wechat.jpg">
             </s:if>
             <s:if test="#bean.status == 0">
-                <img style="position: absolute; right:2px; top:20px;" src="img/screen.jpg">
+                <img style="position: absolute; right:2px; top:20px;" src="${rootPath}/img/screen.jpg">
             </s:if>
 
         </div>
