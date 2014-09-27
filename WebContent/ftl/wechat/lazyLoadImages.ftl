@@ -5,7 +5,7 @@
         <a class="fancybox" rel="group" href="${rootPath}/upload/getImage.action?getfile=${bean.fileName}" title="${bean.product.name!}"
            hidefocus="true">
             <div class="thumb">
-                <img style="width:180px;height:80px" src="${rootPath}/upload/getImage.action?targetSize=300&getthumb=${bean.fileName}">
+                <img style="width:120px;height:80px" src="${rootPath}/upload/getImage.action?targetSize=300&getthumb=${bean.fileName}">
             </div>
             </s:if>
         </a>
