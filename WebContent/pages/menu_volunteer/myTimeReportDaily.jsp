@@ -8,7 +8,7 @@
 <%@ include file="../bootstrapHeader.jsp" %>
 <html>
 <head>
-    <link href="css/train.css" rel="stylesheet">
+    <link href="${rootPath}/css/train.css" rel="stylesheet">
     <title>我的日工时</title>
     <style type="text/css">
 
