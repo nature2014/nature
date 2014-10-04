@@ -36,10 +36,10 @@
         .imagedesigner {
             left: 220px;
             top: 5px;
-            border-radius: 40px;
-            -moz-border-radius: 40px;
-            width: 80px;
-            height: 80px;
+            border-radius: 90px;
+            -moz-border-radius: 90px;
+            width: 180px;
+            height: 180px;
             border: 2px solid gray;
         }
     </style>

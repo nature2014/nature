@@ -26,7 +26,7 @@
             <div class="form-group has-success">
                 <label class="control-label col-lg-2 col-sm-3">编码</label>
                 <div class="col-lg-10">
-                    <input name="sourceCode.code" type="text" class="form-control" <s:if test="sourceCode.id!=''">readonly="true"</s:if> value="${sourceCode.code}"/>
+                    <input name="sourceCode.code" type="text" class="form-control" value="${sourceCode.code}"/>
                 </div>
                 <script>
                     $(document).ready(function() {

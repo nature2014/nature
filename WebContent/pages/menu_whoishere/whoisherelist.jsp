@@ -40,7 +40,7 @@
         <div class="bg-left2" style="width: 200px;">
             <div class="hosp-green">
                 <div class="plase-img">
-                    <img src="<s:property value="servicePlaceBean.serviceicon"/>" style="width:100px;height:80px"/>
+                    <img src="<s:property value="servicePlaceBean.serviceicon"/>"/>
                 </div>
                 <div class="plase-font" style="width:150px"><s:property value="servicePlaceBean.name"/>
                    <span style="float:right;color:red;font-weight:900;font-size:20px">

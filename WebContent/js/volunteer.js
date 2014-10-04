@@ -29,7 +29,7 @@ cellFormatter["status"] = function ( data, type, full ) {
 cellFormatter["registerFrom"] = function ( data, type, full ) {
     //1=医院,2=微信
     if(data == 1){
-        return '医院';
+        return '网站';
     }else if(data == 2){
         return '微信';
     }else{

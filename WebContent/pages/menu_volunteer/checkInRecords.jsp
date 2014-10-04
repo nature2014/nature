@@ -29,7 +29,7 @@
         </s:else>
 
         <div class="bg-username"><s:property value="#session['sessionUser'].name"/></div>
-        <div class="bg-touxiang"><img src="${rootPath}/<s:property value="#session['sessionUser'].iconpath"/>" width="50"
+        <div class="bg-touxiang"><img src="<s:property value="#session['sessionUser'].iconpath"/>" width="50"
                                       height="50" /></div>
     </div>
 
