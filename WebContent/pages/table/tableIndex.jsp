@@ -316,7 +316,7 @@ $(document).ready(function () {
                 <s:iterator value="tableInit.aoColumns" var="column">
                 <s:if test="%{#column.isbSearchable()==true}">
                 if ($('#${column.mData}').val() != '') {
-                    aoData.push({ "name": "filter['${column.mData}']", "value": $('#${column.mData}').val() });
+                    aoData.push({ "name": "filter['${column.mData}']", "value": $('#${column.mData}').val().trim() });
                 }
                 </s:if>
                 </s:iterator>
@@ -330,7 +330,7 @@ $(document).ready(function () {
                         var hiddenElement = $("<input>");
                         hiddenElement.attr("type", "hidden");
                         hiddenElement.attr("name", aoData[i].name);
-                        hiddenElement.attr("value", aoData[i].value);
+                        hiddenElement.attr("value", (aoData[i].value +"").trim());
                         form.append(hiddenElement);
                     }
                     var parameters = "${addButtonParameter}";
@@ -341,7 +341,7 @@ $(document).ready(function () {
                             var hiddenElement = $("<input>");
                             hiddenElement.attr("type", "hidden");
                             hiddenElement.attr("name", splitEqual[0]);
-                            hiddenElement.attr("value", splitEqual[1]);
+                            hiddenElement.attr("value", (splitEqual[1] +"").trim());
                             form.append(hiddenElement);
                         }
                     }

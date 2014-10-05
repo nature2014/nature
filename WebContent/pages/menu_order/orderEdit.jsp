@@ -95,6 +95,7 @@
                     </style>
                     <script>
                         $(document).ready(function () {
+                            window.orderStatusConstant = ${order.state};
                             var process = [];
                             var proArray = ['测量报价', '设计', '看稿', '修改定稿', '订单价格', '预付款下单', '制作', '安装', '已付余款'];
                             process.push('<div class="md_process_wrap">');
@@ -108,14 +109,14 @@
 
                             $(".md_process_i").on("click", function (evt) {
                                 var index = $(evt.target).attr("data-index");
-                                if (index <= (parseInt('${order.state}') + 1)) {
-                                    $(".hiddenGroup").hide();
-                                    $(".showGroup" + index).show();
-                                }
+                                $(".hiddenGroup").hide();
+                                $(".showGroup" + index).show();
                                 //表明进入下一个状态
-                                if (index == parseInt('${order.state}') + 1) {
+                                if (index >= window.orderStatusConstant + 1) {
                                     if ($("#prePaymentState").val() == 2) {
                                         alert("对不起！由于你当前订单处于报价未做状态！");
+                                        $("#progressLength").width(5 * 60 + 12);
+                                        $("#orderStateValue").val(5);
                                     } else {
                                         $("#progressLength").width(index * 60 + 12);
                                         $("#orderStateValue").val(index);
@@ -123,12 +124,19 @@
                                 }
                             });
                             $("#prePaymentState").change(function () {
-                                if ($(this).val() != 0) {
+                                if ($(this).val() == 0) {
+                                    $("#prePaymentValue").show();
+                                }
+                                else if ($(this).val() == 1) {
                                     $("#prePaymentValue").hide();
                                     //如果不是预付定金状态，强制设置0
                                     $("input[name='order.prePayment']").val(0);
-                                } else {
+                                } else if ($(this).val() == 2) {
+                                    $("#progressLength").width(5 * 60 + 12);
+                                    $("#orderStateValue").val(5);
                                     $("#prePaymentValue").show();
+                                    //回到5的状态
+                                    window.orderStatusConstant = 5;
                                 }
                             });
                             $(".showGroup${order.state}").show();

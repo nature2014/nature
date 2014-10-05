@@ -75,7 +75,7 @@
         var process = [];
         var wrapPre = '预付款下单<br>(¥' + full.prePayment + '元)';
         if (full.prePaymentState == 1) {
-            wrapPre = '未付定金(¥' + 0 + '元)';
+            wrapPre = '未付定金<br>(¥' + 0 + '元)';
         } else if (full.prePaymentState == 2) {
             wrapPre = '报价未做';
         }

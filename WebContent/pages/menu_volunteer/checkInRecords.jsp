@@ -34,7 +34,7 @@
     </div>
 
     <div class="bg-right2">
-        <div class="bg-title2" style="font-size:30px">院内</div>
+        <div class="bg-title2" style="font-size:30px">公司内</div>
         <div class="bg-time" id="timewatcher">加载当前时间</div>
         <s:iterator value="places" var="parent">
             <s:if test="#parent.id!='out'">

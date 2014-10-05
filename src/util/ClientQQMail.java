@@ -30,7 +30,7 @@ public class ClientQQMail {
 
 
     {
-        sendEmail(new String[]{"116352437@qq.com"}, "²âÊÔQQÓÊÏäÈº·¢¹¦ÄÜ", "À´×ÔÎ¢´¸×Ó");
+        sendEmail(new String[]{"116352437@qq.com"}, "æµ‹è¯•QQé‚®ç®±ç¾¤å‘åŠŸèƒ½", "æ¥è‡ªå¾®é”¤å­");
 
     }
 
@@ -43,7 +43,7 @@ public class ClientQQMail {
             props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
             props.put("mail.smtp.host", server);
             //props.put("mail.smtp.port", String.valueOf(port));
-            props.put("mail.smtp.auth", "true");//ÑéÖ¤
+            props.put("mail.smtp.auth", "true");//éªŒè¯
             props.setProperty("mail.smtp.port", "465");
             props.setProperty("mail.pop3.socketFactory.fallback", "false");
             props.setProperty("mail.smtp.socketFactory.port", "465");

@@ -2,7 +2,7 @@
 <html lang="en">
 <html>
 <head>
-    <title>院内服务地点</title>
+    <title>公司内服务地点</title>
     <%@ include file="../bootstrapHeader.jsp" %>
     <script language="javascript" type="text/javascript">
         window.onload = function () {
@@ -23,7 +23,7 @@
                                       height="50" /></div>
     </div>
     <div class="bg-right2">
-        <div class="bg-title2">院内</div>
+        <div class="bg-title2">公司内</div>
         <div class="bg-time" id="timewatcher">加载当前时间</div>
 
         <s:iterator value="servicePlaces" var="parent">

@@ -169,7 +169,13 @@
                          value="${volunteer.email}"/>
              </div>
          </div>
-         
+         <div class="form-group has-success">
+             <label class="col-lg-2 control-label">员工附件资料</label>
+
+             <div class="col-lg-10">
+                 <%@ include file="/pages/imageUploadPlugin.jsp" %>
+             </div>
+         </div>
          <div class="form-group">
              <div class="col-lg-offset-2 col-lg-10">
                  <button class="btn btn-info" type="submit">保存</button>

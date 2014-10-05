@@ -78,7 +78,7 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
     @Override
     public TableInitVo getTableInit() {
         TableInitVo init = new TableInitVo();
-        init.getAoColumns().add(new TableHeaderVo("logo", "公司Logo").enableSearch());
+        init.getAoColumns().add(new TableHeaderVo("logo", "公司Logo").disableSearch());
         init.getAoColumns().add(new TableHeaderVo("company", "公司名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("name", "客户名称").enableSearch());
         init.getAoColumns().add(new TableHeaderVo("cellPhone", "手机号码").enableSearch());

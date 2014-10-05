@@ -84,7 +84,7 @@
                 <div id="hero-donut1" class="bio-chart" style="height: 120px;"></div>
                 <div class="bio-desk" style="height: 120px;">
                     <h4 class="red">员工职称</h4>
-                    <p>院内注册 : <s:property value="dashBoardBean.registerByClient" default="0" />  </p>
+                    <p>网站注册 : <s:property value="dashBoardBean.registerByClient" default="0" />  </p>
                     <p>微信注册 : <s:property value="dashBoardBean.registerByWechat" default="0" /> </p>
                     <p>总计 : <s:property value="%{dashBoardBean.registerByClient + dashBoardBean.registerByWechat}" default="0"/> </p>
                 </div>
@@ -127,7 +127,7 @@
         Morris.Donut({
             element: 'hero-donut1',
             data: [
-                {label: '院内注册', value: <s:property value="dashBoardBean.registerByClient" /> },
+                {label: '网站注册', value: <s:property value="dashBoardBean.registerByClient" /> },
                 {label: '微信注册', value: <s:property value="dashBoardBean.registerByWechat" /> }
             ],
             colors: ['#41cac0', '#B0CCE1']

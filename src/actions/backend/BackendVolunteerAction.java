@@ -3,6 +3,8 @@
  */
 package actions.backend;
 
+import actions.upload.UploadMultipleImageAction;
+import bl.beans.ImageInfoBean;
 import bl.beans.SourceCodeBean;
 import bl.beans.SystemSettingBean;
 import bl.constants.BusTieConstant;
@@ -42,8 +44,26 @@ public class BackendVolunteerAction extends BaseBackendAction<VolunteerBusiness>
 
   protected List<SourceCodeBean> listSource;
   private VolunteerBean volunteer;
+  private String jsonInitImage;
+  private List<ImageInfoBean> image;
 
-  public List<SourceCodeBean> getListSource() {
+    public List<ImageInfoBean> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageInfoBean> image) {
+        this.image = image;
+    }
+
+    public String getJsonInitImage() {
+        return jsonInitImage;
+    }
+
+    public void setJsonInitImage(String jsonInitImage) {
+        this.jsonInitImage = jsonInitImage;
+    }
+
+    public List<SourceCodeBean> getListSource() {
     return listSource;
   }
 
@@ -145,12 +165,16 @@ public class BackendVolunteerAction extends BaseBackendAction<VolunteerBusiness>
   public String save() throws Exception {
 
     this.listSource = (List<SourceCodeBean>) SOURBUS.getAllLeaves().getResponseData();
+    volunteer.setImage(this.image);
     BusinessResult result = getBusiness().save(getRequest(), volunteer);
     if (result.getErrors().size() > 0) {
       for (Object error : result.getErrors()) {
         addActionError(error.toString());
       }
-      return INPUT;
+        //初始化图片列表
+        this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(this.image != null ? this.image : null);
+
+        return INPUT;
     }
     if (result.getMessages().size() > 0) {
       for (Object message : result.getMessages()) {
@@ -165,7 +189,10 @@ public class BackendVolunteerAction extends BaseBackendAction<VolunteerBusiness>
   public String edit() throws Exception {
     this.listSource = (List<SourceCodeBean>) SOURBUS.getAllLeaves().getResponseData();
     volunteer = (VolunteerBean) getBusiness().getLeaf(getId()).getResponseData();
-    return SUCCESS;
+      //初始化图片列表
+      this.jsonInitImage = UploadMultipleImageAction.jsonFromImageInfo(volunteer != null ? volunteer.getImage() : null);
+
+      return SUCCESS;
   }
 
   @Override

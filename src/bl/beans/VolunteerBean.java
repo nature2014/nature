@@ -1,6 +1,8 @@
 package bl.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.mongodb.morphia.annotations.Entity;
 
@@ -41,6 +43,15 @@ public class VolunteerBean extends Bean {
   private String wechat;
   private String iconpath;
   private String fingerpath;
+    private List<ImageInfoBean> image = new ArrayList<ImageInfoBean>();
+
+    public List<ImageInfoBean> getImage() {
+        return image;
+    }
+
+    public void setImage(List<ImageInfoBean> image) {
+        this.image = image;
+    }
 
     public Integer getIdentityType() {
         return identityType;

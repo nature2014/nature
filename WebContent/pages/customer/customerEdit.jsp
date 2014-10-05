@@ -16,9 +16,10 @@
               method="post">
             <div class="form-group has-success">
                 <label class="col-lg-2 control-label">公司名称</label>
+
                 <div class="col-lg-10">
                     <input type="text" placeholder="公司名称" name="customer.company" class="form-control"
-                           required="required" value="${customer.company}" />
+                           value="${customer.company}"/>
                 </div>
             </div>
             <div class="form-group has-success">
@@ -27,7 +28,7 @@
                 <div class="col-lg-10">
                     <input name="customer.id" type="hidden" value="${customer.id}"/>
                     <input type="text" placeholder="客户姓名" name="customer.name" class="form-control"
-                           required="required" value="${customer.name}"
+                           value="${customer.name}"
                             />
                 </div>
             </div>
@@ -38,7 +39,7 @@
                 <div class="col-lg-10">
                     <img id="customer_logo" style="width:240px;height:80px;float:left" src="${customer.logo}"/>
                     <input type="text" placeholder="公司Logo" name="customer.logo" class="form-control"
-                           required="required" value="${customer.logo}" onkeyup="jQuery('#customer_logo').attr('src',this.value);"/>
+                           value="${customer.logo}" onkeyup="jQuery('#customer_logo').attr('src',this.value);"/>
 
                 </div>
             </div>
@@ -48,7 +49,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="手机号码" name="customer.cellPhone" class="form-control"
-                           required="required" value="${customer.cellPhone}"/>
+                           value="${customer.cellPhone}"/>
                 </div>
             </div>
 
@@ -58,7 +59,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="固定电话" name="customer.fixedPhone" class="form-control"
-                           required="required" value="${customer.fixedPhone}"/>
+                           value="${customer.fixedPhone}"/>
                 </div>
             </div>
 
@@ -67,7 +68,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="QQ帐号" name="customer.qq" class="form-control"
-                           required="required" value="${customer.qq}"/>
+                           value="${customer.qq}"/>
                 </div>
             </div>
 
@@ -76,7 +77,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="邮箱地址" name="customer.email" class="form-control"
-                           required="required" value="${customer.email}"/>
+                           value="${customer.email}"/>
                 </div>
             </div>
 
@@ -85,7 +86,7 @@
 
                 <div class="col-lg-10">
                     <input type="text" placeholder="微信" name="customer.wechat" class="form-control"
-                           required="required" value="${customer.wechat}"/>
+                           value="${customer.wechat}"/>
                 </div>
             </div>
             <div class="form-group has-success">
@@ -93,7 +94,7 @@
 
                 <div class="col-lg-10">
                     <input id="servicePlacename" type="text" placeholder="客户地址" name="customer.address" class="form-control"
-                           required="required" value="${customer.address}"/>
+                           value="${customer.address}"/>
                 </div>
             </div>
 
@@ -180,22 +181,34 @@
     $(document).ready(function () {
         $("#customer").validate({
             rules: {
+                'customer.name': {
+                    required: true
+                },
+                'customer.address':{
+                    required: true
+                },
                 'customer.cellPhone': {
                     required: true,
                     cellPhone: true
                 },
                 'customer.email': {
                     email: true
-                },
+                }
             },
             messages: {
+                'customer.name': {
+                    required: "请输入客户姓名"
+                },
+                'customer.address': {
+                    required: "请输入客户地址"
+                },
                 'customer.cellPhone': {
                     required: "请输入手机",
                     cellPhone: "请输入正确的手机号, 例如：13912332122"
                 },
                 'customer.email': {
                     email: "请输入正确的邮箱, 例如：test@qq.com"
-                },
+                }
             }
         });
     });

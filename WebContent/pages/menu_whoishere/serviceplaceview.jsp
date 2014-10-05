@@ -39,7 +39,7 @@
                     <li id="default-title-0" class="current-step">
                         <div style="cursor:default;color:white">
                             <a href="${rootPath}/userFront/whoishere.action?type=0">
-                                院内服务地点
+                                公司内服务地点
                             </a>
                         </div>
                     </li>

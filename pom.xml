@@ -161,7 +161,7 @@
     <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource>
-        <directory>srcresources</directory>
+        <directory>`</directory>
       </resource>
     </resources>
     <testResources>
