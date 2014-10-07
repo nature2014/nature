@@ -72,8 +72,8 @@ public abstract class QueryTableAction<B extends TableBusinessInterface> extends
         config.registerJsonValueProcessor(Date.class, new JsonValueProcessor() {
             @Override
             public Object processObjectValue(String key, Object value, JsonConfig arg2) {
-                System.out.println("key:" + key);
-                System.out.println("value:" + value);
+                //System.out.println("key:" + key);
+                //System.out.println("value:" + value);
                 if(value == null){
                     return value;
                 }

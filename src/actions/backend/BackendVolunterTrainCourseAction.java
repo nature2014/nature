@@ -140,6 +140,7 @@ public class BackendVolunterTrainCourseAction extends BaseBackendAction<Voluntee
                 vtc.setStatus(volunteerTrainCourse.getStatus());
             } else {
                 vtc = new VolunteerTrainCourseBean();
+                vtc.setStatus(volunteerTrainCourse.getStatus());
             }
 
             vtc.setTraincourseId(traincourseId);
@@ -162,6 +163,9 @@ public class BackendVolunterTrainCourseAction extends BaseBackendAction<Voluntee
         }
       return SUCCESS;
     } else {
+      Map filter = new HashMap();
+      filter.put("isDeleted_!=", true);
+      trainCourseList = tcBus.queryDataByCondition(filter, null);
       addActionError("员工或者培训课程不能为空!");
       return FAILURE;
     }
