@@ -6,13 +6,10 @@ import bl.beans.OrderBean;
 import bl.common.BeanContext;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
-import net.sf.json.JSON;
+import bl.report.EchartPie;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.util.JSONUtils;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vo.table.TableQueryVo;
@@ -24,7 +21,7 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
     protected final static OrderBusiness orderBusiness = (OrderBusiness) SingleBusinessPoolManager.getBusObj
             (BusTieConstant.BUS_CPATH_ORDER);
 
-    private static String ECHARTS_PIE_TEMPLATE = "{title:{text:'用户付费情况',x:'center'},tooltip:{trigger:'item',formatter:\"{a} <br/>{b} : {c}元 ({d}%)\"},legend:{orient:'vertical',x:'left',data:['未付款','已付余款']},calculable:true,series:[{name:'付款状态',type:'pie',radius:'55%',center:['50%','60%'],data:[{value:425,name:'未付款'},{value:1024,name:'已付余款'}]}]}";
+
     private static String ECHARTS_INPAY_TOP5_TEMPLATE = "{\"title\":{\"text\":\"前5名客户收入\"},\"tooltip\":{\"trigger\":\"axis\"},\"legend\":{\"data\":[\"订单价格\",\"实际收入\"]},\"calculable\":true,\"xAxis\":[{\"type\":\"value\",\"boundaryGap\":[0,0.01]}],\"yAxis\":[{\"type\":\"category\",\"data\":[]}],\"series\":[{\"name\":\"订单价格\",\"type\":\"bar\",\"data\":[]},{\"name\":\"实际收入\",\"type\":\"bar\",\"data\":[]}]}";
 
     public ReportOrderBusiness() {
@@ -150,22 +147,23 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
         if (CollectionUtils.isEmpty(orderBeanList)) {
             return null;
         }
-        Map paymentStatus = new HashMap();
         float unpay = 0.00f;
         float pay = 0.00f;
         for (OrderBean orderBean : orderBeanList) {
             pay += orderBean.getActualIncome();
             unpay += orderBean.getUnPayment();
         }
-        paymentStatus.put("unpay", unpay);
-        paymentStatus.put("pay", pay);
 
-        JSONObject echartObject = JSONObject.fromObject(ECHARTS_PIE_TEMPLATE);
-        echartObject.getJSONArray("series").getJSONObject(0).getJSONArray("data").getJSONObject(0).put("value",
-                paymentStatus.get("unpay"));
-        echartObject.getJSONArray("series").getJSONObject(0).getJSONArray("data").getJSONObject(1).put("value",
-                paymentStatus.get("pay"));
-        return echartObject;
+        Map<String, String> configMap = new HashMap<>();
+        configMap.put("title", "用户付费情况");
+        configMap.put("dataEnums", "未付款,已付余款");
+        configMap.put("dataName", "付款状态");
+
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("未付款", unpay);
+        valueMap.put("已付余款", pay);
+        EchartPie echartPie = new EchartPie(configMap, valueMap);
+        return echartPie.toEchartJsonObject();
     }
 
     public static void main(String[] args) {
