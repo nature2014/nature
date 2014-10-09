@@ -4,6 +4,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.StringUtil;
 
 import java.util.Map;
@@ -12,15 +14,10 @@ import java.util.Map;
  * Created by fanxin.wfx on 14-10-7.
  */
 public class EchartPie implements EchartIntf{
-
+    private static Logger LOG = LoggerFactory.getLogger(EchartPie.class);
 
     private JSONObject pieJsonTemplate = JSONObject.fromObject(ReportConstants.ECHARTS_PIE_TEMPLATE);
-
-    public EchartPie(Map<String, String> configMap, Map<String, Object> valueMap){
-        initConfig(configMap);
-        transData(valueMap);
-    }
-
+    private boolean isInit = false;
     private void transData(Map<String, Object> valueMap) {
         JSONArray dataJsonArray = pieJsonTemplate.getJSONArray("series").getJSONObject(0).getJSONArray("data");
         for(int i = 0; i < dataJsonArray.size(); i++){
@@ -34,8 +31,24 @@ public class EchartPie implements EchartIntf{
     }
 
     @Override
+    public boolean initData(Map<String, String> configMap, Map<String, Object> valueMap) {
+        try{
+            initConfig(configMap);
+            transData(valueMap);
+            isInit = true;
+        }catch(Exception e){
+            LOG.error("echarPie init error:", e);
+        }
+        return isInit;
+    }
+
+    @Override
     public JSONObject toEchartJsonObject() {
-        return pieJsonTemplate;
+        if(isInit){
+            return pieJsonTemplate;
+        }else{
+            return null;
+        }
     }
 
     public void initConfig(Map<String, String> configMap) {

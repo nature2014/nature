@@ -6,10 +6,13 @@ import bl.beans.OrderBean;
 import bl.common.BeanContext;
 import bl.constants.BusTieConstant;
 import bl.instancepool.SingleBusinessPoolManager;
+import bl.report.EchartBar;
+import bl.report.EchartIntf;
 import bl.report.EchartPie;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vo.table.TableQueryVo;
@@ -46,6 +49,21 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
         {
             JSONObject tmpObject = new JSONObject();
             JSONObject echartObject = culInpayTop5(orderBeanList);
+            if (echartObject != null) {
+                tmpObject.put("data", echartObject);
+                jsonArray.add(tmpObject);
+            }
+        }
+        {
+            Map map = new HashMap();
+            Date startDate = DateUtils.truncate(new Date(), Calendar.DATE);
+            if(LOG.isDebugEnabled()){
+                LOG.debug("startDate:", startDate);
+            }
+            map.put("createTime_gteq", startDate);
+            List<OrderBean> todayOrderBeanList = orderBusiness.queryDataByCondition(map, null);
+            JSONObject tmpObject = new JSONObject();
+            JSONObject echartObject = culTodayPayment(todayOrderBeanList);
             if (echartObject != null) {
                 tmpObject.put("data", echartObject);
                 jsonArray.add(tmpObject);
@@ -162,7 +180,50 @@ public class ReportOrderBusiness extends MongoCommonBusiness<BeanContext, OrderB
         Map<String, Object> valueMap = new HashMap<>();
         valueMap.put("未付款", unpay);
         valueMap.put("已付余款", pay);
-        EchartPie echartPie = new EchartPie(configMap, valueMap);
+        EchartIntf echartPie = new EchartPie();
+        boolean result = echartPie.initData(configMap, valueMap);
+        return echartPie.toEchartJsonObject();
+    }
+
+    private JSONObject culTodayPayment(List<OrderBean> orderBeanList) {
+        if (CollectionUtils.isEmpty(orderBeanList)) {
+            return null;
+        }
+        String PAY_KEY = "已付余款";
+        String UNPAY_KEY = "未付款";
+        StringBuilder customerNames = new StringBuilder();
+        Map<String, Map<String, Float>> customerPaymentMap = new HashMap<>();
+        Map<String, String> customerNameMap = new HashMap<>();
+        for (OrderBean orderBean : orderBeanList) {
+            String customerId = orderBean.getCustomerId();
+            String customerName = orderBean.getCustomerName() == null ? orderBean.getCustomerCompany() : orderBean.getCustomerName();
+            Map<String, Float> paymentMap = customerPaymentMap.get(customerId);
+            if(paymentMap == null){
+                paymentMap = new HashMap<>();
+                customerNameMap.put(customerId, customerName);
+                customerPaymentMap.put(customerId, paymentMap);
+                if(customerNames.length() == 0){
+                    customerNames.append(customerName);
+                }else{
+                    customerNames.append(",").append(customerName);
+                }
+            }
+            float pay = paymentMap.get(PAY_KEY) == null ? 0 : paymentMap.get("已付余款");
+            float unpay = paymentMap.get(UNPAY_KEY) == null ? 0 : paymentMap.get("已付余款");
+            paymentMap.put(PAY_KEY, pay + orderBean.getActualIncome());
+            paymentMap.put(UNPAY_KEY, unpay + orderBean.getUnPayment());
+        }
+
+        Map<String, String> configMap = new HashMap<>();
+        configMap.put("title", "当日客户付费情况");
+        configMap.put("dataBarEnums", PAY_KEY + "," + UNPAY_KEY);
+        configMap.put("dataEnums", customerNames.toString());
+
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("dataNameMap", customerNameMap);
+        valueMap.put("dataValueMap", customerPaymentMap);
+        EchartIntf echartPie = new EchartBar();
+        echartPie.initData(configMap, valueMap);
         return echartPie.toEchartJsonObject();
     }
 
