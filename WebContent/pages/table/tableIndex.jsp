@@ -37,7 +37,7 @@
                         <s:if test="%{#column.isbSearchable()==true}">
                             <s:set id="counter" value="%{#counter+1}"/>
                             <s:if test="#counter % 3 ==1">
-                                <div class="col-lg-12">
+                                <div class="col-lg-12" style="min-width:600px;">
                             </s:if>
                             <s:if test="#column.searchOptions==null">
                                 <div style="width:30%;float:left;margin:5px;">
