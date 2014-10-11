@@ -37,24 +37,25 @@
                         <s:if test="%{#column.isbSearchable()==true}">
                             <s:set id="counter" value="%{#counter+1}"/>
                             <s:if test="#counter % 3 ==1">
-                                <div class="col-lg-12" style="height:40px">
+                                <div class="col-lg-12">
                             </s:if>
                             <s:if test="#column.searchOptions==null">
-                                <label class="col-lg-2 control-label">${column.sTitle}</label>
-
-                                <div class="col-lg-2">
-                                    <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
+                                <div style="width:30%;float:left;margin:5px;">
+                                <label class="control-label">${column.sTitle}</label>
+                                <input id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
                                 </div>
                             </s:if>
                             <s:else>
-                                <label class="col-lg-2 control-label">${column.sTitle}</label>
-
-                                <div class="col-lg-2">
-                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}" value="" name="${column.mData}">
+                                <div style="width:30%;float:left;margin:5px;">
+                                    <label class="control-label">${column.sTitle}</label>
+                                    <select id="${column.mData}" type="text" class="form-control ${column.sClass}"
+                                            value=""
+                                            name="${column.mData}">
                                         <option value="">&nbsp;</option>
                                         <s:iterator value="#column.searchOptions[0]" status="rowstatus">
-                                            <option value="<s:property value="#column.searchOptions[0][#rowstatus.index]"/>"><s:property
-                                                    value="#column.searchOptions[1][#rowstatus.index]"/></option>
+                                            <option value="<s:property value="#column.searchOptions[0][#rowstatus.index]"/>">
+                                                <s:property
+                                                        value="#column.searchOptions[1][#rowstatus.index]"/></option>
                                         </s:iterator>
                                     </select>
                                 </div>
