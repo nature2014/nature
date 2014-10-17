@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by limin.llm on 2014/9/13.
+ * Created by peter on 2014/9/13.
  * 接口API:https://github.com/blueimp/jQuery-File-Upload/wiki/Setup
  */
 public class UploadMultipleImageAction extends HttpServlet {

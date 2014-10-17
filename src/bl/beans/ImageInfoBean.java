@@ -3,7 +3,7 @@ package bl.beans;
 import org.mongodb.morphia.annotations.Transient;
 
 /**
- * Created by limin.llm on 2014/9/13.
+ * Created by peter on 2014/9/13.
  * 支持文件和图片得到控件，暂时不改变类名称，避免改动太多
  */
 public class ImageInfoBean {

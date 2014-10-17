@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Properties;
 
 /**
- * Created by limin.llm on 4/9/
+ * Created by peter on 4/9/
  */
 public class ClientQQMail {
 
