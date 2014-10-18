@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>policy.PolicyEngine</OriginalElement>
+  <nodes>
+    <node x="257.0" y="0.0">policy.PolicyRuleIf</node>
+    <node x="-426.1090909090909" y="340.40000000000003">policy.PolicyEngine</node>
+    <node x="0.0" y="60.0">policy.EventIf</node>
+    <node x="320.0" y="531.0">policy.Policy</node>
+    <node x="186.0" y="328.0">policy.PolicyContext</node>
+    <node x="0.0" y="531.0">policy.PolicyResult</node>
+    <node x="474.5" y="649.0">policy.AbstractPolicy</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="policy.PolicyContext" target="policy.EventIf">
+      <point x="-66.0" y="-79.0" />
+      <point x="252.0" y="303.0" />
+      <point x="118.5" y="303.0" />
+      <point x="0.0" y="79.0" />
+    </edge>
+    <edge source="policy.PolicyContext" target="policy.PolicyRuleIf">
+      <point x="66.0" y="-79.0" />
+      <point x="384.0" y="303.0" />
+      <point x="517.5" y="303.0" />
+      <point x="0.0" y="139.0" />
+    </edge>
+    <edge source="policy.AbstractPolicy" target="policy.Policy">
+      <point x="0.0" y="-19.0" />
+      <point x="0.0" y="34.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.873015873015873" x="394.1181818181818" y="391.0" />
+  <SelectedNodes>
+    <node>policy.PolicyEngine</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
