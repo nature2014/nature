@@ -57,9 +57,9 @@
             <element name="dataType">
                 <simpleType>
                     <restriction base="string">
+                        <!--日期型暂时需要用函数来比较，因为逻辑运算不支持直接比较 -->
                         <enumeration value="int"/>
                         <enumeration value="string"/>
-                        <enumeration value="date"/>
                         <enumeration value="long"/>
                         <enumeration value="float"/>
                         <enumeration value="boolean"/>
