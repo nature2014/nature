@@ -1,6 +1,7 @@
 package policy;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import policy.schema.*;
@@ -61,8 +62,8 @@ public class PolicyXmlManager {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(PolicyDefinition.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            PolicyDefinition policyType = (PolicyDefinition) unmarshaller.unmarshal(PolicyXmlManager.class.getResourceAsStream("/policy/Policy.xml"));
-            ActionEntries actionEntries = policyType.getActions();
+            PolicyDefinition PolicyDeifinition = (PolicyDefinition) unmarshaller.unmarshal(PolicyXmlManager.class.getResource("/policy/Policy.xml"));
+            ActionEntries actionEntries = PolicyDeifinition.getActions();
             if (actionEntries != null) {
                 List<ActionEntry> actionEntryList = actionEntries.getActionEntry();
                 if (actionEntryList != null) {
@@ -71,7 +72,7 @@ public class PolicyXmlManager {
                     }
                 }
             }
-            ConditionEntries conditionEntries = policyType.getConditions();
+            ConditionEntries conditionEntries = PolicyDeifinition.getConditions();
             if (conditionEntries != null) {
                 List<ConditionEntry> conditionEntryList = conditionEntries.getConditionEntry();
                 if (conditionEntryList != null) {
@@ -95,6 +96,6 @@ public class PolicyXmlManager {
     public static void main(String[] args) {
         PolicyXmlManager policyXmlManager = PolicyXmlManager.getInstance();
         ActionEntry actionEntry = policyXmlManager.queryActionById("action_score");
-        System.out.println(ToStringBuilder.reflectionToString(actionEntry));
+        System.out.println(ToStringBuilder.reflectionToString(actionEntry, ToStringStyle.MULTI_LINE_STYLE));
     }
 }

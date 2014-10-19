@@ -21,11 +21,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>2.11.3</version>
@@ -208,7 +203,6 @@
                 <configuration>
                     <schemaDirectory>srcresources/policy</schemaDirectory>
                     <packageName>policy.schema</packageName>
-                    <bindingDirectory>srcresources/policy</bindingDirectory>
                     <extension>true</extension>
                 </configuration>
             </plugin>

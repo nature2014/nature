@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cyznj.com/nature"
-            xmlns="http://www.cyznj.com/nature" elementFormDefault="unqualified" attributeFormDefault="unqualified">
-    <xsd:element name="policyDefinition">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="conditions" type="ConditionEntries"/>
-                <xsd:element name="actions" type="ActionEntries"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:complexType name="ActionEntries">
-        <xsd:sequence>
-            <xsd:element name="actionEntry" type="ActionEntry" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:na="http://www.cyznj.com/nature" targetNamespace="http://www.cyznj.com/nature"
+        elementFormDefault="unqualified">
+    <element name="policyDefinition">
+        <complexType>
+            <sequence>
+                <element name="conditions" type="na:ConditionEntries"/>
+                <element name="actions" type="na:ActionEntries"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="ActionEntries">
+        <sequence>
+            <element name="actionEntry" type="na:ActionEntry" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
 
-    <xsd:complexType name="ConditionEntries">
-        <xsd:sequence>
-            <xsd:element name="conditionEntry" type="ConditionEntry" minOccurs="0" maxOccurs="unbounded"/>
-        </xsd:sequence>
-    </xsd:complexType>
+    <complexType name="ConditionEntries">
+        <sequence>
+            <element name="conditionEntry" type="na:ConditionEntry" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
 
 
-    <xsd:complexType name="ActionEntry">
-        <xsd:sequence>
-            <xsd:element name="classPath" type="xsd:string"/>
-            <xsd:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="description" type="xsd:string"/>
-        </xsd:sequence>
-        <xsd:attribute name="id" type="xsd:ID"/>
-    </xsd:complexType>
+    <complexType name="ActionEntry">
+        <sequence>
+            <element name="classPath">
+                <simpleType>
+                    <restriction base="string">
+                        <pattern value="policy.impl.*"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="parameter" type="na:Parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="description" type="string"/>
+        </sequence>
+        <attribute name="id" type="ID"/>
+    </complexType>
 
-    <xsd:complexType name="ConditionEntry">
-        <xsd:sequence>
+    <complexType name="ConditionEntry">
+        <sequence>
             <!--用来描述condition中用到的表达式，目前我们采用FEL表达式语法，参考 https://code.google.com/p/fast-el/ -->
-            <xsd:element name="expression" type="xsd:string"/>
+            <element name="expression" type="string"/>
             <!--用来描述condition中表达式用到的变量上下文token，有些是需要参数来自于前台任务，有些是系统管理元设置-->
-            <xsd:element name="parameter" type="Parameter" minOccurs="0" maxOccurs="unbounded"/>
-            <xsd:element name="description" type="xsd:string"/>
-        </xsd:sequence>
-        <xsd:attribute name="id" type="xsd:string"/>
-    </xsd:complexType>
+            <element name="parameter" type="na:Parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="description" type="string"/>
+        </sequence>
+        <attribute name="id" type="string"/>
+    </complexType>
 
-    <xsd:complexType name="Parameter">
-        <xsd:sequence>
+    <complexType name="Parameter">
+        <sequence>
             <!-- 要采用命名空间的做法，采用父名称+点的形式,否则在多个PolicyCondition共享PolicyContext中上下文参数有命名冲突 -->
-            <xsd:element name="name" type="xsd:string"/>
-            <xsd:element name="default" type="xsd:string"/>
+            <element name="name" type="string"/>
+            <element name="default" type="string"/>
             <!--参数的类型，需要在表达式式运算中进行转化-->
-            <xsd:element name="dataType">
-                <xsd:simpleType>
-                    <xsd:restriction base="xsd:string">
-                        <xsd:enumeration value="int"/>
-                        <xsd:enumeration value="string"/>
-                        <xsd:enumeration value="date"/>
-                        <xsd:enumeration value="long"/>
-                        <xsd:enumeration value="float"/>
-                        <xsd:enumeration value="boolean"/>
-                    </xsd:restriction>
-                </xsd:simpleType>
-            </xsd:element>
-        </xsd:sequence>
-    </xsd:complexType>
+            <element name="dataType">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="int"/>
+                        <enumeration value="string"/>
+                        <enumeration value="date"/>
+                        <enumeration value="long"/>
+                        <enumeration value="float"/>
+                        <enumeration value="boolean"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
 
-</xsd:schema>
+</schema>
