@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
-    <xsd:element name="policy" type="PolicyType"></xsd:element>
-    <xsd:complexType name="PolicyType">
-        <xsd:sequence>
-            <xsd:element name="conditions" type="ConditionEntries"/>
-            <xsd:element name="actions" type="ActionEntries"/>
-        </xsd:sequence>
-    </xsd:complexType>
-
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cyznj.com/nature"
+            xmlns="http://www.cyznj.com/nature" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+    <xsd:element name="policyDefinition">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="conditions" type="ConditionEntries"/>
+                <xsd:element name="actions" type="ActionEntries"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:complexType name="ActionEntries">
         <xsd:sequence>
             <xsd:element name="actionEntry" type="ActionEntry" minOccurs="0" maxOccurs="unbounded"/>

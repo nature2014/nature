@@ -59,10 +59,9 @@ public class PolicyXmlManager {
 
     public synchronized void load() {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(PolicyType.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(PolicyDefinition.class);
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            PolicyType policyType = (PolicyType) unmarshaller.unmarshal(
-                    new File("D:\\workspace_study\\nature\\srcresources\\policy\\policy.xml"));
+            PolicyDefinition policyType = (PolicyDefinition) unmarshaller.unmarshal(PolicyXmlManager.class.getResourceAsStream("/policy/Policy.xml"));
             ActionEntries actionEntries = policyType.getActions();
             if (actionEntries != null) {
                 List<ActionEntry> actionEntryList = actionEntries.getActionEntry();
