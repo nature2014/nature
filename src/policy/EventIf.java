@@ -33,9 +33,9 @@ public interface EventIf {
      *
      * @param parameters
      */
-    void setParameter(Map<String, Object> parameters);
+    void setParameters(Map<String, Object> parameters);
 
-    void getParameter();
+    Map<String, Object> getParameters();
 
     /**
      * 承载员工的id
