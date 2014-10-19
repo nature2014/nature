@@ -1,5 +1,6 @@
 package policy;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -45,4 +46,21 @@ public interface EventIf {
 
     void setEmployeeId(String id);
 
+    /**
+     * 任务和对应的ConditionId
+     *
+     * @return
+     */
+    List<String> getPolicyConditionId();
+
+    void setPolicyConditionId();
+
+    /**
+     * 任务和对应的ActionId
+     *
+     * @return
+     */
+    String getPolicyActionId();
+
+    void setPolicyActionId();
 }

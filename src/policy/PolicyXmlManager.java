@@ -20,8 +20,8 @@ import java.util.Map;
  * 策略模版的管理者，提供系统的Policy.xml的原始信息
  */
 public class PolicyXmlManager {
-    private static PolicyXmlManager policyXmlManager = new PolicyXmlManager();
-    private static Logger LOG = LoggerFactory.getLogger(PolicyXmlManager.class);
+    private final static PolicyXmlManager policyXmlManager = new PolicyXmlManager();
+    private final static Logger LOG = LoggerFactory.getLogger(PolicyXmlManager.class);
     private static volatile boolean load = false;
 
     private PolicyXmlManager() {

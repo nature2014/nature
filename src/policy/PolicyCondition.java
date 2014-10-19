@@ -4,11 +4,28 @@ import java.util.Map;
 
 /**
  * Created by peter on 2014/10/16.
- * 所有的条件抽象类，为了分离Condition和Action，采用派生类。
+ * 为了分离Condition和Action，采用类为了不直接使用Policy.xsd产生的对象
  */
-public abstract class PolicyCondition extends AbstractPolicy {
+public class PolicyCondition {
+    private String id;
     /**
-     * 目前，列表中的条件都是且的关系，将来以后支持and,or,!,运算符
+     * 来自交互传来的参数
      */
-    public abstract boolean checkCondition(PolicyContext policyContext);
+    private Map<String, Object> parameters;
+
+    public Map<String, Object> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, Object> parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

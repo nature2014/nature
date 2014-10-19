@@ -4,10 +4,13 @@ import java.util.Map;
 
 /**
  * Created by limin.llm on 2014/10/19.
- * Action对象
+ * 为了分离Condition和Action，采用类为了不直接使用Policy.xsd产生的对象
  */
 public class PolicyAction {
     private String id;
+    /**
+     * 来自交互传来的参数
+     */
     private Map<String, Object> parameters;
 
     public Map<String, Object> getParameters() {
