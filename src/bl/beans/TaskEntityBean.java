@@ -2,6 +2,7 @@ package bl.beans;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
+import policy.PolicyObject;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TaskEntityBean extends Bean{
     private int approveType;        //0:需审批，1:无需审批
 
     @Transient
-    private List<PolicyBean> policies;
+    private List<PolicyObject> policies;
     @Transient
     private List<TaskParamBean> taskParams;
 
@@ -55,11 +56,11 @@ public class TaskEntityBean extends Bean{
         this.approveType = approveType;
     }
 
-    public List<PolicyBean> getPolicies() {
+    public List<PolicyObject> getPolicies() {
         return policies;
     }
 
-    public void setPolicies(List<PolicyBean> policies) {
+    public void setPolicies(List<PolicyObject> policies) {
         this.policies = policies;
     }
 

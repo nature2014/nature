@@ -2,7 +2,10 @@ package bl.beans;
 
 import org.mongodb.morphia.annotations.Entity;
 import policy.EventIf;
+import policy.PolicyObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,4 +57,19 @@ public class TaskInstance extends Bean implements EventIf {
     public void setEmployeeId(String id) {
         this.employeeId = employeeId;
     }
+
+    @Override
+    public List<PolicyObject> getPolicyObjects() {
+        TaskEntityBean taskEntityBean = (TaskEntityBean) getTask();
+        if(null != taskEntityBean) {
+            return taskEntityBean.getPolicies();
+        }
+        return new ArrayList<PolicyObject>();
+    }
+
+    @Override
+    public void setPolicyObjects(List<PolicyObject> policyObjectList) {
+
+    }
+
 }
