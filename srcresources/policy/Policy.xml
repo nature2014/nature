@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy>
+    <conditions>
+        <conditionEntry id="condition_1">
+            <expression>isDayOfMonth($day)</expression>
+            <parameter>
+                <name>day</name>
+                <default>31</default>
+                <dataType>int</dataType>
+            </parameter>
+            <description>此条件用来判断当前是一个月的第几天</description>
+        </conditionEntry>
+    </conditions>
+    <actions>
+        <actionEntry id="action_1">
+            <classPath>policy.xxx</classPath>
+            <parameter>
+                <name>score</name>
+                <default>30</default>
+                <dataType>int</dataType>
+            </parameter>
+            <description>此为通用的积分累加器</description>
+        </actionEntry>
+    </actions>
+</policy>

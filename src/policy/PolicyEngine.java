@@ -4,7 +4,6 @@ import com.greenpineyu.fel.Expression;
 import com.greenpineyu.fel.FelEngine;
 import com.greenpineyu.fel.FelEngineImpl;
 import com.greenpineyu.fel.context.FelContext;
-import com.greenpineyu.fel.context.MapContext;
 import com.greenpineyu.fel.function.CommonFunction;
 import com.greenpineyu.fel.function.Function;
 import org.apache.commons.lang.math.NumberUtils;
@@ -19,11 +18,9 @@ public abstract class PolicyEngine {
     public List<PolicyResult> sendToEngine(PolicyContext policyContext) {
         List<PolicyResult> policyResults = Arrays.<PolicyResult>asList();
         EventIf eventIf = policyContext.getEvent();
-        List<PolicyRuleIf> policyRuleIfs = policyContext.getPolicyRuleList();
+        List<PolicyConditionIf> policyRuleIfs = policyContext.getPolicyRuleList();
         if (policyResults != null && eventIf != null && policyRuleIfs != null) {
             for (int i = 0; i < policyRuleIfs.size(); i++) {
-                AbstractPolicy policy = policyRuleIfs.get(i).getPolicy();
-                policyResults.add(policy.execute(policyContext, policyRuleIfs.get(i)));
             }
         }
         return policyResults;
