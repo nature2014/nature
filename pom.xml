@@ -160,7 +160,7 @@
         <sourceDirectory>src</sourceDirectory>
         <resources>
             <resource>
-                <directory>`</directory>
+                <directory>srcresources</directory>
             </resource>
         </resources>
         <testResources>
@@ -206,9 +206,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <schemaDirectory>srcresources</schemaDirectory>
+                    <schemaDirectory>srcresources/policy</schemaDirectory>
                     <packageName>policy.schema</packageName>
-                    <staleFile>target/generated-sources/jaxb/xjcStaleFlag</staleFile>
                     <bindingDirectory>srcresources/policy</bindingDirectory>
                     <extension>true</extension>
                 </configuration>

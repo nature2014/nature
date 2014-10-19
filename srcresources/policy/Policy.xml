@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<policy>
+<policy xmlns="http://www.cyznj.com/nature" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:schemaLocation="http://www.cyznj.com/nature Policy.xsd">
     <conditions>
         <conditionEntry id="condition_1">
             <expression>isDayOfMonth($day)</expression>
@@ -10,10 +11,29 @@
             </parameter>
             <description>此条件用来判断当前是一个月的第几天</description>
         </conditionEntry>
+        <conditionEntry id="condition_operation">
+            <expression>left operator right</expression>
+            <parameter>
+                <name>left</name>
+                <default>31</default>
+                <dataType>int</dataType>
+            </parameter>
+            <parameter>
+                <name>operator</name>
+                <default>==</default>
+                <dataType>string</dataType>
+            </parameter>
+            <parameter>
+                <name>right</name>
+                <default>100</default>
+                <dataType>int</dataType>
+            </parameter>
+            <description>此条件用来计算逻辑表达式：例如：数量判断</description>
+        </conditionEntry>
     </conditions>
     <actions>
-        <actionEntry id="action_1">
-            <classPath>policy.xxx</classPath>
+        <actionEntry id="action_score">
+            <classPath>policy.impl.PolicyAddScore</classPath>
             <parameter>
                 <name>score</name>
                 <default>30</default>

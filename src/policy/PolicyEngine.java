@@ -18,11 +18,6 @@ public abstract class PolicyEngine {
     public List<PolicyResult> sendToEngine(PolicyContext policyContext) {
         List<PolicyResult> policyResults = Arrays.<PolicyResult>asList();
         EventIf eventIf = policyContext.getEvent();
-        List<PolicyConditionIf> policyRuleIfs = policyContext.getPolicyRuleList();
-        if (policyResults != null && eventIf != null && policyRuleIfs != null) {
-            for (int i = 0; i < policyRuleIfs.size(); i++) {
-            }
-        }
         return policyResults;
     }
 
@@ -33,11 +28,12 @@ public abstract class PolicyEngine {
         FelContext context = fel.getContext();
         context.set("a", true);
         context.set("b", true);
-        Expression exp = fel.compile("a && b && caculateDayOfWeek(7)", context);
+        //Expression exp = fel.compile("a && b && caculateDayOfWeek(1)", null);
 
-        if ((boolean) exp.eval(context)) {
+        if ((boolean) fel.eval("caculateDayOfWeek(1) && a==b", context)) {
             System.out.println("执行Action");
         }
+        System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
     }
 
     public static Function caculateDayOfWeek() {
