@@ -46,21 +46,7 @@ public interface EventIf {
 
     void setEmployeeId(String id);
 
-    /**
-     * 任务和对应的ConditionId
-     *
-     * @return
-     */
-    List<String> getPolicyConditionId();
+    List<PolicyObject> getPolicyObjects();
 
-    void setPolicyConditionId();
-
-    /**
-     * 任务和对应的ActionId
-     *
-     * @return
-     */
-    String getPolicyActionId();
-
-    void setPolicyActionId();
+    void setPolicyObjects(List<PolicyObject> policyObjectList);
 }
