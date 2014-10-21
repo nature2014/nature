@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <na:policyDefinition xmlns:na="http://www.cyznj.com/nature" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                     xmlns:schemaLocation="http://www.cyznj.com/nature Policy.xsd">
+                     xmlns:schemaLocation="http://www.cyznj.com/nature">
     <conditions>
         <conditionEntry id="condition_1">
-            <expression>caculateDayOfWeek($day)</expression>
+            <expression>caculateDayOfWeek(day)</expression>
             <parameter>
                 <name>day</name>
                 <default>31</default>
