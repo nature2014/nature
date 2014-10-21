@@ -77,31 +77,4 @@ public abstract class AbstractPolicy implements Policy {
         }
         return globalBool;
     }
-
-    public static Function caculateDayOfWeek() {
-        return new CommonFunction() {
-
-            @Override
-            public Object call(Object[] objects) {
-                if (objects != null && objects.length > 0) {
-                    Long passValue = NumberUtils.createLong(objects[0].toString());
-                    int day = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-                    if (day == passValue) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-
-            }
-
-            @Override
-            //函数名称
-            public String getName() {
-                return "caculateDayOfWeek";
-            }
-        };
-    }
 }

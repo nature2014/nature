@@ -3,7 +3,7 @@
                      xmlns:schemaLocation="http://www.cyznj.com/nature Policy.xsd">
     <conditions>
         <conditionEntry id="condition_1">
-            <expression>isDayOfMonth($day)</expression>
+            <expression>caculateDayOfWeek($day)</expression>
             <parameter>
                 <name>day</name>
                 <default>31</default>
