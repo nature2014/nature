@@ -13,6 +13,7 @@ import java.util.List;
 @Entity(value = "policy")
 public class PolicyBean extends Bean implements PolicyObject {
 
+    private int priority = 0;
     private List<String> conditions;
     private List<String> actions;
 
@@ -45,5 +46,13 @@ public class PolicyBean extends Bean implements PolicyObject {
     @Override
     public List<PolicyAction> getPolicyActions() {
         return null;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

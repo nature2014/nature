@@ -94,6 +94,18 @@
                         <%--<li><a  href="boxed_page.html">工时排名</a></li>--%>
                     </ul>
                 </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-clock-o"></i>
+                        <span>积分管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a href="${rootPath}/backend/policy/index.action">积分策略配置</a></li>
+                        <li><a href="${rootPath}/backend/policy/index.action">积分任务配置</a></li>
+                    </ul>
+                </li>
+
                 <s:if test="#session.backendSessionUser != null && #session.backendSessionUser.name == 'admin'">
                     <li class="sub-menu">
                         <a href="javascript:;">
