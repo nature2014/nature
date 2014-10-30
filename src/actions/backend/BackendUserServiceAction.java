@@ -58,6 +58,6 @@ public class BackendUserServiceAction extends BaseBackendAction<UserServiceBusin
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>工时管理</li><li class=\"active\">签到记录</li></ul>";
+        return "<li>工时管理</li><li class=\"active\">签到记录</li>";
     }
 }

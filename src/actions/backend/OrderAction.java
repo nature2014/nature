@@ -129,7 +129,7 @@ public class OrderAction extends BaseBackendAction<OrderBusiness> {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>订单管理</li><li class=\"active\">订单记录</li></ul>";
+        return "<li>订单管理</li><li class=\"active\">订单记录</li>";
     }
 
     @Override

@@ -31,7 +31,7 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>策略管理</li><li class=\"active\">策略</li></ul>";
+        return "<li>策略管理</li><li class=\"active\">策略</li>";
     }
 
 

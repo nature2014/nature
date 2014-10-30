@@ -121,7 +121,7 @@ public class ProductAction extends BaseBackendAction<ProductBusiness> {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>产品管理</li><li class=\"active\">产品发布</li></ul>";
+        return "<li>产品管理</li><li class=\"active\">产品发布</li>";
     }
 
     @Override

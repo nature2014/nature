@@ -108,7 +108,7 @@ public class BackendVolunteerAction extends BaseBackendAction<VolunteerBusiness>
 
   @Override
   public String getTableTitle() {
-    return "<ul class=\"breadcrumb\"><li>员工管理</li><li class=\"active\">员工</li></ul>";
+    return "<li>员工管理</li><li class=\"active\">员工</li>";
   }
 
   @Override

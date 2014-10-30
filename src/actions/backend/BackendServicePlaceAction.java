@@ -240,8 +240,8 @@ public class BackendServicePlaceAction extends BaseBackendAction<ServicePlaceBus
     @Override
     public String getTableTitle() {
         if (this.type == 0)
-            return "<ul class=\"breadcrumb\"><li>服务管理</li><li class=\"active\">公司</li></ul>";
+            return "<li>服务管理</li><li class=\"active\">公司</li>";
         else
-            return "<ul class=\"breadcrumb\"><li>服务管理</li><li class=\"active\">地图地点</li></ul>";
+            return "<li>服务管理</li><li class=\"active\">地图地点</li>";
     }
 }

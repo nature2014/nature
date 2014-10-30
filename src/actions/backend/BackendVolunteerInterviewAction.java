@@ -19,7 +19,7 @@ public class BackendVolunteerInterviewAction extends BackendVolunteerAction {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>员工管理</li><li class=\"active\">面试</li></ul>";
+        return "<li>员工管理</li><li class=\"active\">面试</li>";
     }
 
 

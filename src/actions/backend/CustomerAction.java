@@ -93,7 +93,7 @@ public class CustomerAction extends BaseBackendAction<CustomerBusiness> {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>客户管理</li><li class=\"active\">客户信息</li></ul>";
+        return "<li>客户管理</li><li class=\"active\">客户信息</li>";
     }
 
     @Override

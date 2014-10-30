@@ -99,6 +99,6 @@ public class SourceCodeAction extends BaseBackendAction<SourceCodeBusiness> {
 
     @Override
     public String getTableTitle() {
-        return "<ul class=\"breadcrumb\"><li>系统管理</li><li class=\"active\">职称编码</li></ul>";
+        return "<li>系统管理</li><li class=\"active\">职称编码</li>";
     }
 }

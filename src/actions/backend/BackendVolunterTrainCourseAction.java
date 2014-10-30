@@ -173,6 +173,6 @@ public class BackendVolunterTrainCourseAction extends BaseBackendAction<Voluntee
 
   @Override
   public String getTableTitle() {
-    return "<ul class=\"breadcrumb\"><li>培训管理</li><li class=\"active\">培训记录</li></ul>";
+    return "<li>培训管理</li><li class=\"active\">培训记录</li>";
   }
 }
