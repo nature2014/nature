@@ -10,7 +10,7 @@ import java.util.List;
 public class PolicyContext {
     private EventIf event;
     private List<PolicyCondition> policyConditions;
-    private PolicyAction policyActions;
+    private List<PolicyAction> policyActions;
 
     public EventIf getEvent() {
         return event;
@@ -28,11 +28,11 @@ public class PolicyContext {
         this.policyConditions = policyConditions;
     }
 
-    public PolicyAction getPolicyActions() {
+    public List<PolicyAction> getPolicyActions() {
         return policyActions;
     }
 
-    public void setPolicyActions(PolicyAction policyActions) {
+    public void setPolicyActions(List<PolicyAction> policyActions) {
         this.policyActions = policyActions;
     }
 }
