@@ -1,19 +1,17 @@
 package actions.backend;
 
-import bl.beans.SourceCodeBean;
+import bl.beans.PolicyBean;
 import bl.mongobus.PolicyBusiness;
+import org.apache.commons.lang.StringUtils;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
-import vo.table.TableQueryVo;
-
-import java.util.List;
 
 /**
  * Created by wangronghua on 14-10-20.
  */
 public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
 
-
+    private PolicyBean policy;
 
     @Override
     public String getActionPrex() {
@@ -44,6 +42,25 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
         return init;
     }
 
+    public String save() {
+        if(null != policy) {
+            if(StringUtils.isNotEmpty(policy.getId())) {
+                getBusiness().updateLeaf(policy, policy);
+            } else {
+                getBusiness().createLeaf(policy);
+            }
+        }
+        return SUCCESS;
+    }
+
+    public String edit() throws Exception {
+        String policyId = getId();
+        if(StringUtils.isNotEmpty(policyId)) {
+            policy = (PolicyBean) getBusiness().getLeaf(policyId).getResponseData();
+        }
+        return SUCCESS;
+    }
+
     /**
      * 创建或保存Policy
      * @return
@@ -51,4 +68,13 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
     public String savePolicy() {
         return SUCCESS;
     }
+
+    public PolicyBean getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(PolicyBean policy) {
+        this.policy = policy;
+    }
+
 }

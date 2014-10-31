@@ -14,6 +14,7 @@ import java.util.List;
 public class PolicyBean extends Bean implements PolicyObject {
 
     private int priority = 0;
+    private String description;
     private List<String> conditions;
     private List<String> actions;
 
@@ -55,4 +56,13 @@ public class PolicyBean extends Bean implements PolicyObject {
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 }
