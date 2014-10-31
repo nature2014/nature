@@ -1,8 +1,5 @@
 package policy;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by peter on 2014/10/16.
  * Policy核心执行接口，什么是Policy?
