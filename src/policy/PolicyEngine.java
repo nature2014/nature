@@ -1,24 +1,27 @@
 package policy;
 
+import bl.beans.PolicyBean;
+import bl.beans.TaskInstance;
 import com.greenpineyu.fel.FelEngine;
 import com.greenpineyu.fel.FelEngineImpl;
 import com.greenpineyu.fel.context.FelContext;
 import com.greenpineyu.fel.function.CommonFunction;
 import com.greenpineyu.fel.function.Function;
+import net.sf.json.JSONArray;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import policy.impl.DefaultPolicy;
 import policy.schema.ActionEntry;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by peter on 2014/10/16.
  */
-public abstract class PolicyEngine {
+public class PolicyEngine {
     private PolicyXmlManager policyXmlManager = PolicyXmlManager.getInstance();
     private final static Logger LOG = LoggerFactory.getLogger(PolicyXmlManager.class);
     protected final static ConcurrentHashMap<String, Policy> cachedPolicy = new ConcurrentHashMap<String, Policy>();
@@ -31,7 +34,10 @@ public abstract class PolicyEngine {
      * @return
      */
     public List<PolicyResult> processPolicies(EventIf eventif) {
-        List<PolicyResult> policyResults = new ArrayList<PolicyResult>();
+        if (eventif == null || CollectionUtils.isEmpty(eventif.getPolicyObjects())) {
+            return null;
+        }
+        List<PolicyResult> policyResults = new ArrayList<>(eventif.getPolicyObjects().size());
         if (eventif != null) {
             List<PolicyObject> policyObjectList = eventif.getPolicyObjects();
             if (policyObjectList != null) {
@@ -40,12 +46,14 @@ public abstract class PolicyEngine {
                     PolicyContext policyContext = builderPolicy(eventif, policyObject);
                     List<PolicyResult> policyResultAll = processPolicy(policyContext);
                     //结果放入结果集
-                    policyResults.addAll(policyResultAll);
+                    if (CollectionUtils.isNotEmpty(policyResultAll)) {
+                        policyResults.addAll(policyResultAll);
+                    }
                 }
             }
 
         }
-        return null;
+        return policyResults;
     }
 
     /**
@@ -67,10 +75,28 @@ public abstract class PolicyEngine {
                 policyContext.setPolicyConditions(policyConditions);
                 policyContext.setPolicyActions(policyActions);
                 policyContext.setEvent(eventif);
+                for (PolicyCondition policyCondition : policyConditions) {
+                    policyCondition.setParameters(eventif.getParameters());
+                }
+                for (PolicyAction policyAction : policyActions) {
+                    policyAction.setParameters(eventif.getParameters());
+                }
                 return policyContext;
             }
         }
         return null;
+    }
+
+    private List<PolicyResult> processPolicy(PolicyContext policyContext) {
+        if (processPolicyCondition(policyContext)) {
+            return processPolicyAction(policyContext);
+        }
+        return null;
+    }
+
+    private boolean processPolicyCondition(PolicyContext policyContext) {
+        DefaultPolicy defaultPolicy = new DefaultPolicy();
+        return defaultPolicy.checkCondition(policyContext);
     }
 
     /**
@@ -80,38 +106,75 @@ public abstract class PolicyEngine {
      * @param policyContext
      * @return List<PolicyResult>
      */
-    private List<PolicyResult> processPolicy(PolicyContext policyContext) {
+    private List<PolicyResult> processPolicyAction(PolicyContext policyContext) {
         List<PolicyAction> policyActions = policyContext.getPolicyActions();
-        List<PolicyResult> policyResults = new ArrayList<PolicyResult>();
+        List<PolicyResult> policyResults = new ArrayList<>();
         for (PolicyAction policyAction : policyActions) {
             String actionId = policyAction.getId();
             ActionEntry actionEntry = policyXmlManager.queryActionById(actionId);
             if (actionEntry != null) {
                 String classPath = actionEntry.getClassPath();
                 try {
-                    Policy policy = null;
-                    //读取缓存对象
-                    if (cachedPolicy.contains(actionId)) {
-                        policy = cachedPolicy.get(actionId);
-                    } else {
-                        policy = (Policy) Class.forName(classPath).newInstance();
-                        Policy oldPolicy = cachedPolicy.putIfAbsent(actionId, policy);
-                        if (oldPolicy != null) {
-                            //还是用旧的对象，保持缓存一致
-                            policy = oldPolicy;
-                        }
-                    }
-
-                    if (policy.checkCondition(policyContext)) {
-                        PolicyResult policyResult = policy.execute(policyContext);
-                        //一个Policy执行结果放入结果集里
-                        policyResults.add(policyResult);
-                    }
+                    Policy policy = getPolicy(actionId, classPath);
+                    PolicyResult policyResult = policy.execute(policyContext);
+                    //一个Policy执行结果放入结果集里
+                    policyResults.add(policyResult);
                 } catch (Exception en) {
                     LOG.error("锻造对象失败{}", en.getMessage());
                 }
             }
         }
         return policyResults;
+    }
+
+    private Policy getPolicy(String actionId, String classPath) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        Policy policy = null;
+        //读取缓存对象
+        if (cachedPolicy.contains(actionId)) {
+            policy = cachedPolicy.get(actionId);
+        } else {
+            policy = (Policy) Class.forName(classPath).newInstance();
+            Policy oldPolicy = cachedPolicy.putIfAbsent(actionId, policy);
+            if (oldPolicy != null) {
+                //还是用旧的对象，保持缓存一致
+                policy = oldPolicy;
+            }
+        }
+        return policy;
+    }
+
+    public void simplePolicyTest() {
+        EventIf eventIf = new TaskInstance();
+        eventIf.setEmployeeId("1001");
+        List<PolicyObject> policyObjects = new ArrayList<>(1);
+        eventIf.setPolicyObjects(policyObjects);
+        PolicyBean policyBean = new PolicyBean();
+        policyObjects.add(policyBean);
+        //设定condition
+        {
+            List<String> policyConditions = new ArrayList<>(1);
+            policyConditions.add("condition_1");
+            policyBean.setConditions(policyConditions);
+        }
+        //设定action
+        {
+            List<String> policyActions = new ArrayList<>(1);
+            policyActions.add("action_score");
+            policyBean.setActions(policyActions);
+        }
+        //设定Params
+        {
+            Map<String, Object> parameters = new HashMap<>();
+            eventIf.setParameters(parameters);
+            parameters.put("day", 7);
+        }
+
+        List<PolicyResult> policyResults = processPolicies(eventIf);
+        System.out.println(policyResults.get(0).getMessage());
+    }
+
+    public static void main(String[] args) {
+        PolicyEngine policyEngine = new PolicyEngine();
+        policyEngine.simplePolicyTest();
     }
 }
