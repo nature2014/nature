@@ -1,10 +1,12 @@
 package bl.beans;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.mongodb.morphia.annotations.Entity;
 import policy.PolicyAction;
 import policy.PolicyCondition;
 import policy.PolicyObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,11 +42,29 @@ public class PolicyBean extends Bean implements PolicyObject {
 
     @Override
     public List<PolicyCondition> getPolicyConditionList() {
+        if (CollectionUtils.isNotEmpty(conditions)) {
+            List<PolicyCondition> policyConditions = new ArrayList<>(conditions.size());
+            for (String condId : conditions) {
+                PolicyCondition policyCondition = new PolicyCondition();
+                policyCondition.setId(condId);
+                policyConditions.add(policyCondition);
+            }
+            return policyConditions;
+        }
         return null;
     }
 
     @Override
     public List<PolicyAction> getPolicyActions() {
+        if (CollectionUtils.isNotEmpty(actions)) {
+            List<PolicyAction> policyActions = new ArrayList<>(actions.size());
+            for (String actionId : actions) {
+                PolicyAction policyAction = new PolicyAction();
+                policyAction.setId(actionId);
+                policyActions.add(policyAction);
+            }
+            return policyActions;
+        }
         return null;
     }
 

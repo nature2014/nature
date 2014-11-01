@@ -2,13 +2,18 @@ package policy;
 
 import com.greenpineyu.fel.FelEngine;
 import com.greenpineyu.fel.FelEngineImpl;
+import com.greenpineyu.fel.context.ArrayCtxImpl;
 import com.greenpineyu.fel.context.FelContext;
 import com.greenpineyu.fel.function.CommonFunction;
 import com.greenpineyu.fel.function.Function;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import policy.schema.ConditionEntry;
 import policy.schema.Parameter;
+import util.PackageUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +25,40 @@ import java.util.Map;
  * 实现一些基本的方法或者扩展方法,同时实现扩展的函数，采用标准的方法：Policy.xml中的定义
  */
 public abstract class AbstractPolicy implements Policy {
+    private final static Logger LOG = LoggerFactory.getLogger(PolicyXmlManager.class);
+
     protected PolicyXmlManager policyXmlManager = PolicyXmlManager.getInstance();
+
+    protected FelEngine fel = new FelEngineImpl();
+
+    public AbstractPolicy() {
+        initFelFunc();
+    }
+
+    protected void initFelFunc() {
+        List<String> classNameList = PackageUtil.getClassName("policy.function");
+        if (CollectionUtils.isNotEmpty(classNameList)) {
+
+            for (String className : classNameList) {
+                try {
+                    Class cls = Class.forName(className);
+                    if (cls.getAnnotation(PolicyFunc.class) != null) {
+                        Object obj = cls.newInstance();
+                        if (obj instanceof Function) {
+                            fel.addFun((Function) obj);
+                            LOG.error("add func:" + className);
+                        } else {
+                            LOG.debug("skip class because not implement Function:" + className);
+                        }
+                    } else {
+                        LOG.error("skip class because not use PolicyFunc annotation:" + className);
+                    }
+                } catch (Exception e) {
+                    LOG.error(className + "方法加载异常:", e);
+                }
+            }
+        }
+    }
 
     public boolean checkCondition(PolicyContext policyContext) {
         List<PolicyCondition> policyConditions = policyContext.getPolicyConditions();
@@ -34,14 +72,12 @@ public abstract class AbstractPolicy implements Policy {
             //参数化，用交互的参数覆盖缺省的
             List<Parameter> parameters = conditionEntry.getParameter();
             boolean checkCondition = true;
-            FelEngine fel = new FelEngineImpl();
-            FelContext context = fel.getContext();
-
+            FelContext context = new ArrayCtxImpl();
             for (int j = 0; j < parameters.size(); j++) {
                 Parameter parameter = parameters.get(i);
                 String name = parameter.getName();
                 Map<String, Object> activeParameter = policyCondition.getParameters();
-                Object value = activeParameter.get(name) != null ? activeParameter.get(name) != null : parameter.getDefault();
+                Object value = activeParameter.get(name) != null ? activeParameter.get(name) : parameter.getDefault();
                 //数据类型转化
                 if (value != null) {
                     String dateType = parameter.getDataType();

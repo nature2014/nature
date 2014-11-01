@@ -15,6 +15,7 @@ public class PolicyAddScore extends AbstractPolicy {
         PolicyResult policyResult = new PolicyResult();
         policyResult.setStatus(0);
         policyResult.setMessage("恭喜你本次任务加" + 30 + "分");
+        System.out.println("Sysout 恭喜你本次任务加" + 30 + "分");
         return policyResult;
     }
 }

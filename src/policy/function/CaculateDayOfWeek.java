@@ -1,16 +1,16 @@
 package policy.function;
 
 import com.greenpineyu.fel.function.CommonFunction;
-import com.greenpineyu.fel.function.Function;
 import org.apache.commons.lang.math.NumberUtils;
+import policy.PolicyFunc;
 
 import java.util.Calendar;
 
 /**
  * Created by limin.llm on 2014/10/21.
  */
+@PolicyFunc
 public class CaculateDayOfWeek extends CommonFunction {
-
     @Override
     public Object call(Object[] objects) {
         if (objects != null && objects.length > 0) {
