@@ -46,6 +46,14 @@
                 <label class="col-lg-2 control-label">条件</label>
 
                 <div class="col-lg-10">
+                    <s:iterator value="conditions" var="condition">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="policy.conditions" value="<s:property value='%{#condition.id}' />">
+                                <s:property value="%{#condition.expression}" />(<s:property value="%{#condition.description}" />)
+                            </label>
+                        </div>
+                    </s:iterator>
                 </div>
             </div>
 
@@ -53,6 +61,14 @@
                 <label class="col-lg-2 control-label">动作</label>
 
                 <div class="col-lg-10">
+                    <s:iterator value="actions" var="action">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="policy.actions" value="<s:property value='%{#action.id}' />">
+                                <s:property value="%{#action.classPath}" />(<s:property value="%{#action.description}" />)
+                            </label>
+                        </div>
+                    </s:iterator>
                 </div>
             </div>
 
@@ -87,5 +103,14 @@
                 }
             }
         });
+
+        <s:iterator value="policy.conditions" var="condition" >
+            $("input[type=checkbox][value=<s:property value="%{#condition}"/>]").attr("checked", "checked");
+        </s:iterator>
+
+        <s:iterator value="policy.actions" var="action" >
+            $("input[type=checkbox][value=<s:property value="%{#action}"/>]").attr("checked", "checked");
+        </s:iterator>
+
     });
 </script>

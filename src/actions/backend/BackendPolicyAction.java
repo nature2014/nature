@@ -3,8 +3,14 @@ package actions.backend;
 import bl.beans.PolicyBean;
 import bl.mongobus.PolicyBusiness;
 import org.apache.commons.lang.StringUtils;
+import policy.PolicyXmlManager;
+import policy.schema.ActionEntry;
+import policy.schema.ConditionEntry;
 import vo.table.TableHeaderVo;
 import vo.table.TableInitVo;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by wangronghua on 14-10-20.
@@ -12,6 +18,9 @@ import vo.table.TableInitVo;
 public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
 
     private PolicyBean policy;
+
+    private ConditionEntry[] conditions;
+    private ActionEntry[] actions;
 
     @Override
     public String getActionPrex() {
@@ -58,6 +67,9 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
         if(StringUtils.isNotEmpty(policyId)) {
             policy = (PolicyBean) getBusiness().getLeaf(policyId).getResponseData();
         }
+
+        actions = PolicyXmlManager.getInstance().getActionEntryMap().values().toArray(new ActionEntry[0]);
+        conditions = PolicyXmlManager.getInstance().getConditionEntryMap().values().toArray(new ConditionEntry[0]);
         return SUCCESS;
     }
 
@@ -77,4 +89,20 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
         this.policy = policy;
     }
 
+
+    public ConditionEntry[] getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(ConditionEntry[] conditions) {
+        this.conditions = conditions;
+    }
+
+    public ActionEntry[] getActions() {
+        return actions;
+    }
+
+    public void setActions(ActionEntry[] actions) {
+        this.actions = actions;
+    }
 }
