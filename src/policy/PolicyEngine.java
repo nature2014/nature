@@ -7,6 +7,7 @@ import com.greenpineyu.fel.FelEngineImpl;
 import com.greenpineyu.fel.context.FelContext;
 import com.greenpineyu.fel.function.CommonFunction;
 import com.greenpineyu.fel.function.Function;
+import net.sf.json.JSONArray;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
@@ -52,7 +53,7 @@ public class PolicyEngine {
             }
 
         }
-        return null;
+        return policyResults;
     }
 
     /**
@@ -168,7 +169,8 @@ public class PolicyEngine {
             parameters.put("day", 7);
         }
 
-        processPolicies(eventIf);
+        List<PolicyResult> policyResults = processPolicies(eventIf);
+        System.out.println(policyResults.get(0).getMessage());
     }
 
     public static void main(String[] args) {
