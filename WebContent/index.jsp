@@ -138,15 +138,17 @@
                                 image.push('</a>');
                                 image.push('<div class="plus_btn">');
                                 image.push('<span class="imagecavas">');
+
+                                //此处代码先注释掉了，避免设计师的展现
                                 if (data[j].volunteerBean == null) {
                                     image.push('<img class="imagedesigner" src="${rootPath}/img/starheader.png"/>');
                                     image.push('<div class="imagedesignerback">');
                                     image.push('<div style="margin-top:20px">【公司艺术作品】</div>');
                                     image.push('<div></div></div>');
                                 } else {
-                                    image.push('<img class="imagedesigner" src="' + data[j].volunteerBean.iconpath + '"/>');
-                                    image.push('<div class="imagedesignerback">');
-                                    image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div></div>');
+//                                    image.push('<img class="imagedesigner" src="' + data[j].volunteerBean.iconpath + '"/>');
+//                                    image.push('<div class="imagedesignerback">');
+//                                    image.push('<div style="margin-top:20px">【设计师】:' + data[j].volunteerBean.name + '</div></div>');
                                 }
                                 image.push('</span>');
                                 image.push('</div><div class="clear"></div>');
