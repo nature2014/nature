@@ -91,6 +91,10 @@
         <action name="getOrderDetails" class="actions.wechat.WechatOrderAction" method="getOrder">
             <result name="success">/pages/wechat/orderDetail.jsp</result>
         </action>
+
+        <action name="mainPage" class="actions.wechat.WechatProductAction" method="main">
+            <result name="success">/pages/wechat/mainPage.jsp</result>
+        </action>
     </package> 
     
     <package name="user" namespace="/wechat/user" extends="default-wechat">

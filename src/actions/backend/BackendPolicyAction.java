@@ -33,12 +33,12 @@ public class BackendPolicyAction extends BaseBackendAction<PolicyBusiness>  {
     }
 
     public String getCustomJsp() {
-        return "/pages/volunteer/policy.jsp";
+        return "/pages/menu_policy/policy.jsp";
     };
 
     @Override
     public String getTableTitle() {
-        return "<li>策略管理</li><li class=\"active\">策略</li>";
+        return "<li>积分管理</li><li class=\"active\">策略</li>";
     }
 
 

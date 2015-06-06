@@ -423,4 +423,32 @@
             <result name="input">/pages/menu_policy/policyEdit.jsp</result>
         </action>
     </package>
+
+    <package name="task" namespace="/backend/task" extends="default-backend">
+        <action name="index" class="actions.backend.BackendTaskAction" method="index">
+            <result name="input">/pages/table/tableIndex.jsp</result>
+        </action>
+        <action name="initTable" class="actions.backend.BackendTaskAction" method="initTable"/>
+        <action name="queryTable" class="actions.backend.BackendTaskAction" method="queryTable">
+            <interceptor-ref name="noLoginStack"></interceptor-ref>
+        </action>
+
+        <action name="delete" class="actions.backend.BackendTaskAction" method="delete">
+            <result name="success" type="chain">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+        <action name="add" class="actions.backend.BackendTaskAction" method="add">
+            <result name="success">/pages/menu_task/taskEdit.jsp</result>
+        </action>
+        <action name="edit" class="actions.backend.BackendTaskAction" method="edit">
+            <result name="success">/pages/menu_task/taskEdit.jsp</result>
+        </action>
+        <action name="save" class="actions.backend.BackendTaskAction" method="saveTaskEntity">
+            <result name="success" type="redirectAction">
+                <param name="actionName">index</param>
+            </result>
+            <result name="input">/pages/menu_task/taskEdit.jsp</result>
+        </action>
+    </package>
 </struts>

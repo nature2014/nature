@@ -73,21 +73,41 @@ public class SystemSettingAction extends BaseAction {
 
     private WechatMenu getMenu() throws UnsupportedEncodingException {
         WechatMenu menu = new WechatMenu();
+        WechatButton button0 = new WechatButton();
+        button0.setName("首页");
+        button0.setType("view");
+        button0.setUrl("http://www.cyznj.com/pages/wechat/mainPage.jsp");
+
+//        WechatButton subbutton10 = new WechatButton();
+//        subbutton10.setName("首页");
+//        subbutton10.setType("view");
+
         WechatButton button1 = new WechatButton();
-        button1.setName("大自然广告");
+        button1.setName("集团信息");
 
         WechatButton subbutton11 = new WechatButton();
-        subbutton11.setName("产品展示");
+        subbutton11.setName("产品介绍");
         subbutton11.setType("view");
         subbutton11.setUrl(MenuUtils.getFullUrl("/wechat/productList.action"));
 
         WechatButton subbutton12 = new WechatButton();
-        subbutton12.setName("订单查询");
+        subbutton12.setName("公司简介");
         subbutton12.setType("view");
-        subbutton12.setUrl(MenuUtils.getFullUrl("/wechat/queryOrders.action"));
+        subbutton12.setUrl(MenuUtils.getFullUrl("/wechat/serviceDescription.action"));
+
+        WechatButton subbutton13 = new WechatButton();
+        subbutton13.setName("联系我们");
+        subbutton13.setType("view");
+        subbutton13.setUrl("http://www.cyznj.com/pages/wechat/contact.jsp");
+
+
+        WechatButton subbutton30 = new WechatButton();
+        subbutton30.setName("谁在这里");
+        subbutton30.setType("view");
+        subbutton30.setUrl(MenuUtils.getOAuthUrl("/wechat/peopleHere.action"));
 
         WechatButton button2 = new WechatButton();
-        button2.setName("员工管理");
+        button2.setName("我的服务");
 
         WechatButton subbutton21 = new WechatButton();
         subbutton21.setName("服务签入");
@@ -104,63 +124,62 @@ public class SystemSettingAction extends BaseAction {
         subbutton23.setType("click");
         subbutton23.setKey("ME_TIMECARD");
 
-        WechatButton subbutton24 = new WechatButton();
-        subbutton24.setName("我的培训");
-        subbutton24.setType("view");
-        subbutton24.setUrl(MenuUtils.getOAuthUrl("/wechat/trainCourse/myTrainCourse.action"));
+//        WechatButton subbutton24 = new WechatButton();
+//        subbutton24.setName("我的培训");
+//        subbutton24.setType("view");
+//        subbutton24.setUrl(MenuUtils.getOAuthUrl("/wechat/trainCourse/myTrainCourse.action"));
 
         WechatButton subbutton25 = new WechatButton();
         subbutton25.setName("我的资料");
         subbutton25.setType("view");
         subbutton25.setUrl(MenuUtils.getOAuthUrl("/wechat/user/myInfo.action"));
 
-        WechatButton button3 = new WechatButton();
-        button3.setName("公司动态");
+//        WechatButton button3 = new WechatButton();
+//        button3.setName("公司动态");
 
-        WechatButton subbutton30 = new WechatButton();
-        subbutton30.setName("谁在这里");
-        subbutton30.setType("view");
-        subbutton30.setUrl(MenuUtils.getOAuthUrl("/wechat/peopleHere.action"));
 
         WechatButton subbutton31 = new WechatButton();
         subbutton31.setName("员工注册");
         subbutton31.setType("view");
         subbutton31.setUrl(MenuUtils.getOAuthUrl("/wechat/volunteerRecruit.action"));
+//
+//        WechatButton subbutton32 = new WechatButton();
+//        subbutton32.setName("我的建议");
+//        subbutton32.setType("view");
+//        subbutton32.setUrl(MenuUtils.getOAuthUrl("/wechat/myAdvise.action"));
+//
+//        WechatButton subbutton33 = new WechatButton();
+//        subbutton33.setName("当前活动");
+//        subbutton33.setType("view");
+//        subbutton33.setUrl(MenuUtils.getOAuthUrl("/wechat/currentActivity.action"));
+//
+//        WechatButton subbutton34 = new WechatButton();
+//        subbutton34.setName("公司介绍");
+//        subbutton34.setType("view");
+//        subbutton34.setUrl(MenuUtils.getOAuthUrl("/wechat/serviceDescription.action"));
 
-        WechatButton subbutton32 = new WechatButton();
-        subbutton32.setName("我的建议");
-        subbutton32.setType("view");
-        subbutton32.setUrl(MenuUtils.getOAuthUrl("/wechat/myAdvise.action"));
-
-        WechatButton subbutton33 = new WechatButton();
-        subbutton33.setName("当前活动");
-        subbutton33.setType("view");
-        subbutton33.setUrl(MenuUtils.getOAuthUrl("/wechat/currentActivity.action"));
-
-        WechatButton subbutton34 = new WechatButton();
-        subbutton34.setName("公司介绍");
-        subbutton34.setType("view");
-        subbutton34.setUrl(MenuUtils.getOAuthUrl("/wechat/serviceDescription.action"));
-
+//        button1.addSubButton(subbutton10);
         button1.addSubButton(subbutton11);
         button1.addSubButton(subbutton12);
+        button1.addSubButton(subbutton13);
+        button1.addSubButton(subbutton30);
 
         button2.addSubButton(subbutton21);
         button2.addSubButton(subbutton22);
         button2.addSubButton(subbutton23);
-        button2.addSubButton(subbutton24);
+//        button2.addSubButton(subbutton24);
         button2.addSubButton(subbutton25);
 
-        button3.addSubButton(subbutton30);
-        button3.addSubButton(subbutton31);
-        button3.addSubButton(subbutton32);
-        button3.addSubButton(subbutton33);
-        button3.addSubButton(subbutton34);
+        button2.addSubButton(subbutton31);
+//        button3.addSubButton(subbutton32);
+//        button3.addSubButton(subbutton33);
+//        button3.addSubButton(subbutton34);
 
         List<WechatButton> buttonList = new ArrayList<WechatButton>();
+        buttonList.add(button0);
         buttonList.add(button1);
         buttonList.add(button2);
-        buttonList.add(button3);
+//        buttonList.add(button3);
 
         menu.setButton(buttonList);
         return menu;

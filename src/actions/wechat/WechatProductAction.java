@@ -32,6 +32,9 @@ public class WechatProductAction extends WechatBaseAuthAction {
     private int totalCount;
     private String rootPath;
 
+    public String main() {
+        return SUCCESS;
+    }
     public String search() {
         productLevelList = (List<ProductLevelBean>) productLevelBus.getAllLeaves().getResponseData();
         if(null != productLevelBean && StringUtils.isNotEmpty(productLevelBean.getId())) {

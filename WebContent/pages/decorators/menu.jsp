@@ -102,7 +102,7 @@
                     </a>
                     <ul class="sub">
                         <li><a href="${rootPath}/backend/policy/index.action">积分策略配置</a></li>
-                        <li><a href="${rootPath}/backend/policy/index.action">积分任务配置</a></li>
+                        <li><a href="${rootPath}/backend/task/index.action">积分任务配置</a></li>
                     </ul>
                 </li>
 
