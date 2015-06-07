@@ -66,10 +66,14 @@ public class DispatcherService {
     }
 
     if(request != null) {
+      String event = (String)rMap.get(Constants.EVENT_TYPE);
       request.fill(rMap);
       BaseMessage response = request.accept(handler);
-      MessageBus.get().add(request);
-      result = response.toXml();
+      if(EVENT_TYPE_SUBSCRIBE.equals(event)){
+        MessageBus.get().add(request);
+      }else{
+          result = response.toXml();
+      }
     }
     return result;
   }

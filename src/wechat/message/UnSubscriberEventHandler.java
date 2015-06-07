@@ -23,6 +23,6 @@ public class UnSubscriberEventHandler implements EventHandler {
 
   @Override
   public void handle(BaseMessage message) {
-    //todo unsubscribe, remove those openID existing in DB
+      LOG.error("unsubscriber: {}", message.toXml());
   }
 }

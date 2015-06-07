@@ -11,6 +11,7 @@ import util.ServerContext;
 import wechat.BaseEvent;
 import wechat.BaseMessage;
 import wechat.request.*;
+import wechat.response.ImageResponse;
 import wechat.response.TextResponse;
 import wechat.response.VoiceResponse;
 import wechat.servicemessage.ServiceMessage;
@@ -34,11 +35,11 @@ public class DefaultMessageHandler implements MessageHandler {
 
   @Override
   public BaseMessage handle(TextRequest text) {
-    TextResponse response = new TextResponse();
+    ImageResponse response = new ImageResponse();
     response.setToUserName(text.getFromUserName());
     response.setFromUserName(text.getToUserName());
     response.setCreateTime(System.currentTimeMillis() / 1000);
-    response.setContent("对不起，暂未提供短信助手功能！");
+    response.setMediaId(WechatContext.getWelcomeMsg());
     return response;
   }
 

@@ -1,0 +1,64 @@
+{
+    "button": [
+        {
+            "name": "首页",
+            "type": "view",
+            "url": "http://dzr.cyznj.com/pages/wechat/mainPage.jsp"
+        },
+        {
+            "name": "集团信息",
+            "sub_button": [
+                {
+                    "name": "产品介绍",
+                    "type": "view",
+                    "url": "http://dzr.cyznj.com/wechat/productList.action"
+                },
+                {
+                    "name": "公司简介",
+                    "type": "view",
+                    "url": "http://dzr.cyznj.com/wechat/serviceDescription.action"
+                },
+                {
+                    "name": "联系我们",
+                    "type": "view",
+                    "url": "http://dzr.cyznj.com/pages/wechat/contact.jsp"
+                },
+                {
+                    "name": "谁在这里",
+                    "type": "view",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx701c34334c70d654&redirect_uri=http://dzr.cyznj.com%2Fwechat%2FpeopleHere.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+                }
+            ]
+        },
+        {
+            "name": "我的服务",
+            "sub_button": [
+                {
+                    "name": "服务签入",
+                    "type": "view",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx701c34334c70d654&redirect_uri=http://dzr.cyznj.com%2Fwechat%2FcheckIn.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+                },
+                {
+                    "name": "服务签出",
+                    "type": "view",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx701c34334c70d654&redirect_uri=http://dzr.cyznj.com%2Fwechat%2FcheckOut.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+                },
+                {
+                    "name": "我的工时",
+                    "type": "click",
+                    "key": "ME_TIMECARD"
+                },
+                {
+                    "name": "我的资料",
+                    "type": "view",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx701c34334c70d654&redirect_uri=http://dzr.cyznj.com%2Fwechat%2Fuser%2FmyInfo.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+                },
+                {
+                    "name": "员工注册",
+                    "type": "view",
+                    "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx701c34334c70d654&redirect_uri=http://dzr.cyznj.com%2Fwechat%2FvolunteerRecruit.action&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+                }
+            ]
+        }
+    ]
+}

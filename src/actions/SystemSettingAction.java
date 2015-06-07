@@ -76,7 +76,7 @@ public class SystemSettingAction extends BaseAction {
         WechatButton button0 = new WechatButton();
         button0.setName("首页");
         button0.setType("view");
-        button0.setUrl("http://www.cyznj.com/pages/wechat/mainPage.jsp");
+        button0.setUrl("http://dzr.cyznj.com/pages/wechat/mainPage.jsp");
 
 //        WechatButton subbutton10 = new WechatButton();
 //        subbutton10.setName("首页");
@@ -98,7 +98,7 @@ public class SystemSettingAction extends BaseAction {
         WechatButton subbutton13 = new WechatButton();
         subbutton13.setName("联系我们");
         subbutton13.setType("view");
-        subbutton13.setUrl("http://www.cyznj.com/pages/wechat/contact.jsp");
+        subbutton13.setUrl("http://dzr.cyznj.com/pages/wechat/contact.jsp");
 
 
         WechatButton subbutton30 = new WechatButton();
@@ -183,5 +183,14 @@ public class SystemSettingAction extends BaseAction {
 
         menu.setButton(buttonList);
         return menu;
+    }
+
+    public static void main(String[] args) {
+        try {
+            SystemSettingAction systemSettingAction = new SystemSettingAction();
+            System.out.println(systemSettingAction.getMenu().toJson());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 }

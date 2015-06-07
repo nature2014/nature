@@ -79,7 +79,7 @@
         <div class="form-group has-success">
             <label class="control-label col-lg-2">欢迎词</label>
             <div class="col-lg-10">
-                <input name="systemSetting.welcomeMsg" type="text" class="form-control" value="${systemSetting.welcomeMsg}"/>
+                <s:textfield name="systemSetting.welcomeMsg" cssClass="form-control"/>
             </div>
         </div>
 

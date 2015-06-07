@@ -1,5 +1,6 @@
 package wechat;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.dom4j.Document;
@@ -9,6 +10,7 @@ import org.dom4j.io.SAXReader;
 import util.MultiTenancyManager;
 import util.ServerContext;
 import util.DBUtils;
+import util.StringUtil;
 import wechat.access.AccessValidator;
 import wechat.message.MessageBus;
 import wechat.utils.Constants;
@@ -93,7 +95,9 @@ public class WechatServlet extends HttpServlet {
 
         // 响应消息
         PrintWriter out = response.getWriter();
-        out.print(respMessage);
+        if(StringUtils.isNotEmpty(respMessage)){
+            out.print(respMessage);
+        }
         out.close();
       } catch (DocumentException e) {
         LOG.error(e.getMessage());
